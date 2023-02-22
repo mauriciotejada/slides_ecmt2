@@ -1,0 +1,183 @@
+---
+title: "Econometría II"
+subtitle: "**Temas Administrativos**"
+author: "Mauricio M. Tejada"
+institute: "*Departamento de Economía, Universidad Diego Portales*"
+format:
+  revealjs:
+    theme: serif_mod.scss
+    logo: Logo_econ.png
+    footer: "Ingeniería Comercial -- Econometría II"
+    slide-number: c/t
+    show-slide-number: all
+    embed-resources: true
+---
+
+## Temas Administrativos
+
+1. *Quien es quien:*
+
+    - Profesor: Mauricio Tejada (email: <mauricio.tejada@mail.udp.cl>)
+
+    - Ayudante: Por definir.
+
+2. *Horarios:*
+
+    - Clases: Lunes y Miércoles 11:30 a 12:50. Sala TBA.
+
+    - Horas de Oficina: Martes 11:30 a 12:50. Edificio Cubo of. 510.
+
+    - Ayudantía: Por definir.
+
+3. *Comunicación:*
+
+    - Email y Canvas.
+
+
+## Sobre el curso
+
+**Descripción:**
+
+- Este curso es una extensión natural al curso introductorio de econometría. 
+- El enfoque girará en torno al uso de distintos tipos de datos y métodos de estimación en el contexto de dichos tipos de datos. 
+- Un énfasis especial se pondrá en el uso de estos modelos y estimadores para resolver problemas específicos. 
+	
+**Objetivo:**
+
+*Se espera que el alumno conozca los rudimentos de los métodos de estimación bajo distintos tipos de datos y sepa identificar las situaciones en las que éstos deben ser aplicados.*
+
+
+## Contenidos
+
+- **Unidad 1:** Repaso del Modelo de Regresión Lineal
+  
+  - MCO, propiedes, inferencia, uso de variable dummy, variables instrumentales.
+
+- **Unidad 2:** Modelos para Datos de Panel
+
+  - Modelo de componentes de error, efectos fijos, efectos aleatorios, inferencia.
+  
+- **Unidad 3:** Modelos de Series Temporales
+
+  - Procesos estacionarios univariados y multivariados, raíces unitarias, cointegración.
+
+## Contenidos
+
+- **Unidad 4:** Modelos de Variable Dependiente Limitada
+
+  - Variable dependiente dicotómica, selección muestral.
+
+- **Unidad 5:** Otros Métodos de Estimación^[Si el tiempo lo permite.]
+
+  - Método generalizado de momentos y aplicaciones
+
+## Bibliografía:
+
+1. Stock, James y Watson, Mark (2012). Introducción a la Econometría. Tercera Edición, Peason. **[SW]**
+
+2. Wooldridge, Jeffrey M. (2015). Introducción a la Econometría. Un Enfoque Moderno. Quinta Edición, CENGAGE Learning. **[W]**
+
+
+*Nota: Voy a distribuir material adicional principalmente con derivaviones matemáticas no cubiertas en clase.*
+
+## Software
+
+- La aplicación de las técnicas econométricas requiere de un paquete computacional. En este curso [vamos a utilizar R]{.emph}.
+
+- Este paquete es muy popular en estadística y ciencia de los datos. En economía cae aún por detrás de Stata, pero ha tenido un crecimiento importante en los últimos años. 
+
+- **Ventajas:** Es software libre (y por tanto es gratuito) y existe un repositorio enorme de paquetes implementando técnicas econométricas y estadísticas modernas.
+
+## Software
+
+- Referencias útiles:
+
+    - Introduction to Econometrics with R de Christoph Hanck, Martin Arnold, Alexander Gerber y Martin Schmelzer (replica aplicaciones SW): <https://www.econometrics-with-r.org/> 
+
+    - Using R for Introductory Econometrics de Florian Heiss (replica aplicaciones empíricas W): <http://www.urfie.net/>
+    
+    - Principles of Econometrics with R de Constantin Colonescu (tiene una mezcla de aplicaciones): <https://bookdown.org/ccolonescu/RPoE4/>
+
+## Evaluación 
+
+- Formas de evaluación:
+    
+  * **Evaluación 1 (20%):**  semana del 17 al 21 de abril.
+
+  * **Evaluación 2 (20%):** semana del 12 al 16 de junio.
+
+  * **Tareas y ejercicios empíricos (30%):** se desarrollarán durante el semestre.
+
+  * **Examen (30%):** semana del 5 al 13 de julio.
+
+- Reglas adicionales: 
+  
+  * Inasistencia justificada: Aplica reglamento.
+
+  * No existe eximición del examen final, el mismo que cubre toda la materia.
+
+## Programación
+
+:::: {.columns}
+
+::: {.column width="25%"}
+*Marzo*
+
+    8-10: Unidad 1 (1)
+    
+    13-17: Unidad 1 (2) 
+    
+    20-24: Unidad 1 (2)
+    
+    27-31: Unidad 1/2 (2)
+
+:::
+
+::: {.column width="25%"}
+*Abril*
+
+    3-7: Unidad 2 (2)
+    
+    10-14: Unidad 2 (2)
+    
+    17-21: Eval 1
+    
+    24-28: Unidad 2/3 (2)
+
+:::
+
+::: {.column width="25%"}
+*Mayo*
+
+    1-5: Receso
+    
+    8-12: Unidad 3 (2)
+    
+    15-19: Unidad 3 (2)
+    
+    22-26: Unidad 3 (2)
+    
+    29-31: Unidad 3/4 (2)
+:::
+
+
+::: {.column width="25%"}
+*Junio*
+
+    5-9: Unidad 4 (2)
+    
+    12-16: Eval 2
+    
+    19-23: Unidad 4 (1)
+    
+    26-30: Unidad 5 (1)
+
+
+*Julio*
+
+    3-7: Unidad 5 (1)
+    
+:::
+::::
+
+
