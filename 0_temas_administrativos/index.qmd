@@ -6,7 +6,7 @@ institute: "*Departamento de Economía, Universidad Diego Portales*"
 format:
   revealjs:
     theme: serif_mod.scss
-    logo: Logo_econ.png
+    logo: "figs/logo_econ.png"
     footer: "Ingeniería Comercial -- Econometría II"
     slide-number: c/t
     show-slide-number: all
