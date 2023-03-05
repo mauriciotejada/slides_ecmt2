@@ -7,7 +7,7 @@
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.313">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Mauricio M. Tejada">
   <title>Econometría II</title>
@@ -1262,13 +1262,71 @@ E[y_i|x_i,d_i=0]&amp;=&amp;\beta_0 + \beta_1 x_i
 </ul>
 <p><strong>Medidas remediales</strong>: Mínimos cuadrados generalizados (factibles).</p>
 </section></section>
+<section>
 <section id="variables-instrumentales" class="title-slide slide level1 center center-x">
 <h1>Variables instrumentales</h1>
+
+</section>
+<section id="variable-intrumental" class="slide level2">
+<h2>Variable intrumental</h2>
+<p>Considere el siguiente modelo de regresión simple: <span class="math display">\[y_{i}=\beta_{0}+\beta_{1} x_{i}+u_{i}\]</span></p>
+<ul>
+<li>Sabemos que <span class="math inline">\(\mathbb{Cov}(u_i,x_i)\neq0\)</span>, entonces el estimador MCO es inconsistente.</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>La regresión de VI:</p>
+<ul>
+<li><p>Separar <span class="math inline">\(x\)</span> en dos partes: la parte correlacionada con <span class="math inline">\(u_{i}\)</span> y la parte no correlacionada.</p></li>
+<li><p>Esto se logra mediante una <strong>variable instrumental</strong>, <span class="math inline">\(z_{i}\)</span> correlacionada con <span class="math inline">\(x_{i}\)</span> pero no correlacionada con <span class="math inline">\(u_{i}\)</span></p></li>
+</ul></li>
+</ul>
+</section>
+<section id="dos-condiciones-para-un-instrumento-válido" class="slide level2">
+<h2>Dos condiciones para un instrumento válido</h2>
+<ul>
+<li><p>Para que una variable instrumental (un “instrumento”) <span class="math inline">\(z\)</span> para <span class="math inline">\(x\)</span> sea válido, ésta debe cumplir dos condiciones:</p>
+<ol type="1">
+<li><p><strong>Relevancia del instrumento</strong>: <span class="math inline">\(\mathbb{Corr}\left(z_{i}, x_{i}\right) \neq 0\)</span></p></li>
+<li><p><strong>Exogeneidad del instrumento</strong>: <span class="math inline">\(\mathbb{Corr}\left(z_{i}, u_{i}\right)=0\)</span></p></li>
+</ol></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>Supongamos por ahora que existe tal <span class="math inline">\(z_{i}\)</span> ¿Cómo podemos usar <span class="math inline">\(z_{i}\)</span> para estimar <span class="math inline">\(\beta_{1}\)</span>?</p>
+<ul>
+<li>Mínimos cuadrados de dos etapas (MCDE)</li>
+</ul></li>
+</ul>
+</section>
+<section id="el-estimador-vi-con-un-x-y-un-z" class="slide level2">
+<h2>El estimador VI con un <span class="math inline">\(x\)</span> y un <span class="math inline">\(z\)</span></h2>
+<p>MCDE tiene dos etapas: <strong>dos regresiones</strong>:</p>
+<ol type="1">
+<li>Aísle la parte de <span class="math inline">\(x\)</span> que no está correlacionada con <span class="math inline">\(u\)</span> realizando una regresión MCO entre <span class="math inline">\(x\)</span> en <span class="math inline">\(z\)</span>:</li>
+</ol>
+<p><span class="math display">\[x_{i}=\pi_{0}+\pi_{1} z_{i}+v_{i}\]</span></p>
+<ul>
+<li><p>Como <span class="math inline">\(z_{i}\)</span> no está correlacionada con <span class="math inline">\(u_{i}, \pi_{0}+\pi_{1} z_{i}\)</span> no está correlacionada con <span class="math inline">\(u_{i}\)</span>.</p></li>
+<li><p>Calcule los valores predichos de <span class="math inline">\(x_{i}\)</span>, donde <span class="math inline">\(\hat{x}_{i}=\hat{\pi}_{0}+\hat{\pi}_{1} z_{i}\)</span>.</p></li>
+</ul>
+</section>
+<section id="el-estimador-vi-con-un-x-y-un-z-cont" class="slide level2">
+<h2>El estimador VI con un <span class="math inline">\(x\)</span> y un <span class="math inline">\(z\)</span> (cont…)</h2>
+<ol start="2" type="1">
+<li>Reemplace <span class="math inline">\(x_{i}\)</span> por <span class="math inline">\(\hat{x}_{i}\)</span> en la regresión de interés y use MCO para estimar los parámetros:</li>
+</ol>
+<p><span class="math display">\[y_{i}=\beta_{0}+\beta_{1} \hat{x}_{i}+u_{i}\]</span></p>
+<ul>
+<li><p>Como <span class="math inline">\(\hat{x}_{i}\)</span> no esta correlacionada con <span class="math inline">\(u_{i}\)</span>, los supuestos del modelo clásico y las propiedades deseables de MCO se cumplen.</p></li>
+<li><p>El estimador resultante es conocido como el <strong>estimador de mínimos cuadrados en dos etapas (MCDE)</strong>: <span class="math inline">\(\hat{\beta}_{1}^{MCDE}\)</span>.</p></li>
+<li><p><span class="math inline">\(\hat{\beta}_{1}^{MCDE}\)</span> es un estimador conststente de <span class="math inline">\(\beta_{1}\)</span>.</p></li>
+</ul>
 
 <img src="figs/logo_econ.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p>Ingeniería Comercial – Econometría II</p>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

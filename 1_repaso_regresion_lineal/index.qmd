@@ -735,3 +735,57 @@ lines(x=db_female$educ, y=db_female$wage_hat_int, col = "red", lwd = 2)
        
 # Variables instrumentales {.center .center-x}
 
+## Variable intrumental
+
+Considere el siguiente modelo de regresión simple:
+$$y_{i}=\beta_{0}+\beta_{1} x_{i}+u_{i}$$
+
+- Sabemos que $\mathbb{Cov}(u_i,x_i)\neq0$, entonces el estimador MCO es inconsistente.
+
+\ 
+
+- La regresión de VI: 
+
+    - Separar $x$ en dos partes: la parte correlacionada con $u_{i}$ y la parte no correlacionada. 
+
+    - Esto se logra mediante una **variable instrumental**, $z_{i}$ correlacionada con $x_{i}$ pero no correlacionada con $u_{i}$ 
+
+## Dos condiciones para un instrumento válido
+
+- Para que una variable instrumental (un "instrumento") $z$ para $x$ sea válido, ésta debe cumplir dos condiciones:
+
+    1. **Relevancia del instrumento**: $\mathbb{Corr}\left(z_{i}, x_{i}\right) \neq 0$
+
+    2. **Exogeneidad del instrumento**: $\mathbb{Corr}\left(z_{i}, u_{i}\right)=0$
+
+\ 
+
+- Supongamos por ahora que existe tal $z_{i}$ ¿Cómo podemos usar $z_{i}$ para estimar $\beta_{1}$?
+
+    -  Mínimos cuadrados de dos etapas (MCDE)
+
+## El estimador VI con un $x$ y un $z$
+
+MCDE tiene dos etapas: **dos regresiones**:
+
+(1) Aísle la parte de $x$ que no está correlacionada con $u$ realizando una regresión MCO entre $x$ en $z$:
+
+$$x_{i}=\pi_{0}+\pi_{1} z_{i}+v_{i}$$
+
+- Como $z_{i}$ no está correlacionada con $u_{i}, \pi_{0}+\pi_{1} z_{i}$ no está correlacionada con $u_{i}$. 
+
+- Calcule los valores predichos de $x_{i}$, donde $\hat{x}_{i}=\hat{\pi}_{0}+\hat{\pi}_{1} z_{i}$.
+
+## El estimador VI con un $x$ y un $z$ (cont...)
+
+(2) Reemplace $x_{i}$ por $\hat{x}_{i}$ en la regresión de interés y use MCO para estimar los parámetros: 
+
+$$y_{i}=\beta_{0}+\beta_{1} \hat{x}_{i}+u_{i}$$
+
+- Como $\hat{x}_{i}$ no esta correlacionada con $u_{i}$, los supuestos del modelo clásico y las propiedades deseables de MCO se cumplen. 
+
+- El estimador resultante es conocido como el **estimador de mínimos cuadrados en dos etapas (MCDE)**: $\hat{\beta}_{1}^{MCDE}$.
+
+- $\hat{\beta}_{1}^{MCDE}$ es un estimador consistente de $\beta_{1}$.
+
+
