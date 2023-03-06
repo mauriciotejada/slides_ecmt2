@@ -1,0 +1,45 @@
+---
+title: "Econometría II"
+subtitle: "**Unidad 5: Otros Métodos de Estimación y sus Aplicaciones**"
+author: "Mauricio M. Tejada"
+institute: "*Departamento de Economía, Universidad Diego Portales*"
+format:
+  revealjs:
+    theme: serif_mod.scss
+    logo: "figs/logo_econ.png"
+    footer: "Ingeniería Comercial -- Econometría II"
+    slide-number: c/t
+    show-slide-number: all
+    #embed-resources: true
+---
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(ggplot2)
+
+theme_set(theme_minimal(base_size = 14))
+```
+
+
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+
+## Bullets
+
+When you click the **Render** button a document will be generated that includes:
+
+-   Content authored with markdown
+-   Output from executable code
+
+$$\frac{\alpha}{\beta} \hat{x}$$
+
+## Code
+
+When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+
