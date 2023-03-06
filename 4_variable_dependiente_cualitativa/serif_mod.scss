@@ -1,0 +1,86 @@
+/*-- scss:defaults --*/
+
+/*-- scss:defaults --*/
+// importing fonts
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Lato&family=Yanone+Kaffeesatz&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic');
+
+// fonts
+//$font-family-sans-serif: "Palatino Linotype", "Book Antiqua", Palatino,
+//  FreeSerif, serif !default;
+$font-family-sans-serif: 'Droid Serif', sans-serif !default;
+$presentation-font-size-root: 28px;
+//$border-width: 0.5px;
+
+// colors
+$body-bg: #FFFFFF !default;
+$body-color: #000 !default;
+$link-color: #0000EE !default;
+$selection-bg: #26351c;
+
+// headings
+//$presentation-heading-font: "Palatino Linotype", "Book Antiqua", Palatino,
+//  FreeSerif, serif !default;
+$presentation-heading-font: 'Yanone Kaffeesatz',  Tahoma, sans-serif  !default;
+$presentation-heading-color: #C23430 !default;
+$presentation-h1-font-size: 2.2em;
+$presentation-h2-font-size: 1.925em;
+
+//code
+$code-color: #034f84 !default;
+$font-family-monospace: 'Inconsolata', monospace  !default;
+$code-block-font-size: 0.75em;
+
+
+/*-- scss:rules --*/
+.reveal a {
+  line-height: 1.3em;
+}
+
+/*.reveal .slide-logo {
+  height: 50px !important;
+  max-width: unset !important;
+  max-height: unset !important;
+}*/
+
+.reveal .slide-logo {
+   max-height: 1.5em !important;
+}
+
+.slide-logo {
+  display: block !important;
+  position: fixed !important;
+  top: 0 !important;
+  right: 10px !important;
+  max-height: 5% !important;
+  height: 80% !important;
+  width: auto !important;
+  color: $body-color !important;
+}
+
+.slide-number, .reveal.has-logo .slide-number {
+  bottom: 10px !important;
+  right: 10px !important;
+  top: unset !important;
+  color: $body-color !important;
+}
+
+.reveal .footer {
+    color: #C23430;
+}
+
+.color_red{
+  color: #ff0011;
+}
+
+.emph{
+  color:  #C23430;
+}
+
+.center-x{
+  text-align: center;
+}
+
+.small{
+  font-size: 0.8em;
+}
