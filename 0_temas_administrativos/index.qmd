@@ -17,17 +17,21 @@ format:
 
 1. *Quien es quien:*
 
-    - Profesor: Mauricio Tejada (email: <mauricio.tejada@mail.udp.cl>)
+    - Profesor: Mauricio Tejada (email: [mauricio.tejada@mail.udp.cl](mailto:mauricio.tejada@mail.udp.cl]))
 
-    - Ayudante: Por definir.
+    - Ayudante: A ser anunciado
+
+. . .
 
 2. *Horarios:*
 
-    - Clases: Lunes y Miércoles 11:30 a 12:50. Sala TBA.
+    - Clases: Lunes y Miércoles 11:30 a 12:50. Sala B-603
 
-    - Horas de Oficina: Martes 11:30 a 12:50. Edificio Cubo of. 510.
+    - Horas de Oficina: Miércoles 14:30 a 16:00. Oficia 510 Edificio Cubo
 
-    - Ayudantía: Por definir.
+    -  Ayudantía: Viernes 10:00 a 11:20. Sala a ser anuncuada
+
+. . .
 
 3. *Comunicación:*
 
@@ -41,7 +45,9 @@ format:
 - Este curso es una extensión natural al curso introductorio de econometría. 
 - El enfoque girará en torno al uso de distintos tipos de datos y métodos de estimación en el contexto de dichos tipos de datos. 
 - Un énfasis especial se pondrá en el uso de estos modelos y estimadores para resolver problemas específicos. 
-	
+
+. . .
+
 **Objetivo:**
 
 *Se espera que el alumno conozca los rudimentos de los métodos de estimación bajo distintos tipos de datos y sepa identificar las situaciones en las que éstos deben ser aplicados.*
@@ -100,21 +106,47 @@ format:
 
 ## Evaluación 
 
-- Formas de evaluación:
+Formas de evaluación:
     
-  * **Evaluación 1 (20%):**  semana del 17 al 21 de abril.
+* **Evaluación 1 (20%):**  semana del 17 al 21 de abril.
 
-  * **Evaluación 2 (20%):** semana del 12 al 16 de junio.
+* **Evaluación 2 (20%):** semana del 12 al 16 de junio.
 
-  * **Tareas y ejercicios empíricos (30%):** se desarrollarán durante el semestre.
+* **Tareas (15%):** se desarrollarán durante el semestre.
 
-  * **Examen (30%):** semana del 5 al 13 de julio.
+* **Ejercicios empíricos (15%):** se desarrollarán durante el semestre.
 
-- Reglas adicionales: 
-  
-  * Inasistencia justificada: Aplica reglamento.
+* **Examen (30%):** semana del 5 al 13 de julio.
 
-  * No existe eximición del examen final, el mismo que cubre toda la materia.
+## Evaluación 
+
+Para la evaluación del curso tome en cuenta lo siguiente:
+
+::: {.incremental}
+
+- No existe eximición del examen final, el mismo que cubre toda la materia.
+
+- Las evaluaciones se tomarán en semana de pruebas y los horarios serán asignados por la escuela. 
+
+- Justificativos sobre inasistencia a evaluaciones deben ser remitidos a Secretaria de Estudios. Son ellos los que evaluaran la admisibilidad de los mismos.
+
+- Si el o la estudiante falta a una evaluación parcial, se reponderará la misma en el examen final. 
+
+- Conductas deshonestas, plagio y cualquier acción que vicie el proceso de aprendizaje será llevada al Comité de Ética.
+
+:::
+
+## Sobre el uso de herramientas de inteligencia artificial
+
+- Para garantizar un aprendizaje óptimo y ético usen de forma responsable las herramientas de inteligencia artificial. 
+
+- Usen la herramienta solo si no afecta su rendimiento académico o el de sus compañeros. 
+
+- Usen la herramienta cuando logren internalizar y entender los argumentos, puedan citar fuentes, y puedan verificar que los datos sean verídicos. 
+
+- Tomen en cuenta cuenta que esta herramientas están en constante evolución y tiene capacidades y limitaciones. 
+
+- Ustedes son los únicos responsables de todo el contenido que presentan en evaluaciones.
 
 ## Programación
 
