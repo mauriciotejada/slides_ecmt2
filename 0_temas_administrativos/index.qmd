@@ -17,19 +17,19 @@ format:
 
 1. *Quien es quien:*
 
-    - Profesor: Mauricio Tejada (email: [mauricio.tejada@mail.udp.cl](mailto:mauricio.tejada@mail.udp.cl]))
+    - Profesor: Mauricio Tejada (email: [mauricio.tejada@mail.udp.cl](mailto:mauricio.tejada@mail.udp.cl])).
 
-    - Ayudante: A ser anunciado
+    - Ayudante: A ser anunciado.
 
 . . .
 
 2. *Horarios:*
 
-    - Clases: Lunes y Miércoles 11:30 a 12:50. Sala B-603
+    - Clases: Lunes y Miércoles 11:30 a 12:50. Sala B-603.
 
-    - Horas de Oficina: Miércoles 14:30 a 16:00. Oficia 510 Edificio Cubo
+    - Horas de Oficina: Miércoles 14:30 a 16:00. Oficia 510 Edificio Cubo.
 
-    -  Ayudantía: Viernes 10:00 a 11:20. Sala a ser anuncuada
+    -  Ayudantía: Viernes 10:00 a 11:20. Sala a ser anunciada.
 
 . . .
 
@@ -43,7 +43,9 @@ format:
 **Descripción:**
 
 - Este curso es una extensión natural al curso introductorio de econometría. 
+
 - El enfoque girará en torno al uso de distintos tipos de datos y métodos de estimación en el contexto de dichos tipos de datos. 
+
 - Un énfasis especial se pondrá en el uso de estos modelos y estimadores para resolver problemas específicos. 
 
 . . .
