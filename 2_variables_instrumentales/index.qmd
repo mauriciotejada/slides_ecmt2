@@ -304,7 +304,7 @@ reg.vi <- ivreg(lpackpc ~ lravgprs + lperinc | rtaxso + rtax + lperinc, data = d
 modelsummary(list("lpackpc MCO"=reg.mco, "lravgprs 1ETA"=reg.etapa1, 
                   "lpackpc 2ETA"=reg.etapa2, "lpackpc VI"=reg.vi), output = "markdown",
              gof_omit = "AIC|BIC|Log.Lik|RMSE|R2 Adj.|Num.Obs|F|R2", stars = T, 
-             title = "*Variable dependiente:*")
+             title = "*Variable dependiente:*", vcov = "stata")
 ```
 
 :::
