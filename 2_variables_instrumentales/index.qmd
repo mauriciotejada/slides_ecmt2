@@ -10,7 +10,8 @@ format:
     footer: "Ingeniería Comercial -- Econometría II"
     slide-number: c/t
     show-slide-number: all
-    #embed-resources: true
+    embed-resources: true
+    self-contained-math: true
 ---
 
 ```{r setup, message=FALSE, warning=FALSE, include=FALSE}
@@ -104,7 +105,7 @@ $$\hat{\beta}^{MCDE}_{1} = \frac{\frac{1}{n}\sum_{i=1}^{N}(y_{i}-\bar{y})(z_{i}-
 
     *Este es el estimador de MCDE*.
 
-## Ejemplo 5: Retornos a la educación para mujeres casadas
+## Ejemplo 1: Retornos a la educación para mujeres casadas
 
 - Modelo postulado:
 $$log(wage_{i})=\beta_{0}+\beta_{1} educ_{i}+ \beta_{2} habil_i+u_{i}$$
@@ -121,11 +122,11 @@ $$log(wage_{i})=\beta_{0}+\beta_{1} educ_{i}+ \beta_{2} habil_i+u_{i}$$
     
     - $\mathbb{Cov}\left(habil_{i}, fatheduc_{i}\right) = \mathbb{Cov}\left(\tilde{u}_i, fatheduc_{i}\right) = 0$ [¿Discutible?]
 
-## Ejemplo 5: Retornos a la educación para mujeres casadas
+## Ejemplo 1: Retornos a la educación para mujeres casadas
 
 ::: {.small}
 
-```{r ejemplo_5}
+```{r ejemplo_1}
 #| warning: false
  
 library(haven)
@@ -244,7 +245,7 @@ $$y_i=\beta_0+\beta_1 x_{1 i}+\beta_{2} w_{1 i}+\ldots+\beta_{R+1} w_{R i}+u_i$$
 
     - Los coeficientes de esta regresión de segunda etapa son los estimadores de MCDE.
     
-## Ejemplo 6: Demanda de cigarrillos
+## Ejemplo 2: Demanda de cigarrillos
 
 - Postulamos el siguiente modelo para la demanda de cigarrillos
 $$\log (Q_i^{cigarrillos}) = \beta_0 + \beta_1 \log (P_i^{cigarrillos}) + \beta_2 \log (Ingreso_i) + u_i$$
@@ -257,7 +258,7 @@ $$\log (Q_i^{cigarrillos}) = \beta_0 + \beta_1 \log (P_i^{cigarrillos}) + \beta_
 
 - [Variable exógena]{.emph}: $\log (Ingreso_i)$ (esto es plausible - ¿por qué?) (un $w$)
 
-## Ejemplo 6: Demanda de cigarrillos (cont...)
+## Ejemplo 2: Demanda de cigarrillos (cont...)
 
 - [Dos instrumentos]{.emph} (dos $z$):
 
@@ -273,11 +274,11 @@ $$\log (Q_i^{cigarrillos}) = \beta_0 + \beta_1 \log (P_i^{cigarrillos}) + \beta_
     
 - ¿Está $\beta_1$ sobre-, sub-, o exactamente identificado?.
 
-## Ejemplo 6: Demanda de cigarrillos (cont...)
+## Ejemplo 2: Demanda de cigarrillos (cont...)
 
 :::{.small}
 
-```{r}
+```{r ejemplo_2}
 library(haven)
 library(dplyr)
 library(modelsummary)
@@ -368,7 +369,7 @@ $$y_i = \beta_0 + \beta_1 x_i + u_i$$
 
 - Esto solo se puede hacer si #$z$ >#$x$ (sobreidentificado).
 
-# Pruebas de restricciones sobreidentificadas (cont)
+## Pruebas de restricciones sobreidentificadas (cont)
 
 La prueba $J$ de Anderson-Rubin tiene los sigueinte pasos:
 
