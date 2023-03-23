@@ -443,6 +443,7 @@ Mauricio M. Tejada
 </section>
 <section id="ejemplo-5-retornos-a-la-educación-para-mujeres-casadas-1" class="slide level2">
 <h2>Ejemplo 5: Retornos a la educación para mujeres casadas</h2>
+<div class="small">
 <div class="cell">
 <div class="cell-output-display">
 <table>
@@ -464,9 +465,9 @@ Mauricio M. Tejada
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
-<td style="text-align: center;">(0.276)</td>
-<td style="text-align: center;">(0.185)</td>
-<td style="text-align: center;">(0.446)</td>
+<td style="text-align: center;">(0.272)</td>
+<td style="text-align: center;">(0.171)</td>
+<td style="text-align: center;">(0.465)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">fatheduc</td>
@@ -484,13 +485,13 @@ Mauricio M. Tejada
 <td style="text-align: left;">educ</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">0.109***</td>
-<td style="text-align: center;">0.059+</td>
+<td style="text-align: center;">0.059</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;">(0.014)</td>
-<td style="text-align: center;">(0.035)</td>
+<td style="text-align: center;">(0.013)</td>
+<td style="text-align: center;">(0.037)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Num.Obs.</td>
@@ -506,13 +507,20 @@ Mauricio M. Tejada
 </tr>
 <tr class="odd">
 <td style="text-align: left;">F</td>
-<td style="text-align: center;">88.841</td>
-<td style="text-align: center;">56.929</td>
+<td style="text-align: center;">87.119</td>
+<td style="text-align: center;">65.591</td>
 <td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Std.Errors</td>
+<td style="text-align: center;">HC1</td>
+<td style="text-align: center;">HC1</td>
+<td style="text-align: center;">HC1</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Note:</strong> ^^ + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</p>
+</div>
 </div>
 </div>
 </section>
@@ -542,9 +550,9 @@ Mauricio M. Tejada
 <li><p>Hasta ahora hemos considerado la regresión IV con un solo regresor endógeno (<span class="math inline">\(x\)</span>) y un solo instrumento (<span class="math inline">\(z\)</span>).</p></li>
 <li><p>Necesitamos extender esto a:</p>
 <ul>
-<li><p>Múltiples regresores endógenos (<span class="math inline">\(X_1,...,X_K\)</span>).</p></li>
-<li><p>Múltiples variables exógenas incluidas (<span class="math inline">\(W_1,...,W_R\)</span>) o variables de control, que deben incluirse por la razón usual.</p></li>
-<li><p>Múltiples variables instrumentales (<span class="math inline">\(Z_1,...,Z_M\)</span>).</p></li>
+<li><p>Múltiples regresores endógenos (<span class="math inline">\(x_1,...,x_K\)</span>).</p></li>
+<li><p>Múltiples variables exógenas incluidas (<span class="math inline">\(w_1,...,w_R\)</span>) o variables de control, que deben incluirse por la razón usual.</p></li>
+<li><p>Múltiples variables instrumentales (<span class="math inline">\(z_1,...,z_M\)</span>).</p></li>
 </ul></li>
 <li><p>Más instrumentos (relevantes) pueden producir una varianza menor de MCDE: el <span class="math inline">\(R^2\)</span> de la primera etapa aumenta, por lo que tenemos más variación en <span class="math inline">\(\hat{x}\)</span>.</p></li>
 <li><p><em>Nueva terminología</em>: identificación y sobreidentificación.</p></li>
@@ -657,10 +665,10 @@ Mauricio M. Tejada
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
-<td style="text-align: center;">(0.966)</td>
-<td style="text-align: center;">(0.088)</td>
-<td style="text-align: center;">(1.097)</td>
-<td style="text-align: center;">(0.959)</td>
+<td style="text-align: center;">(1.023)</td>
+<td style="text-align: center;">(0.099)</td>
+<td style="text-align: center;">(1.141)</td>
+<td style="text-align: center;">(1.059)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">lravgprs</td>
@@ -671,10 +679,10 @@ Mauricio M. Tejada
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
-<td style="text-align: center;">(0.261)</td>
+<td style="text-align: center;">(0.251)</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;">(0.250)</td>
+<td style="text-align: center;">(0.263)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">lperinc</td>
@@ -685,10 +693,10 @@ Mauricio M. Tejada
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
-<td style="text-align: center;">(0.260)</td>
+<td style="text-align: center;">(0.235)</td>
 <td style="text-align: center;">(0.040)</td>
-<td style="text-align: center;">(0.271)</td>
-<td style="text-align: center;">(0.254)</td>
+<td style="text-align: center;">(0.257)</td>
+<td style="text-align: center;">(0.239)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">rtaxso</td>
@@ -729,15 +737,8 @@ Mauricio M. Tejada
 <td style="text-align: left;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;">(0.286)</td>
+<td style="text-align: center;">(0.284)</td>
 <td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Std.Errors</td>
-<td style="text-align: center;">HC1</td>
-<td style="text-align: center;">HC1</td>
-<td style="text-align: center;">HC1</td>
-<td style="text-align: center;">HC1</td>
 </tr>
 </tbody>
 </table>

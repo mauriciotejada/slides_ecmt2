@@ -123,6 +123,8 @@ $$log(wage_{i})=\beta_{0}+\beta_{1} educ_{i}+ \beta_{2} habil_i+u_{i}$$
 
 ## Ejemplo 5: Retornos a la educación para mujeres casadas
 
+::: {.small}
+
 ```{r ejemplo_5}
 #| warning: false
  
@@ -140,10 +142,13 @@ reg.mco <- lm(log(wage) ~ educ, data = db_submuetra)
 
 reg.iv <- ivreg(log(wage) ~ educ | fatheduc, data = db_submuetra)
 
-modelsummary(list("educ MCO"=reg.educ.fatheduc, "log(wage) MCO"=reg.mco, "log(wage) VI"=reg.iv), output = "markdown",
+modelsummary(list("educ MCO"=reg.educ.fatheduc, "log(wage) MCO"=reg.mco, 
+                  "log(wage) VI"=reg.iv), output = "markdown",
              gof_omit = "AIC|BIC|Log.Lik|RMSE|R2 Adj.", stars = T, 
-             title = "*Variable dependiente:*")
+             title = "*Variable dependiente:*", vcov = "stata")
 ```
+
+:::
 
 ## Consistencia del estimador MCDE
 
@@ -175,11 +180,11 @@ La relevancia del instrumento $\mathbb{Cov}\left(x_{i}, z_{i}\right)\neq0$ asegu
 
 - Necesitamos extender esto a:
 
-    - Múltiples regresores endógenos ($X_1,...,X_K$).
+    - Múltiples regresores endógenos ($x_1,...,x_K$).
 
-    - Múltiples variables exógenas incluidas ($W_1,...,W_R$) o variables de control, que deben incluirse por la razón usual.
+    - Múltiples variables exógenas incluidas ($w_1,...,w_R$) o variables de control, que deben incluirse por la razón usual.
 
-    - Múltiples variables instrumentales ($Z_1,...,Z_M$). 
+    - Múltiples variables instrumentales ($z_1,...,z_M$). 
     
 - Más instrumentos (relevantes) pueden producir una varianza menor de MCDE: el $R^2$ de la primera etapa aumenta, por lo que tenemos más variación en $\hat{x}$.
 
@@ -295,14 +300,14 @@ db_reg$lravgprs_hat = predict(reg.etapa1)
 
 reg.etapa2 <- lm(lpackpc ~ lravgprs_hat + lperinc, data = db_reg)
 reg.vi <- ivreg(lpackpc ~ lravgprs + lperinc | rtaxso + rtax + lperinc, data = db_reg)
+
 modelsummary(list("lpackpc MCO"=reg.mco, "lravgprs 1ETA"=reg.etapa1, 
                   "lpackpc 2ETA"=reg.etapa2, "lpackpc VI"=reg.vi), output = "markdown",
              gof_omit = "AIC|BIC|Log.Lik|RMSE|R2 Adj.|Num.Obs|F|R2", stars = T, 
-             title = "*Variable dependiente:*", vcov = "stata")
+             title = "*Variable dependiente:*")
 ```
 
 :::
-
 
 ## Validez del instrumento
 
