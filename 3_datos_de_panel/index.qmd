@@ -1,6 +1,6 @@
 ---
 title: "Econometría II"
-subtitle: "**Unidad 2: Modelos para Datos de Panel**"
+subtitle: "**Unidad 3: Modelos para Datos de Panel**"
 author: "Mauricio M. Tejada"
 institute: "*Departamento de Economía, Universidad Diego Portales*"
 format:
