@@ -1,6 +1,6 @@
 ---
 title: "Econometría II"
-subtitle: "**Unidad 3: Modelos de Series de Tiempo**"
+subtitle: "**Unidad 4: Modelos de Series de Tiempo**"
 author: "Mauricio M. Tejada"
 institute: "*Departamento de Economía, Universidad Diego Portales*"
 format:
@@ -17,5 +17,826 @@ format:
 library(ggplot2)
 
 theme_set(theme_minimal(base_size = 14))
+
+library(readxl) # Leer documentos xlsx 
+library(dynlm)
+library(forecast)
+library(AER)
 ```
+
+## Introducción
+
+Serie de tiempo
+: *Son datos recopilados para una unidad observacional en múltiples períodos de tiempo.*
+
+\ 
+
+Algunos ejemplos:
+
+-   El consumo agregado y el PIB de un país (20 años de observaciones
+    trimestrales = 80 observaciones).
+
+-   El tipo de cambio Pesos/US\$ (datos diarios por 1 año = 365
+    observaciones.
+
+-   La horas promedio trabajadas en una semana representativa (datos
+    anuales desde 1990 a 2016 = 27 observaciones)
+
+**Nota:** Un aspecto central respecto de corte transversal es que los
+datos siguen un orden particular: [el tiempo]{.emph}.
+
+## Algunos ejemplos de series de tiempo
+```{r}
+pib <- read_xlsx("data/pib_real_anual.xlsx", 
+                 sheet = "Cuadro", skip = 2, col_names = c("date","pib"))
+
+pib.ts <- ts(pib$pib, start = 1960, frequency = 1)
+
+plot(pib.ts, col = "red", xlab = "", ylab = "Miles de Millones de Pesos Encadenados",
+     lwd = 2, main = "Chile: Producto Interno Bruto Real Anual")
+```
+
+## Algunos ejemplos de series de tiempo
+```{r}
+td <- read_xlsx("data/desempleo.xlsx", 
+                 sheet = "Cuadro", skip = 2, col_names = c("date","td"))
+
+td.ts <- ts(td$td, start = c(1986,2), frequency = 12)
+
+plot(td.ts, col = "red", xlab = "", ylab = "Porcentaje de la Fuerza Laboral",
+     lwd = 2, main = "Chile: Tasa de Desempleo")
+abline(h = mean(td.ts), lty = 2, col="blue")
+```
+
+## Algunos ejemplos de series de tiempo
+```{r}
+tcr <- read_xlsx("data/tipo_cambio_real.xlsx", 
+                 sheet = "Cuadro", skip = 3, col_names = c("date","tcr"))
+
+tcr.ts <- ts(tcr$tcr, start = c(1986,1), frequency = 12)
+
+plot(tcr.ts, col = "red", xlab = "", ylab = "Índice 1986 = 100",
+     lwd = 2, main = "Chile: Tipo de Cambio Real")
+```
+
+## Algunos ejemplos de series de tiempo
+```{r}
+inf <- read_xlsx("data/inflacion.xlsx", 
+                 sheet = "Cuadro", skip = 2, col_names = c("date","inf12"))
+
+inf12.ts <- ts(inf$inf12, start = c(1981,1), frequency = 12)
+
+plot(inf12.ts, col = "red", ylab = "Índice 1986 = 100", xlab = "",
+     lwd = 2, main = "Chile: Tasa de Inflación en 12 Meses")
+abline(v = 1991.000, lty = 2, col = "blue")
+abline(v = 2000.000, lty = 2, col = "blue")
+```
+
+## Caracterísisticas típicas de las series de tiempo
+
+1.  Fuertes tendencias.
+
+2.  Difícil de distinguir tendencias y ciclos.
+
+3.  Ciclos estocásticos, difíciles de predecir.
+
+4.  Comportamientos estacionales marcados.
+
+5.  Oscilaciones muy erráticas, no hay tendencias ni ciclos obvios.
+
+6.  Covariaciones sugerentes.
+
+7.  Cambios estructurales.
+
+# Definiciones Básicas
+
+## Proceso Estocástico
+
+Proceso Estocástico o PGD 
+: *Sucesión de variables aleatorias ordenadas en el tiempo. Por ejemplo el PIB, el tipo de cambio, el IPC,
+etc.
+$$\{y_{-\infty},...,y_{0},y_{1},y_{2},...,y_{\infty}\}\,\,o\,\,\{y_{t}\}_{t=-\infty}^{\infty}$$*
+
+-   Note que cada $y_{t}$ es una variable aleatoria y tendrá su propia
+    función de distribución $F(r)=p(y\leq r)$ con sus correspondientes
+    momentos ($E(y_{t}),V(y_{t}),...$).
+
+-   Para caracterizar un proceso estocástico en un período $1$ a $T$
+    debemos especificar las funciones de distribución conjunta de estas
+    variables ($F(y_{1},y_{2},...,y_{T})$).
+
+-   Consideramos sólo observaciones consecutivas y equidistantes. La distancia en el tiempo se denomina
+    **frecuencia**: anual, trimestral, mensual, semana, diaria.
+
+## Serie de Tiempo
+
+Serie de Tiempo
+: *La serie de tiempo $\{y_{1},...,y_{T}\}$, con $T$ el número de observaciones, contiene los valores observados de la variable $y_{t}$, esto es, las realización del PGD.*
+
+\ 
+
+:::: {.columns}
+
+::: {.column width="40%"}
+Ejemplo: $PIB_{2007}=62,793,469$ millones de pesos es una [realización del PGD]{.emph} (en función a factores económicos, políticos, metereológicos, etc).
+:::
+
+::: {.column width="60%"}
+![](figs/procesoestocastico.png)
+:::
+
+::::
+
+## Definiciones básicas
+
+Las series de tiempo introducen la dimensión temporal. Esto hace que debamos preocuparnos de aspectos como:
+
+-   Rezagos y adelantos en el tiempo.
+
+-   Correlación serial o autocorrelación.
+
+-   Cálculo de errores estándar en presencia de correlación serial.
+
+-   Estacionariedad
+
+Una buena forma de aprender sobre el comportamiento de las series de tiempo es observando datos y tratando de encontrar patrones. Una buena fuente de datos:
+
+-   Base de Datos del Banco Central de Chile `www.bcentral.cl.`
+
+## Rezagos, primeras diferencias y crecimiento
+
+-   El primer rezago de $y_{t}$ es $y_{t-1}$.
+
+-   El rezago *j-esimo* de $y_{t}$ es $y_{t-j}$.
+
+-   La primera diferencia, $\Delta y_{t}$, es el cambio entre los períodos $t-1$ y $t$:
+    $$\Delta y_{t}=y_{t}-y_{t-1}$$
+
+-   La primer diferencia del logaritmo de $y_{t}$ es: $$\Delta\ln y_{t}=\ln y_{t}-\ln y_{t-1}$$
+
+-   La tasa de crecimiento entre los periodos $t-1$ y $t$ es: $$g_{y}=\frac{y_{t}-y_{t-1}}{y_{t-1}}\times100$$ y puede ser aproximada (para cambios pequeños) por: $g_{y}=\Delta\ln y_{t}\times100$
+
+## Autocorrelación 
+
+-   Se denomina autocorrelación a la correlación entre una serie de tiempo y sus valores rezagados.
+
+-   Definimos la primera autocovarianza como:
+    $$\mathbb{Cov}(y_{t},y_{t-1})=\mathbb{E}\left[\left(y_{t}-\mathbb{E}[y_{t}]\right)\left(y_{t-1}-\mathbb{E}[y_{t-1}]\right)\right]$$
+
+-   La primera autocorrelación se define entonces como:
+    $$\rho_{1}=\mathbb{Corr}(y_{t},y_{t-1})=\frac{\mathbb{Cov}(y_{t},y_{t-1})}{\sqrt{\mathbb{V}(y_{t})\mathbb{V}(y_{t-1})}}$$
+
+-   Estas correlaciones están definidas en el PGD, esto es son "poblacionales". Describen la distribución conjunta entre $y_{t},y_{t-1}$.
+
+## Autocorrelación
+
+-   De la misma forma definimos la *j-esima* covarianza y la *j-esima* correlación.
+    $$\mathbb{Cov}(y_{t},y_{t-j})=\mathbb{E}\left[\left(y_{t}-\mathbb{E}[y_{t}]\right)\left(y_{t-j}-\mathbb{E}[y_{t-j}]\right)\right]$$
+    $$\rho_{j}=\mathbb{Corr}(y_{t},y_{t-j})=\frac{\mathbb{Cov}(y_{t},y_{t-j})}{\sqrt{\mathbb{V}(y_{t})\mathbb{V}(y_{t-j})}}$$
+
+-   Describimos la distribución conjunta entre $y_{t},y_{t-j}$ en el PGD o la "población".
+
+## Autocorrelación muestral
+
+-   La *j-esima* autocorrelación muestral es el estimador de la *j-esima* autocorrelación poblacional:
+    $$\hat{\rho}_{j}=\frac{\widehat{\mathbb{Cov}(y_{t},y_{t-j})}}{\widehat{\mathbb{V}(y_{t})}}$$
+    donde:
+    $$\widehat{\mathbb{Cov}(y_{t},y_{t-j})}=\frac{1}{T}\sum_{t=j+1}^{T}(y_{t}-\bar{y}_{j+1,T})(y_{t-j}-\bar{y}_{1,T-j})$$
+
+-   $\bar{y}_{j+1,T}$ es el promedio muestral de $y_{t}$ calculado con las observaciones $t=j+1,...,T$.
+
+## Estacionariedad
+
+El concepto de estacionariedad nos indica que la historia es relevante (es clave para **validez externa**).
+
+Estacionariedad
+: *Una serie de tiempo es estacionaria si su distribución de probabilidad no cambia en el tiempo, esto es, si la distribución conjunta de $y_{s+1},y_{s+2},...,y_{s+T}$ no depende de $s$ sin importar el valor de $T$. En caso contrario, la series es no estacionaria. Por otro lado, se dice que un par de series de tiempo $x_{t}$ e $y_{t}$ son conjuntamente estacionarias si la distribución conjunta de $y_{s+1},...,y_{s+T},x_{s+1},...x_{s+T}$ no depende de $s$ sin importar el valor de $T$.*
+
+\ 
+
+**Nota**: Estacionaridad implica que el futuro es parecido al pasado, al menos en un sentido probabilístico. Discutiremos esto más adelante.
+
+## Definción alternativa: Estacionariedad débil
+
+Definición alternativa, más débil pero más práctica:
+
+Estacionariedad en Covarianza
+: *Un proceso estocástico $y_{t}$ es débilmente estacionario o estacionario en covarianza si y solo si:*
+
+    1.  $\mathbb{E}\left[y_{t}\right]=\mu<\infty,\,\,\,\forall t$
+    
+    2.  $\mathbb{V}(y_{t})=\mathbb{E}\left[(y_{t}-\mathbb{E}[y_{t}])^{2}\right]=\gamma_{0}<\infty,\,\,\,\forall t$
+    
+    3.  $Cov(y_{t},y_{t-j})=\mathbb{E}\left[(y_{t}-\mathbb{E}[y_{t}])(y_{t-j}-\mathbb{E}[y_{t-j}])\right]=\gamma_{j}<\infty,\,\,\,\forall t,\forall j$
+
+\ 
+
+Interpretación:
+
+- Una serie de tiempo con media y varianza constantes y finitas y con covarianzas que solo dependen del rezago para el cual se definen pero no del tiempo es considerada estacionaria en el sentido débil.
+
+
+## Usos para las series de tiempo
+
+-   [Predicción]{.emph}.
+
+    -   Ejemplo 1: Cuánto será el crecimiento del PIB el próximo año?
+
+    -   Ejemplo 2: Cuánto será el aumento de costos futuros en el sistema de salud?
+
+-   Estimación de [Efectos causales dinámicos]{.emph}.
+
+    -   Ejemplo 1: Qué sucede con la tasa de inflación si el Banco Central aumenta la tasa de inflación y la tasa de desempleo a 3 meses y a 12 meses?
+
+    -   Ejemplo 2: Cuál es el efecto en el tiempo de la reforma tributaria sobre las variables macroeconómicas?
+
+# Usando R con series de tiempo
+
+## Definiendo series de tiempo en R
+
+- Para realizar cálculos específicos con series de tiempo (como rezagos, adelantos, tendencias y efectos estacionales, etc) tendremos que definir explícitamente la estructura de nuestros datos. 
+
+- En R, hay varios **tipos de series de tiempo**. La distinción más importante se relaciona con si los datos están equidistantes entre sí en el tiempo o no. 
+
+  - Las series de tiempo **equidistantes en el tiempo** se recopilan en puntos regulares en el tiempo (ejemplos:  datos mensuales, trimestrales o anuales. En R, estos datos se almacenan de manera eficiente en el tipo de variable `ts` (time series).
+  
+  - Las series de tiempo **irregulares** tienen distancias variables (ejemplos datos financiero diarios o por horas. Trabajaremos principalmente con datos equidistantes. Hay varios paquetes para declarar series de tiempo irregulares, los más importantes son `xts` (extended time series) y `zoo`.
+
+## Definiendo series de tiempo en R
+
+- Objetos tipo `ts`, para series de tiempo que son **equidistantes en el tiempo**, se definen de la siguiente manera:
+  ```{r eval=FALSE, echo=TRUE}
+  datos_st = ts(datos, start = c(año, periodo), frequency = num_frec)
+  ```
+  
+  - `datos` puede ser un vector, una matriz, o una base de datos.
+  
+  - `c(año, periodo)` es un vector con el año de inicio y el periodo intra anual de inicio (1 a 4 para series trimestrales, 1 a 12 para series mensuales, etc.)
+  
+  - `num_frec` es un número que representa la frecuencia con la que se observa la serie de tiempo en un año: 2 para datos semestrales, 4 para datos trimestrales, 12 para datos mensuales, 52 para datos semanales, etc. 
+
+- Funciones específicas a este tipo de datos.
+  ```{r eval=FALSE, echo=TRUE}
+  y_j = lag(datos_st, k = -j)             # rezago j-esimo
+  dy_j = diff(datos_st, lag = j)          # dy = y_t - y_t-j
+  ddy = diff(datos_st, , differences = 2) # d(dy) = (y_t - y_t-1)-(y_t-1 - y_t-2)
+  ```
+
+## Definiendo series de tiempo en R
+
+- El paquete `lubridate` permite trabajar de forma bien conveniente con fechas en R (permite entre otras cosas convertir texto en fechas, hacer cálculos entre fechas, obtener ciertos componentes de una fecha).
+  ```{r eval=FALSE, echo=TRUE}
+  library(lubridate)
+  ```
+
+- Para transformar una variable en formato fecha usamos funciones como `ymd()`, `mdy()`, `qy()`, etc (ver la ayuda para los distintos formatos de fecha):
+  ```{r eval=FALSE, echo=TRUE}
+  ymd("2017-01-31")         # formato año-mes-día y obtenemos "2017-01-31"
+  mdy("January 31st, 2017") # format mes-día-año y obtenemos "2017-01-31"
+  dmy("31-Jan-2017")        # format día-mes-año y obtenemos "2017-01-31"
+  ``` 
+  Nota: la variable a transformar puede ser un vector.
+
+- En ocasiones tenemos diferentes componentes de una fecha en diferentes variables (por ejemplo, variables año, mes y día). En este caso usamos la función `make_datetime()`. 
+  ```{r eval=FALSE, echo=TRUE}
+  make_datetime(year = 1978, month = 2, day = 18) # obtenemos "1978-02-18"
+  ```
+
+## Definiendo series de tiempo en R
+
+- Es posible extraer distintos componentes de una fecha usando funciones como `year()`, `month()`, `mday()`, etc:
+  ```{r eval=FALSE, echo=TRUE}
+  dmy("14/10/1979")
+  month(bday)              # obtenemos 10
+  year(bday)               # obtenemos 1979
+  wday(bday, label = TRUE) # Obtenemos Sun
+  ```
+
+- Contar con variables en formato adecuado de fechas va a ser muy útil para aquellas series de tiempo que son **irregulares** (sólo días de semana por ejemplo). Usando el paquete `xts` tenemos:
+  ```{r eval=FALSE, echo=TRUE}
+  library(xts)
+  datos_st = xts(x=datos, order.by=variable_fechas)
+  ```
+
+  El paquete `xts` nos da funciones similares a `ts` pero que pueden lidiar con series de tiempo que son irregulares: `lag.xts()` y `diff.xts()`.
+
+## Funciones útiles para trabajar con series de tiempo
+
+- Para extraer las observaciones de una serie de tiempo para un sub-periodo usamos la función `window()`. 
+  ```{r eval=FALSE, echo=TRUE}
+  nueva_st <- window(serie_tiempo, start = c(año,periodo), end = c(año,periodo))
+  ```
+  Si `start` o `end` no son provistos la función usa la fecha inicial o final, respectivamente.
+
+- Para agrupar series de tiempo, manteniendo el periodo de tiempo común entre series de tiempo, usamos la función `ts.intersect()`.
+  ```{r eval=FALSE, echo=TRUE}
+  nuevo_grupo_st <- ts.intersect(serie_tiempo_1, serie_tiempo_2)
+  ```
+
+- Para agrupar series de tiempo, manteniendo el periodo de tiempo que engloba ambas series de tiempo, usamos la función `ts.union()`.
+  ```{r eval=FALSE, echo=TRUE}
+  nuevo_grupo_st <- ts.union(serie_tiempo_1, serie_tiempo_2)
+  ```
+  Note que las observaciones faltantes serán relledadas con `NA`. 
+  
+## Funciones útiles para trabajar con series de tiempo
+
+- Las autocovarianzas y autocorrelaciones se pueden calcular a diferentes rezagos usando al función `acf()`.
+  ```{r eval=FALSE, echo=TRUE}
+  acf(serie_tiempo, lag.max = num_rez, type = typo_stat, plot = TRUE)
+  ```
+  donde `typo_stat` puede ser `"correlation"` o `"covariance"`;  `num_rez` indica que se usaran los rezagos 1 a `num_rez`; `plot = TRUE` indica que se generará un gráfico con los resultados.
+
+- Las covarianzas y correlaciones cruzadas entre dos series de tiempo se pueden calcular a diferentes rezagos usando al función `ccf()`.
+  ```{r eval=FALSE, echo=TRUE}
+  ccf(serie_tiempo_1, serie_tiempo_2, lag.max = num_rez, type = typo_stat, plot = TRUE)
+  ```
+    Las mismas opciones anteriores aplican también a esta función.
+
+## Funciones útiles para trabajar con series de tiempo
+
+- Para cambiar la frecuencia de una serie de tiempo, por ejemplo llevarla de mensual a trimestral, usamos la función `aggregate() ` y una función de agregación (por ejemplo `sum` o `mean`).
+  ```{r eval=FALSE, echo=TRUE}
+  nueva_serie_tiempo <- aggregate.ts(serie_tiempo, nfrequency = nueva_frecuencia,
+                                       FUN = función) 
+  ```
+
+# Predicción
+
+## Aspectos básicos
+
+*Predecir e identificar efectos causales son tareas completamente distintas.*
+
+Para la predicción:
+
+-   $\overline{R}^{2}$ importa mucho. Recuerde que: $$\bar{R}^{2}=1-\left[\frac{(1-R^{2})(N-1)}{N-K-1}\right]$$ con $N$ el número de observaciones y $K$ el número de parámetros de pendiente estimados.
+
+-   Sesgo por variables omitidas no es un problema.
+
+-   No hay necesidad de interpretar los parámetros.
+
+-   Validez externa del modelo es clave: el modelo estimado con datos del pasado debe ser válido en el futuro.
+
+## Modelos autoregresivos
+
+-   Un punto de partida natural para predecir el futuro de $y_{t}$ es usar sus valores pasados $y_{t-1},y_{t-2,}y_{t-3},...$
+
+-   Un **modelo autoregresivo (AR)** es un modelo de regresión en el cual corremos una regresión entre $y_{t}$ sobre sus valores pasados.
+
+-   El número de rezagos usados en la regresión determina el **orden** del modelo autoregresivo.
+
+    -  AR(1) o primer orden: regresión de $y_{t}$ sobre $y_{t-1}$.
+
+    -   AR(2) o segundo orden: regresión de $y_{t}$ sobre $y_{t-1}$ y $y_{t-2}$.
+
+    -   AR(p) u orden $p$: regresión de $y_{t}$ sobre $y_{t-1}$, $y_{t-2}$, \... y $y_{t-p}$.
+
+## Modelo autoregresivo de primer orden - AR(1)
+
+-   El modelo AR(1) poblacional:
+    $$y_{t}=\beta_{0}+\beta_{1}y_{t-1}+u_{t}$$
+-   El modelo AR(1) puede se estimado por MCO, en la regresión de $y_{t}$ sobre $y_{t-1}$. ¿Cómo luce el estimador del parámetro $\beta_{1}$?
+
+-   Los parámetros $\beta_{0}$ y $\beta_{1}$ no tienen una interpretación causal.
+
+-   El test de hipótesis $H_{0}:\beta_{1}=0$ contra
+    $H_{1}:\beta_{1}\neq0$ responde a la pregunta si la información
+    pasada es útil o no para la predicción.
+
+## Modelo autoregresivo de primer orden - AR(1)
+
+-   Las predicciones o proyecciones se definen fuera de la muestra. Se relacionan con valores futuros.
+
+    -   Definimos $y_{T+1|T}$ como la predicción de $y_{T+1}$ condicional en la información hasta $T$ ($y_{T},y_{T-1},...$) y usando los parámetros poblacionales.
+
+    -   Definimos $\hat{y}_{T+1|T}$ como la predicción de $y_{T+1}$ condicional en la información hasta $T$ ($y_{T},y_{T-1},...$) y usando los parámetros estimados con $T$ datos.
+
+## Modelo autoregresivo de primer orden - AR(1)
+
+-   Para el modelo AR(1) tenemos: 
+$$\begin{aligned}
+y_{T+1|T} & =  \beta_{0}+\beta_{1}y_{T}\\
+\hat{y}_{T+1|T} & =  \hat{\beta}_{0}+\hat{\beta}_{1}y_{T}
+\end{aligned}$$
+
+-   El error de predicción un período adelante se define como:
+    $$e_{1}^{f}=y_{T+1}-\hat{y}_{T+1|T}$$
+
+-   La distinción entre el error de predicción y el residuo de regresión
+    sigue la misma lógica fuera y dentro de la muestra.
+    
+## Modelo autoregresivo de orden p - AR(p)
+
+-   El modelo AR(p) poblacional:
+    $$y_{t}=\beta_{0}+\beta_{1}y_{t-1}+\beta_{2}y_{t-2}+...+\beta_{p}y_{t-p}+u_{t}$$
+
+-   El modelo AR(p) usa $p$ rezagos de la variable dependiente.
+
+-   Como antes, los parámetros $\beta_{1}$ a $\beta_{p}$ no tienen interpretación causal.
+
+-   El test de hipótesis:
+    $$H_{0}:\beta_{i}=\beta_{i+1}=...=\beta_{p}=0$$ indica que los
+    rezagos de $i$ hasta $p$ no tienen información útil para predecir
+    $y_{t}$ (usamos un test $F$ o un test $t$ dependiendo del número de
+    restricciones)
+
+    -   Esta idea se puede usar de forma secuencia para determinar el orden $p$. El problema es que los modelos tienden a ser muy grandes.
+
+## Selección del rezago óptimo usando Criterios de Información
+
+- Otra alternativa es determinar los rezagos usando los **criterios de información**.
+
+- El problema de elegir modelos con mucho rezagos no existe en este caso ya que en los criterios de información esta implícita la disyuntiva entre ajuste vs. grados de libertad.
+
+-   Existen dos criterios de información, el Criterio de Bayes (BIC) y el Criterio de Akaike (AIC).
+
+## Selección del rezago óptimo usando Criterios de Información
+
+Criterio de Información de Bayes (BIC)
+: *El criterio de información BIC se calcula como: $$BIC(p)=\ln\left(\frac{SRC(p)}{T}\right)+(p+1)\frac{\ln T}{T}$$*
+
+-   El primer término es siempre decreciente en $p$ (un $p$ grande siempre mejora el ajuste).
+
+-   El segundo término es siempre creciente en $p$.
+
+    -   La varianza de predicción dada por el error de estimación es
+        creciente en $p$, por tanto no es buena idea predecir con un
+        modelo con mucho rezagos.
+
+    -   Este término es una *penalidad* al uso de muchos parámetros.
+
+-   Al minimizar el $BIC(p)$ elegimos el mejor valor de $p$.
+
+## Selección del rezago óptimo usando Criterios de Información
+
+Criterio de Información de Akaike (AIC)
+: *El criterio de información AIC se calcula como: $$AIC(p)=\ln\left(\frac{SRC(p)}{T}\right)+(p+1)\frac{2}{T}$$*
+
+-   La interpretación es la misma que en el criterio $BIC(p)$.
+
+-   La diferencia está en que el término de penalidad es más pequeño
+    para el criterio $AIC(p)$: $$(p+1)\frac{2}{T}<(p+1)\frac{\ln T}{T}$$
+
+-   Por esto el criterio $AIC(p)$ estima mayores rezagos que el criterio
+    $BIC(p)$.
+
+## Ejemplo 1: Propiedades estadísticas de la tasa de inflación en Chile
+
+```{r}
+library(readxl) # Leer documentos xlsx 
+library(dplyr)
+library(dynlm) # Modelos dinámicos
+    
+# Cargando datos
+datos <- read_xlsx("data/ipc_y_tasa_desempleo.xlsx")
+
+# Declaramos los datos como series de tiempo
+ipc.t <- ts(datos$IPC, start = 1990, frequency = 12) 
+td.t <- ts(datos$tasa_desempleo, start = 1990, frequency = 12)
+
+# Transformar en logs y diferencias a un periodo y a 12 periodos 
+lipc = log(ipc.t)
+
+inf = diff(lipc)*100
+inf12 = diff(lipc, lag = 12)*100
+
+# Rezagos
+linf = stats::lag(inf, k = -1)
+linf12 = stats::lag(inf12, k = -1)
+
+# Primeras diferencias 
+dinf = diff(inf)
+dinf12 = diff(inf12)
+```
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+plot(inf12, main = "Chile: Tasa de Inflación en 12 Meses",
+     ylab = "Porcentaje", xlab = "Meses", col = "red")
+
+plot(dinf12, main = "Chile: Primera Dif. de la Tasa de Inflación en 12 Meses",
+     ylab = "Porcentaje", xlab = "Meses", col = "red")
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+plot(inf, main = "Chile: Tasa de Inflación Mensual",
+     ylab = "Porcentaje", xlab = "Meses", col = "blue")
+
+plot(dinf, main = "Chile: Primera Dif. de la Tasa de Inflación Mensual",
+     ylab = "Porcentaje", xlab = "Meses", col = "blue")
+```
+:::
+
+::::
+
+## Ejemplo 1: Propiedades estadísticas de la tasa de inflación en Chile
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+acf(inf12, main = "Función de Autocorrelación: Inflación 12 Meses",
+    xlab = "Rezago (Meses)")
+
+acf(dinf12, main = "Función de Autocorrelación: Dif. Inflación 12 Meses",
+    xlab = "Rezago (Meses)")
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+acf(inf, main = "Función de Autocorrelación: Inflación Mensual",
+    xlab = "Rezago (Meses)")
+
+acf(dinf, main = "Función de Autocorrelación: Dif. Inflación Inflación",
+    xlab = "Rezago (Meses)")
+```
+
+:::
+
+::::
+
+
+## Ejemplo 2: Predicción de la tasa de inflación
+
+- Elegimos el mejor modelo AR usando los criterios de información:
+```{r}
+    # Estimar varios modelos y comparar ajuste
+    ar1_dinf <- dynlm(dinf~L(dinf, 1), start = c(2000,1))
+    ar2_dinf <- dynlm(dinf~L(dinf, 1:2), start = c(2000,1))
+    ar3_dinf <- dynlm(dinf~L(dinf, 1:3), start = c(2000,1))
+    ar4_dinf <- dynlm(dinf~L(dinf, 1:4), start = c(2000,1))
+    ar5_dinf <- dynlm(dinf~L(dinf, 1:5), start = c(2000,1))
+    ar6_dinf <- dynlm(dinf~L(dinf, 1:6), start = c(2000,1))
+    
+    comparar <- data.frame(orden=1:6,
+                           AIC = c(AIC(ar1_dinf), AIC(ar2_dinf),
+                                   AIC(ar3_dinf), AIC(ar4_dinf),
+                                   AIC(ar5_dinf), AIC(ar6_dinf)),
+                           BIC = c(BIC(ar1_dinf), BIC(ar2_dinf),
+                                   BIC(ar3_dinf), BIC(ar4_dinf),
+                                   BIC(ar5_dinf), BIC(ar6_dinf)))
+    
+    comparar %>%     
+        as_tibble() %>% 
+        knitr::kable(digits = 3, 
+                 col.names = c("Orden AR", "AIC", "BIC"),
+                 align = "ccc",
+                 caption = "*Comparación de criterios de información*")
+```
+
+## Ejemplo 2: Predicción de la tasa de inflación
+
+```{r}
+#| echo: true
+ar5_dinf <- dynlm(dinf~L(dinf, 1:5), start = c(2000,1))
+summary(ar5_dinf)
+```
+
+## Ejemplo 2: Predicción de la tasa de inflación
+
+- Predicción de la diferencia de la inflación un periodo adelante:
+\begin{aligned}
+\widehat{\Delta \pi}_{May,23|Abr,23} &= \hat{\beta_0}+\hat{\beta_1} \Delta \pi_{Abr,23} +\hat{\beta_2} \Delta \pi_{Mar,23} +\hat{\beta_3} \Delta \pi_{Feb,23} \\
+&+\hat{\beta_4} \Delta \pi_{Ene,23} +\hat{\beta_5} \Delta \pi_{Dic,22}
+\end{aligned}
+
+- Predicción de la inflación:
+$$\widehat{\pi}_{May,23|Abr,23} = \pi_{Abr,23} + \widehat{\Delta \pi}_{May,23|Abr,23}$$
+
+```{r}
+#| echo: true
+for.data = c(1,rev(window(dinf, start = c(2022,12)))) # 5 últimos datos en orden reverso
+dinf.for <- coef(ar5_dinf) %*% for.data
+inf.for = for.data[2] + dinf.for
+inf.for
+```
+
+
+## Modelo Autoregresivo de Retardos Distribuidos (ARD)
+
+-   Hasta ahora hemos considerado modelos de predicción que suponen que sólo el pasado de la misma variable es relevante.
+
+-   Sin embargo, tiene sentido que otras variables $x$ puedan tener información relevante para predecir $y$.
+
+-   Usando esta idea tenemos:
+    $$y_{t}=\beta_{0}+\beta_{1}y_{t-1}+...+\beta_{p}y_{t-p}+\delta_{1}x_{t-1}+...+\delta_{r}x_{t-r}+u_{t}$$
+
+-   Este es un modelo autoregresivo de retardos distribuidos con $p$ rezagos de $y$ y $r$ rezagos de $x$: $ARD(p,q)$
+
+## Modelo Autoregresivo de Retardos Distribuidos (ARD)
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+
+-   Ejemplo: Inflación y Desempleo. *Curva de Phillips*: si la tasa de
+    desempleo está por encima de la tasa natural, entonces la tasa de
+    inflación aumentará.
+
+-   De esta forma, $\Delta inf_{t}$ debería estar relacionada con
+    valores pasados de la tasa de desempleo y el coeficiente debiera ser
+    negativo.
+:::
+
+::: {.column width="50%"}
+```{r}
+#| fig-width: 7 
+#| fig-height: 7  
+inf_a = aggregate(window(dinf12, start = c(2000,1), end = c(2019,12)), nfrequency = 1, FUN = mean)
+td_a = aggregate(window(td.t, start = c(2000,1), end = c(2019,12)), nfrequency = 1, FUN = mean)
+plot(x=as.numeric(td_a), y=as.numeric(inf_a),
+     xlab = "Tasa de Desempleo", ylab = "Var. Tasa de Inflación", col = "blue",
+     main = "Chile: Curva de Phillips")
+abline(lm(as.numeric(inf_a)~as.numeric(td_a)), col="red")
+```
+:::
+
+::::
+
+## Ejemplo 2: Modelo ARD para la Tasa de Inflación
+
+```{r}
+#| echo: true
+ard_dinf <- dynlm(dinf~L(dinf, 1:5) + L(td.t, 1:2), start = c(2000,1))
+summary(ard_dinf)
+```
+
+## Test de Causalidad de Granger
+
+El *Test de Causalidad a la Granger* indaga en si una variable $x$
+*tiene poder predictivo* (información relevante) sobre la variable $y$.
+Recuerde:
+$$y_{t}=\beta_{0}+\beta_{1}y_{t-1}+...+\beta_{p}y_{t-p}+\delta_{1}x_{t-1}+...+\delta_{r}x_{t-r}+u_{t}$$
+T.C.G. es un test F sobre para probar:
+$H_{0}:\delta_{1}=...=\delta_{r}=0$
+
+En el caso de nuestro modelo ARD para la inflación:
+
+```{r}
+#| echo: true
+library(AER)
+linearHypothesis(ard_dinf, c("L(td.t, 1:2)1 = 0", "L(td.t, 1:2)2 = 0"))
+```
+
+## Selección del Rezago Óptimo usando Criterios de Información
+
+Generalización del Criterio de Bayes para los Modelos ARD
+
+-   Definamos como $K$ el número total de coeficientes estimados en el
+    modelo (intercepto + rezagos de $y$ + rezagos de $x$). El criterio
+    de Bayes es:
+    $$BIC(K)=\ln\left(\frac{SRC(K)}{T}\right)+K\frac{\ln T}{T}$$
+
+-   Se podrías calcular este criterio para todas las combinaciones
+    posibles de rezagos $p$ y rezagos $r$.
+
+-   En la práctica, elegimos el $AR(p)$ para $y$ y decidimos si incluir
+    rezagos de $x$ usando el test de Causalidad de Granger.
+
+## Incertidumbre e Intervalos de Predicción
+
+-   ¿Porqué necesitamos una medida de incertidumbre? Para construir intervalos de confianza de la predicción.
+
+-   Estos intervalos dan una idea del grado de precisión que deberíamos esperar de la predicción.
+
+-   Consideremos la predicción de un modelo ARD(1,1):
+    $$\hat{y}_{T+1|T}=\hat{\beta}_{0}+\hat{\beta}_{1}y_{T}+\hat{\delta}_{1}x_{T}$$
+
+-   El error de predicción es:
+    $$y_{T+1}-\hat{y}_{T+1|T}=u_{T+1}-\left[\left(\hat{\beta}_{0}-\beta_{0}\right)+\left(\hat{\beta}_{1}-\beta_{1}\right)y_{T}+\left(\hat{\delta}_{1}-\delta_{1}\right)x_{T}\right]$$
+
+## Incertidumbre e Intervalos de Predicción
+
+-   El error de predicción cuadrático medio es: 
+\begin{aligned}
+        E\left(y_{T+1}-\hat{y}_{T+1|T}\right)^{2} & =  E\left[u_{T+1}^{2}\right]\\
+         & +  E\left[\left(\hat{\beta}_{0}-\beta_{0}\right)+\left(\hat{\beta}_{1}-\beta_{1}\right)y_{T}+\left(\hat{\delta}_{1}-\delta_{1}\right)x_{T}\right]^{2}
+    \end{aligned}
+
+-   Entonces: $$EPCM=Var(u_{T+1})+\Theta$$ con $\Theta$ la incertidumbre asociada a errores de estimación.
+
+-   Cuando la muestra es grande tenemos que: $Var(u_{T+1})>>\Theta$ y por tanto: $EPCM\approx Var(u_{T+1})$
+
+## Incertidumbre e Intervalos de Predicción
+
+-   Definamos también la raíz del error de predicción cuadrático medio:
+    $$REPCM=\sqrt{E\left(y_{T+1}-\hat{y}_{T+1|T}\right)^{2}}$$
+
+-   Esta es una medida de dispersión de la distribución del error de predicción (es de hecho una desviación estándar, pero para la predicción).
+
+-   Entonces es una medida de la *magnitud de una error de predicción típico*.
+
+## Incertidumbre e Intervalos de Predicción
+
+- Para proximar el $REPMC$ usar la varianza del error de regresión 
+$$\widehat{REPCM} = \sqrt{\hat{\sigma}_{u}^{2}}$$
+
+-   Si $u_{T+1}$ tiene una distribución normal, entonces el intervalo de la predicción al 95% se puede construir como:
+    $$\hat{y}_{T+1|T}\pm1.96\times\widehat{REPCM}$$
+
+-   El intervalo para la predicción no es un intervalo de confianza ($\hat{y}_{T+1}$ no es un coeficiente no aleatorio, sino es en efecto aleatorio).
+
+-   El intervalo anterior es válido sólo bajo el supuesto de normalidad. Sin embargo, su uso es muy común.
+
+-   Se pueden construir intervalos de predicción a distintos porcentajes
+    (70%, 80%, 90%, 95%, 99%).
+
+## Ejemplo 1: Intervalos de Confianza para la Tasa de Inflación
+
+- Estimamos un modelo AR(5). Usamos alternativamente el comando `ar()`:
+```{r}
+#| echo: true
+ar_dinf5 = ar(window(dinf, start = c(2000,1)), order.max = 5); ar_dinf5
+```
+
+- Predecimos usando el comando `predict()` con la opción `n.ahead`:
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+dinf.f1 <- predict(ar_dinf5, n.ahead = 1); dinf.f1
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+dinf.ic <- c(dinf.f1$pred-1.96*dinf.f1$se,
+             dinf.f1$pred+1.96*dinf.f1$se)
+dinf.ic
+```
+:::
+
+::::
+
+
+## Predicción de Múltiples Periodos
+
+-   Supongamos un modelo AR(1): $$y_{t} = \phi_{0}+\phi_{1}y_{t-1}+\epsilon_{t}$$
+
+-   La **predicción** un período adelante es: 
+\begin{aligned}
+        y_{T+1} & =  \phi_{0}+\phi_{1}y_{T}+\epsilon_{T+1}\\
+        y_{T+1|T} & =  E[\phi_{0}+\phi_{1}y_{T}+\epsilon_{T+1}|y_{T},y_{T-1},..]\\
+         & =  \phi_{0}+\phi_{1}y_{T}
+\end{aligned}
+
+-   La predicción dos período adelante es: $y_{T+2|T} = \phi_{0}+\phi_{0}\phi_{1}+\phi_{1}^{2}y_{T}$
+
+-   La predicción $j$ períodos adelante es: $y_{T+j|T} = \phi_{0}(1+\phi_{1}+\phi_{1}^{2}+...+\phi^{j-1})+\phi_{1}^{j}y_{T}$
+
+## Predicción de Múltiples Periodos
+
+-   Note que la calidad de la predicción disminuye mientras más lejos
+    está $j$:
+    $$\lim_{j\rightarrow\infty}y_{T+j|T}=\frac{\phi_{0}}{1-\phi_{1}}$$
+    La predicción es la media del proceso.
+
+-   El **error de predicción** (de la predicción $j$ períodos adelante)
+    se define como: $e_{T}(j)=y_{T+j}-y_{T+j|T}$. Para diferentes horizontes de predicción tenemos: 
+\begin{aligned}
+        e_{T}(1) & =  y_{T+1}-\left(\phi_{0}+\phi_{1}y_{T}\right)=\epsilon_{T+1}\\
+        e_{T}(2) & =  y_{T+2}-\left(\phi_{0}+\phi_{0}\phi_{1}+\phi_{1}^{2}y_{T}\right)=\epsilon_{T+2}+\phi\epsilon_{T+1}\\
+         & \vdots\\
+        e_{T}(j) & =  \epsilon_{T+j}+\phi_{1}\epsilon_{T+j-1}+\phi_{1}^{2}\epsilon_{T+j-2}+...+\phi_{1}^{j-1}\epsilon_{T+1}
+    \end{aligned}
+
+## Predicción de Múltiples Periodos
+
+-   La **Varianza del Error de Predicción** es:
+    $$V(e_{T}(j))=\sigma^{2}\left(1+\phi_{1}^{2}+\phi_{1}^{4}+...+\phi_{1}^{2(j-1)}\right)$$
+
+-   Entonces podemos construir un **Intervalo de Confianza** (a cada
+    horizonte) para juzgar la precisión de la predicción:
+    \begin{aligned}
+        j=1 & : & \left(\phi_{0}+\phi_{1}y_{T}\right)\pm Z_{\alpha/2}\sqrt{\sigma^{2}}\\
+        j=2 & : & \left(\phi_{0}+\phi_{0}\phi_{1}+\phi_{1}^{2}y_{T}\right)\pm Z_{\alpha/2}\sqrt{\sigma^{2}\left(1+\phi_{1}^{2}\right)}\\
+         & \vdots\\
+        j=k & : & \left(\phi_{0}(1+\phi_{1}+\phi_{1}^{2}+...+\phi^{k-1})+\phi_{1}^{k}y_{T}\right)\\
+         &  & \pm Z_{\alpha/2}\sqrt{\sigma^{2}\left(1+\phi_{1}^{2}+\phi_{1}^{4}+...+\phi_{1}^{2(k-1)}\right)}
+        
+    \end{aligned}
+
+## Ejemplo 1: Predicción para la Tasa de Inflación hasta Diciembre 2023
+
+```{r}
+#| echo: true
+dinf.f2 <- forecast(ar_dinf5, h = 8, level = 95)
+plot(dinf.f2, main = "Predicción 8 periodos adelantes para dinf")
+```
+
+# Efectos causales dinámicos
+
+
+
+
+
 
