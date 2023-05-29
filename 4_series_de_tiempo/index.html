@@ -8,7 +8,7 @@
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.353">
+  <meta name="generator" content="quarto-1.3.361">
 
   <meta name="author" content="Mauricio M. Tejada">
   <title>Econometría II</title>
@@ -1098,8 +1098,8 @@ Model 2: dinf ~ L(dinf, 1:5) + L(td.t, 1:2)
 <li><p>Se pueden construir intervalos de predicción a distintos porcentajes (70%, 80%, 90%, 95%, 99%).</p></li>
 </ul>
 </section>
-<section id="ejemplo-1-intervalos-de-confianza-para-la-tasa-de-inflación" class="slide level2">
-<h2>Ejemplo 1: Intervalos de Confianza para la Tasa de Inflación</h2>
+<section id="ejemplo-3-intervalos-de-confianza-para-la-tasa-de-inflación" class="slide level2">
+<h2>Ejemplo 3: Intervalos de Confianza para la Tasa de Inflación</h2>
 <ul>
 <li>Estimamos un modelo AR(5). Usamos alternativamente el comando <code>ar()</code>:</li>
 </ul>
@@ -1189,21 +1189,1213 @@ $se
 \end{aligned}\]</span></li>
 </ul>
 </section>
-<section id="ejemplo-1-predicción-para-la-tasa-de-inflación-hasta-diciembre-2023" class="slide level2">
-<h2>Ejemplo 1: Predicción para la Tasa de Inflación hasta Diciembre 2023</h2>
+<section id="ejemplo-4-predicción-para-la-tasa-de-inflación-hasta-diciembre-2023" class="slide level2">
+<h2>Ejemplo 4: Predicción para la Tasa de Inflación hasta Diciembre 2023</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>dinf.f2 <span class="ot">&lt;-</span> <span class="fu">forecast</span>(ar_dinf5, <span class="at">h =</span> <span class="dv">8</span>, <span class="at">level =</span> <span class="dv">95</span>)</span>
 <span id="cb28-2"><a href="#cb28-2"></a><span class="fu">plot</span>(dinf.f2, <span class="at">main =</span> <span class="st">"Predicción 8 periodos adelantes para dinf"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="index_files/figure-revealjs/unnamed-chunk-33-1.png" width="960" class="r-stretch"></section></section>
+<section>
 <section id="efectos-causales-dinámicos" class="title-slide slide level1 center">
 <h1>Efectos causales dinámicos</h1>
 
-<img src="figs/logo_econ.png" class="slide-logo r-stretch"><div class="footer footer-default">
-<p>Ingeniería Comercial – Econometría II</p>
+</section>
+<section id="el-modelo-estático" class="slide level2">
+<h2>El modelo estático</h2>
+<ul>
+<li><p>Consideremos las siguientes series de tiempo: <span class="math inline">\(y\)</span>, <span class="math inline">\(z_1\)</span>, <span class="math inline">\(z_2\)</span>, …, <span class="math inline">\(z_k\)</span>. Un modelo estático representa una <strong>relación contemporánea</strong> y es: <span class="math display">\[y_{t}=\beta_{0}+\beta_{1} z_{1t}+...+\beta_{k} z_{kt}+u_{t}, \ \ \ t=1,2, \ldots, T\]</span></p></li>
+<li><p>Diferenciando totalmente: <span class="math display">\[y_t - y_{t-1} = \Delta y_{t}=\beta_{1} \Delta z_{1t}+...+\beta_{k} \Delta z_{kt}+ \Delta u_{t}\]</span></p></li>
+<li><p>El efecto <strong>ceteris paribus</strong> de <span class="math inline">\(z_1\)</span> sobre <span class="math inline">\(y\)</span> se da cuando <span class="math inline">\(\Delta z_{2t} = ... = \Delta z_{kt} = \Delta u_{t} = 0\)</span>, entonces: <span class="math display">\[\Delta y_{t}=\beta_{1} \Delta z_{1t} \rightarrow \frac{\Delta y}{\Delta z_{1t}} = \beta_1\]</span></p></li>
+<li><p>El efecto <em>ceteris paribus</em> es un <strong>efecto contemporáneo o inmediato</strong>.</p></li>
+</ul>
+</section>
+<section id="el-modelo-de-rezagos-distribuidos-finitos-rdf" class="slide level2">
+<h2>El modelo de rezagos distribuidos finitos (RDF)</h2>
+<ul>
+<li><p>En un modelo RDF(q) con dos series de tiempo <span class="math inline">\(y\)</span> y <span class="math inline">\(z\)</span>: <span class="math display">\[y_{t}=\alpha_{0}+\delta_{0} z_{t}+\delta_{1} z_{t-1}+...+\delta_{q} z_{t-q}+u_{t}, \ \ \ t=1,2, \ldots, T\]</span></p></li>
+<li><p>Diferenciando totalmente: <span class="math display">\[y_t - y_{t-1} = \Delta y_{t} = \delta_{0} \Delta z_{t}+ \delta_{1} \Delta z_{t-1} + ...+\delta_{q} \Delta z_{t-q} + \Delta u_{t}\]</span></p></li>
+<li><p>Efecto <strong>ceteris paribus</strong> de un cambio permanente en <span class="math inline">\(z\)</span> en <span class="math inline">\(t\)</span> sobre <span class="math inline">\(y\)</span>: <span class="math inline">\(\Delta z_t \neq 0\)</span>, <span class="math inline">\(\Delta u = 0\)</span> para todo <span class="math inline">\(t\)</span> y <span class="math inline">\(\Delta z_{t - j} = \Delta z_{t+j} = 0\)</span> para todo <span class="math inline">\(j&gt;0\)</span>. <span class="math display">\[
+\begin{aligned}
+\Delta y_{t} &amp;= \color{#ee6c4d}{\delta_{0} \Delta z_{t}}+ \delta_{1} \Delta z_{t-1} + \delta_{2} \Delta z_{t-2} + ...+\delta_{q} \Delta z_{t-q} + \Delta u_{t} \\
+\Delta y_{t+1} &amp;= \delta_{0} \Delta z_{t+1}+ \color{#ee6c4d}{\delta_{1} \Delta z_{t}} + \delta_{2} \Delta z_{t-1} + ...+\delta_{q} \Delta z_{t+1-q} + \Delta u_{t+1} \\
+\Delta y_{t+2} &amp;= \delta_{0} \Delta z_{t+2}+ \delta_{1} \Delta z_{t+1} + \color{#ee6c4d}{\delta_{2} \Delta z_{t}} + ...+\delta_{q} \Delta z_{t+2-q} + \Delta u_{t+2} \\
+\vdots
+\end{aligned}
+\]</span></p></li>
+</ul>
+</section>
+<section id="el-modelo-de-rezagos-distribuidos-finitos-rdf-1" class="slide level2">
+<h2>El modelo de rezagos distribuidos finitos (RDF)</h2>
+<p>El efecto <strong>ceteris paribus</strong> es:</p>
+<ul>
+<li><p>Efecto en <span class="math inline">\(t\)</span> es <span class="math inline">\(\frac{\Delta y_t}{\Delta z_{t}} = \delta_0\)</span> (<em>multiplicador de impacto</em>).</p></li>
+<li><p>El efecto un periodo adelante es <span class="math inline">\(\frac{\Delta y_{t+1}}{\Delta z_{t}}= \delta_1\)</span> (<em>multiplicador un periodo adelante</em>).</p>
+<ul>
+<li>Efecto acumulado <span class="math inline">\(\delta_0+\delta_1\)</span>.</li>
+</ul></li>
+<li><p>El efecto un periodo adelante es <span class="math inline">\(\frac{\Delta y_{t+2}}{\Delta z_{t}}= \delta_2\)</span> (<em>multiplicador dos periodos adelante</em>).</p>
+<ul>
+<li>Efecto acumulado <span class="math inline">\(\delta_0+\delta_1+\delta_2\)</span>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="el-modelo-de-rezagos-distribuidos-finitos-rdf-2" class="slide level2">
+<h2>El modelo de rezagos distribuidos finitos (RDF)</h2>
+<ul>
+<li>El <strong>multiplicador de largo plazo</strong> es la suma de todos los coeficientes de las variables <span class="math inline">\(z\)</span>. <span class="math display">\[PLP=\delta_{0}+\delta_{1}+\ldots+\delta_{q}\]</span></li>
+</ul>
+<p>&nbsp;</p>
+<p><strong>Nota</strong>: <em>Una alta correlación entre entre <span class="math inline">\(z\)</span> y sus rezagos (multicolinealidad) hace difícil obtener estimadores precisos de cada <span class="math inline">\(\delta\)</span> individual. No obstante, a menudo se pueden obtener buenas estimaciones de la <span class="math inline">\(PLP\)</span>.</em></p>
+</section>
+<section id="el-modelo-de-rezagos-distribuidos-finitos-rdf-3" class="slide level2">
+<h2>El modelo de rezagos distribuidos finitos (RDF)</h2>
+<p><strong>Ejemplo</strong>: La tasa de fertilidad podría depender de excepciones tributarias, pero por razones biológicas y psicológicas el efecto podrías darse con rezago. <span class="math display">\[tf_t = \alpha_0 + 0.15 et_t + 0.3 et_{t-1} + 0.1 et_{t-2} + 0.05 et_{t-3} + u_t\]</span> donde <span class="math inline">\(tf\)</span> es la tasa de fertilidad (niños nacidos / 1000 mujeres) y <span class="math inline">\(e_t\)</span> son las exempciones tributarias.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-fig.dim="[5,4]">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/multiplicadores-1.png" style="width:75.0%"></p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-fig.dim="[5,4]">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/multiplicadores_acum-1.png" style="width:75.0%"></p>
+</div>
+</div>
+</div>
 </div>
 </section>
+<section id="estimación-propiedades-en-muestras-finitas-e-inferencia" class="slide level2">
+<h2>Estimación, propiedades en muestras finitas e inferencia</h2>
+<ul>
+<li><p>Usamos MCO para estimar tanto el modelo estático como el de rezagos distribuidos finitos.</p></li>
+<li><p><strong>Supuestos</strong>:</p>
+<ol type="1">
+<li><p>Linealidad en Parámetros</p></li>
+<li><p>No hay colinealidad perfecta</p></li>
+<li><p>Media condicional del error cero</p></li>
+<li><p>Homocedasticidad y No autocorrelación en los errores.</p></li>
+<li><p>Normalidad en los errores</p></li>
+</ol></li>
+</ul>
+<p><strong>Nota:</strong> <em>Como antes, bajo los supuestos 1 a 3 MCO es insesgado. Agregando 4 MCO es ficiente (<span class="emph">MELI</span>). Además, agregando 6 toda los procedimientos de inferencia aplican.</em></p>
+</section>
+<section id="qué-significa-ahora-media-condiconal-cero" class="slide level2">
+<h2>¿Qué significa ahora media condiconal cero?</h2>
+<p>Media condicional cero: <span class="math inline">\(\mathbb{E}\left(u_{t} \mid \mathbf{X}\right)=0, t=1,2, \ldots, T\)</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Definamos la matriz completa de las variables dependientes: <span class="math display">\[\mathbf{X}=\left(\begin{array}{cccc}
+x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1 K} \\
+\vdots &amp; \vdots &amp; \cdots &amp; \vdots \\
+x_{t 1} &amp; x_{t 2} &amp; \cdots &amp; x_{t K} \\
+\vdots &amp; \vdots &amp; &amp; \vdots \\
+x_{T 1} &amp; x_{T 2} &amp; \cdots &amp; x_{T K}
+\end{array}\right)\]</span></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><p><strong>Exogeneidad débil</strong>: las variables explicativas y el error no correlacionan de manera contemporánea: <span class="math inline">\(\mathbb{Corr}(x_{tj},u_t ) = 0\)</span>, para toda <span class="math inline">\(j\)</span>.</p></li>
+<li><p><strong>Exogeneidad estricta</strong>: las variables explicativas y el error nunca correlacionan <span class="math inline">\(\mathbb{Corr}(x_{kj},u_t ) = 0\)</span>, para toda <span class="math inline">\(j\)</span> y <span class="math inline">\(k\)</span>. <em>No existe retroalimentación del futuro sobre la variable dependiente hoy</em>.</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="ejemplo-5-la-curva-de-phillips-estática" class="slide level2">
+<h2>Ejemplo 5: La Curva de Phillips estática</h2>
+<p>Consideremos el siguiente modelo estático: <span class="math display">\[inf_t =\beta_0 + \beta_1 unem_t + u_t\]</span></p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><p>¿Disyuntiva a c/p entre inflación y desempleo?</p></li>
+<li><p><span class="math inline">\(H_0: \beta_1 = 0\)</span> y <span class="math inline">\(H_1: \beta_1 &lt; 0\)</span>.</p></li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>             Estimate Std. Error   t value   Pr(&gt;|t|)
+(Intercept) 1.0535656  1.5479571 0.6806168 0.49902205
+unem        0.5023782  0.2655624 1.8917519 0.06389167</code></pre>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Según esta regresión, <strong>no existe una disyuntiva</strong> ya que <span class="math inline">\(\beta_1=0.5&gt;0\)</span>.</p></li>
+<li><p>El estadístico <span class="math inline">\(t=0.5/0.27=1.85\)</span> para <span class="math inline">\(H_0: \beta_1 = 0\)</span> permite rechazar la hipótesis nula al 10%.</p></li>
+<li><p>¿Problemas?</p></li>
+</ul>
+</section>
+<section id="ejemplo-5-la-curva-de-phillips-estática-1" class="slide level2">
+<h2>Ejemplo 5: La Curva de Phillips estática</h2>
+<p><em>El resultado hallado es <strong>contrario a la teoría</strong>. ¿Los supuestos del modelo clásico se cumplen?</em></p>
+<p><em>Nota:</em> <span class="math inline">\(u_t\)</span> contiene shocks monetarios, shocks de demanda, shocks de oferta, shocks en el tipo de cambio, entre otros.</p>
+<p>&nbsp;</p>
+<ul>
+<li><p><strong>S1</strong> restrictivo pero buena aproximación.</p></li>
+<li><p><strong>S2</strong> no es problema si <span class="math inline">\(unemp\)</span> varia en el tiempo.</p></li>
+<li><p><strong>S3</strong> <span class="math inline">\(\mathbb{E}(u_t|unem_1,...,unem_T)=0\)</span> es probable de ser violado (el estimador sería <strong>sesgado</strong>).</p>
+<ul>
+<li><span class="math inline">\(unem_{t-1} \uparrow \Rightarrow \text{Demanda}\downarrow \Rightarrow u_t \downarrow\)</span>.</li>
+<li><span class="math inline">\(u_{t-1} \uparrow \Rightarrow inf_{t-1} \uparrow \Rightarrow unem_t \uparrow\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="ejemplo-5-la-curva-de-phillips-estática-2" class="slide level2">
+<h2>Ejemplo 5: La Curva de Phillips estática</h2>
+<ul>
+<li><strong>TS4</strong> <span class="math inline">\(\mathbb{V}(u_t|unem_1,...,unem_T)=\sigma^2\)</span> no se cumple si
+<ul>
+<li>la política monetaria responde agresivamente a mayor desempleo.</li>
+</ul></li>
+<li><strong>TS5</strong> <span class="math inline">\(Corr(u_t,u_s|unem_1,...,unem_T)=0\)</span> no se cumple si
+<ul>
+<li>el efecto de otras variables en <span class="math inline">\(unemp\)</span> persiste en el tiempo.</li>
+</ul></li>
+<li><strong>TS6</strong> <span class="math inline">\(\mathcal{N}(0,\sigma^2)\)</span> cuestionable en muestras pequeñas.</li>
+</ul>
+</section>
+<section id="transformación-útil" class="slide level2">
+<h2>Transformación útil</h2>
+<ul>
+<li><p>En algunas ocasiones es útil hacer <strong>transformaciones para cambiar la interpretación de los parámetros</strong> a estimar. Ejemplo con un RDF(2): <span class="math display">\[y_t = \alpha + \beta_0 x_t + \beta_1 x_{t-1} + \beta_2 x_{t-2} + u_t\]</span> tenemos el multiplicador de impacto y los multiplicadores a 1 y 2 periodos.</p></li>
+<li><p>Sumar y restar <span class="math inline">\(\beta_0 x_{t-1}\)</span> al lado derecho: <span class="math display">\[y_t = \alpha + \beta_0 (x_t - x_{t-1}) + (\beta_0 + \beta_1) x_{t-1} + \beta_2 x_{t-2} + u_t\]</span></p></li>
+<li><p>Sumar y restar <span class="math inline">\((\beta_0 + \beta_1) x_{t-2}\)</span> al lado derecho: <span class="math display">\[y_t = \alpha + \beta_0 (x_t - x_{t-1}) + (\beta_0 + \beta_1) (x_{t-1} - x_{t-2}) + (\beta_0 + \beta_1 + \beta_2) x_{t-2} + u_t\]</span></p></li>
+</ul>
+</section>
+<section id="transformación-útil-1" class="slide level2">
+<h2>Transformación útil</h2>
+<ul>
+<li><p>El modelo RDF transformado queda como: <span class="math display">\[y_t = \alpha + \gamma_0 \Delta x_t  + \gamma_1 \Delta x_{t-1} + \gamma_2 x_{t-2} + u_t\]</span></p></li>
+<li><p>Note que los parámetros estimados ahora son <strong>efectos acumulados</strong>:</p>
+<ul>
+<li><p><span class="math inline">\(\gamma_0 = \beta_0\)</span>: multiplicador de impacto.</p></li>
+<li><p><span class="math inline">\(\gamma_1 = \beta_0 + \beta_1\)</span>: efecto acumulado un periodo adelante.</p></li>
+<li><p><span class="math inline">\(\gamma_2 = \beta_0 + \beta_1 + \beta_2\)</span>: efecto acumulado dos periodos adelante (efecto de largo plazo)</p></li>
+</ul></li>
+<li><p>Esta transformación es muy útil para realizar <strong>pruebas de hipótesis sobre efectos acumulados</strong> y funciona en general para modelo RDF(q). <span class="math display">\[y_t = \alpha + \gamma_0 \Delta x_t  + \gamma_1 \Delta x_{t-1} + ...+ \gamma_{q-1} \Delta x_{t-(q-1)}  + \gamma_q x_{t-q} + u_t\]</span></p></li>
+</ul>
+</section>
+<section id="ejemplo-6-exención-tributaria-y-tasas-de-fertilidad" class="slide level2">
+<h2>Ejemplo 6: Exención tributaria y tasas de fertilidad</h2>
+<ul>
+<li><p>Whittington, Alm y Peters (1990): Efecto de exenciones tributarias personales (deducciones por jardín infantil o educación básica) sobre la tasa de fertilidad.</p>
+<p><span class="math display">\[g f r_{t}=\beta_{0}+\beta_{1} p e_{t}+ \beta_{2} pe_{t-1} + \beta_{3} pe_{t-2} + \beta_{4} ww2_{t}+\beta_{5} pill_{t}+u_{t}\]</span> donde:</p>
+<ul>
+<li><p><span class="math inline">\(gfr\)</span>: número de niños nacidos por cada 1000 mujeres.</p></li>
+<li><p><span class="math inline">\(pe\)</span>: valor en dólares reales de la exención personal.</p></li>
+<li><p><span class="math inline">\(ww2= 1\)</span> si años de 1941 a 1945 (Segunda Guerra Mundial).</p></li>
+<li><p><span class="math inline">\(pill=1\)</span> si 1963 en adelante (salió al mercado la píldora anticonceptiva).</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="ejemplo-6-exención-tributaria-y-tasas-de-fertilidad-1" class="slide level2">
+<h2>Ejemplo 6: Exención tributaria y tasas de fertilidad</h2>
+<ul>
+<li>Resultados:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                 Estimate Std. Error     t value     Pr(&gt;|t|)
+(Intercept)  95.870497467  3.2819571 29.21138071 1.022560e-38
+pe            0.072671828  0.1255331  0.57890569 5.646848e-01
+L(pe)        -0.005779582  0.1556629 -0.03712883 9.704979e-01
+L(pe, 2)      0.033826844  0.1262574  0.26791971 7.896227e-01
+ww2         -22.126497512 10.7319716 -2.06173649 4.329888e-02
+pill        -31.304988800  3.9815591 -7.86249501 5.633695e-11</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Los coeficientes en las variables son por separado es estadísticamente insignificantes.</p></li>
+<li><p>Alta correlación entre <span class="math inline">\(pe_t\)</span>, <span class="math inline">\(pe_{t-1}\)</span> y <span class="math inline">\(pe_{t-2}\)</span> dificulta la estimación individual.</p></li>
+<li><p>Test F de significancia conjunta <span class="math display">\[H_0: pe_t = pe_{t-1} = pe_{t-2}=0\]</span> es 3.972964 con un p-value de 0.011652.</p></li>
+</ul>
+</section>
+<section id="ejemplo-6-exención-tributaria-y-tasas-de-fertilidad-2" class="slide level2">
+<h2>Ejemplo 6: Exención tributaria y tasas de fertilidad</h2>
+<ul>
+<li><p>Multiplicador de largo plazo, <span class="math inline">\(MLP = pe_t +pe_{t-1} +pe_{t-2}\)</span>, es 0.1007191.</p></li>
+<li><p>Test F para la hipótesis <span class="math inline">\(H_0: pe_t + pe_{t-1} + pe_{t-2}=0\)</span> es 11.4212385 con un p-value de 0.0012408</p></li>
+<li><p>Alternativamente: <span class="math display">\[gfr_{t}=\beta_{0}+\beta^*_{1} \Delta pe_{t}+ \beta^*_{2} \Delta pe_{t-1} + \beta^*_{3} pe_{t-2} + \beta_{4} ww2_{t}+\beta_{5} pill_{t}+u_{t}\]</span> con <span class="math inline">\(\beta^*_{3}\)</span> el MLP.</p></li>
+</ul>
+<div class="cell" data-paged.print="false">
+<div class="cell-output cell-output-stdout">
+<pre><code>                Estimate  Std. Error    t value     Pr(&gt;|t|)
+(Intercept)  95.87049747  3.28195707 29.2113807 1.022560e-38
+diff(pe)      0.07267183  0.12553310  0.5789057 5.646848e-01
+L(diff(pe))   0.06689225  0.13163798  0.5081531 6.130930e-01
+L(pe, 2)      0.10071909  0.02980267  3.3795323 1.240844e-03
+ww2         -22.12649751 10.73197162 -2.0617365 4.329888e-02
+pill        -31.30498880  3.98155913 -7.8624950 5.633695e-11</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="tendencias-y-estacionalidad" class="title-slide slide level1 center">
+<h1>Tendencias y estacionalidad</h1>
+
+</section>
+<section id="tendencias" class="slide level2">
+<h2>Tendencias</h2>
+<ul>
+<li><p>Para hacer inferencias causales debemo reconocer que ciertas series muestran <strong>tendencia en el tiempo</strong>.</p></li>
+<li><p>Ignorar la existencia de tendencias conduce a conclusiones erróneas.</p></li>
+<li><p>¿Qué clase de modelos estadísticos representan la tendencia?</p></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Modelo de tendencia lineal</strong></p>
+<p><span class="math display">\[y_{t}=\alpha_{0}+\alpha_{1} t+u_{t}, t=1,2, \ldots\]</span></p>
+<ul>
+<li><p><span class="math inline">\(u_t\)</span> es <em>i.i.d.</em> con <span class="math inline">\(\mathbb{E}(u_t)=0\)</span> y <span class="math inline">\(\mathbb{V}(u_t)=\sigma^2\)</span>.</p></li>
+<li><p><span class="math inline">\(\alpha_1 = \Delta y_t\)</span>. El signo indica si la serie aumenta o disminuye en promedio (variación constante).</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-fig.dim="[5,4]">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/tend_lineal-1.png" style="width:100.0%"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="tendencias-1" class="slide level2">
+<h2>Tendencias</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Modelo de tendencia exponencial</strong></p>
+<p><span class="math display">\[\log(y_{t})=\alpha_{0}+\alpha_{1} t+u_{t}, t=1,2, \ldots\]</span> alternativamente:</p>
+<p><span class="math display">\[y_{t}=e^{\alpha_{0}+\alpha_{1} t+u_{t}}, t=1,2, \ldots\]</span></p>
+<ul>
+<li><p><span class="math inline">\(u_t\)</span> es <em>i.i.d.</em> con <span class="math inline">\(\mathbb{E}(u_t)=0\)</span> y <span class="math inline">\(\mathbb{V}(u_t)=\sigma^2\)</span>.</p></li>
+<li><p><span class="math inline">\(\alpha_1 = \Delta \log(y_t) \approx \frac{y_t-y_{t-1}}{y_{t-1}}\)</span>. El signo indica si la serie crece o decrece en promedio (crecimiento porcentual constante).</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-fig.dim="[5,4]">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/tend_exp-1.png" style="width:100.0%"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="tendencias-2" class="slide level2">
+<h2>Tendencias</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Tendencias más complejas</strong></p>
+<p>Por ejemplo, tendencias cuadráticas.</p>
+<p><span class="math display">\[y_{t}=\alpha_{0} + \alpha_{1} t + \alpha_2 t^2 + u_{t}, t=1,2, \ldots\]</span></p>
+<ul>
+<li><p><span class="math inline">\(u_t\)</span> es <em>i.i.d.</em> con <span class="math inline">\(\mathbb{E}(u_t)=0\)</span> y <span class="math inline">\(\mathbb{V}(u_t)=\sigma^2\)</span>.</p></li>
+<li><p>La pendiente aproximada: <span class="math inline">\(\frac{\Delta y_t}{\Delta t} = \alpha_1 + \alpha_2 t\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(\alpha_1&gt;0\)</span> y <span class="math inline">\(\alpha_2&gt;0\)</span> la pendiente de la tendencia aumenta aumentando.</p></li>
+<li><p>Si <span class="math inline">\(\alpha_1&gt;0\)</span> y <span class="math inline">\(\alpha_2&lt;0\)</span> la tendencia tiene una forma de U invertida.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-fig.dim="[5,4]">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/tend_polinomica-1.png" style="width:100.0%"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="el-modelo-de-regresión-y-la-tendencia" class="slide level2">
+<h2>El modelo de regresión y la tendencia</h2>
+<ul>
+<li><p>Nada respecto de las variables (explicadas o explicativa) con tendencia viola los supuestos 1 a 6.</p></li>
+<li><p>El tipo de tendencia con el que trataremos es <span class="emph">tendencia deterministica</span>. Después analizaremos otro tipo de tendencia que puede generar no estacionariedad.</p></li>
+<li><p>El problema surge con <span class="emph">variable omitidas con tendencia</span> que están correlacionadas con las variables explicativas.</p></li>
+<li><p>Si ignora esta posibilidad podemos encontrar una relación falsa (sesgo). Este problema se conoce como <span class="emph">regresión espuria</span>.</p></li>
+<li><p>La adición de una tendencia en el tiempo elimina este problema: <span class="math display">\[y_t = \beta_0 + \beta_1 x_{1t} + ... + \beta_{Kt} x_{Kt} + \gamma t + u_t, t=1,2, \ldots\]</span></p></li>
+</ul>
+</section>
+<section id="el-modelo-de-regresión-y-la-tendencia-1" class="slide level2">
+<h2>El modelo de regresión y la tendencia</h2>
+<ul>
+<li><p>Incluir una tendencia en el modelo es equivalente a la <strong>eliminación previa de la tendencia</strong> en las series de datos originales.</p></li>
+<li><p>En el modelo anterior <span class="math display">\[y_t = \beta_0 + \beta_1 x_{1t} + ... + \beta_{Kt} x_{Kt}  + \gamma t + u_t, t=1,2, \ldots\]</span> interpretamos los estimadores MCO como descuentos de efectos parciales.</p></li>
+<li><p>Podemos <span class="emph">eliminar (“descontar”) la tendencia</span> antes de estimar el modelo: <span class="math display">\[y_t = \alpha_0 + \alpha_1 t + \tilde{y_t}, t=1,2, \ldots\]</span> para todas las variables del modelo.</p></li>
+<li><p>Luego usar MCO en el modelo (genera estimadores idénticos al modelo orginal): <span class="math display">\[\tilde{y}_t = \beta_1 \tilde{x}_{1t} + ... + \beta_{Kt} \tilde{x}_{Kt}  + \tilde{u}_t, t=1,2, \ldots\]</span></p></li>
+</ul>
+</section>
+<section id="ejemplo-7-inversión-y-precios-de-vivienda" class="slide level2">
+<h2>Ejemplo 7: Inversión y precios de vivienda</h2>
+<ul>
+<li>Analizamos si la inversión real en vivienda per cápita está relacionada con el precio de las viviendas. <span class="math display">\[\log (invpc)= \beta_0 + \beta_1 \log (price) + \beta_3 t + u_t\]</span> donde:
+<ul>
+<li><p><span class="math inline">\(invpc\)</span> es la inversión real en vivienda per cápita (en miles de dólares).</p></li>
+<li><p><span class="math inline">\(price\)</span> es un índice del precio de vivienda (igual a 1 en 1982).</p></li>
+<li><p><span class="math inline">\(t\)</span> es una tendencia lineal.</p></li>
+</ul></li>
+</ul>
+<p><em><span class="emph">Este ejemplo busca resaltar al **importancia de controlar por la tendencia</span> cuando las series muestra comportamientos ascendentes o descendentes en el tiempo, ya que la relación podría deberse únicamente a la presencia de tendencia (<span class="emph">relación artificial o espurea</span>).</em></p>
+</section>
+<section id="ejemplo-7-inversión-y-precios-de-vivienda-1" class="slide level2">
+<h2>Ejemplo 7: Inversión y precios de vivienda</h2>
+
+<img data-src="index_files/figure-revealjs/precio_vivienda-1.png" style="width:70.0%" class="r-stretch"></section>
+<section id="ejemplo-7-inversión-y-precios-de-vivienda-2" class="slide level2">
+<h2>Ejemplo 7: Inversión y precios de vivienda</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table>
+<caption><em>Variable dependiente: log(invpc)</em></caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Sin Tend</th>
+<th style="text-align: right;">Con tend</th>
+<th style="text-align: right;">Quitando Tend</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-0.550***</td>
+<td style="text-align: right;">-0.913***</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;">(0.043)</td>
+<td style="text-align: right;">(0.136)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">log(price)</td>
+<td style="text-align: right;">1.241**</td>
+<td style="text-align: right;">-0.381</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;">(0.382)</td>
+<td style="text-align: right;">(0.679)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trend(ts.data)</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.010**</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.004)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">resid(lprice_reg)</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">-0.381</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.662)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> ^^ + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</p>
+</div>
+</div>
+</section>
+<section id="ejemplo-7-inversión-y-precios-de-vivienda-3" class="slide level2">
+<h2>Ejemplo 7: Inversión y precios de vivienda</h2>
+<ul>
+<li><p>En la primera regresión, la elasticidad es grande y significativa (1.2409432). Debe ser cuidadoso aquí, porque la relación puede deberse solamente a la existencia de tendencia.</p></li>
+<li><p>Al controlar por tendencia, regresión 2, la elasticidad estimada del precio es negativa (-0.3809613) y en términos estadísticos no es diferente de cero (el estadístico t para <span class="math inline">\(H_0: \beta = 0\)</span> es -0.5611985).</p></li>
+<li><p>Note que controlar por la tendencia es equivalente a eliminar primero la tendencia de las series.</p></li>
+</ul>
+</section>
+<section id="estacionalidad" class="slide level2">
+<h2>Estacionalidad</h2>
+<ul>
+<li><p>Una serie de tiempo en <span class="emph">frecuencia interanual</span> (trimestral, mensual, semanal o diaria) puede presentar estacionalidad.</p></li>
+<li><p>Una manera de modelar este fenómeno es permitir que el valor esperado de la serie de tiempo sea distinto (de forma deterministica) en cada periodo interanual.</p></li>
+<li><p>Para lograr este objetivo podemos incluir <span class="emph">variables binarias estacionales</span> en el modelo de regresión.</p></li>
+<li><p>Por ejemplo, si la serie de tiempo es mensual tenemos: <span class="math display">\[y_t = \beta_0 + \beta_1 x_{1t} + ... + \beta_{Kt} x_{Kt} + \gamma_1 feb_t + ... + \gamma_{11} dic_t  + u_t\]</span> donde <span class="math inline">\(mes_t\)</span> es 1 en el mes correspondiente y 0 en otro caso. Note que hemos omitido una variable binaria <span class="math inline">\(ene_t\)</span> para evitar colinealidad perfecta.</p></li>
+</ul>
+</section>
+<section id="estacionalidad-1" class="slide level2">
+<h2>Estacionalidad</h2>
+<ul>
+<li><p>Incluir variables binarias estacionales en una regresión es equivalente a la <span class="emph">eliminación de la estacionalidad de los datos</span>.</p></li>
+<li><p>De igual forma que con la tendencia, podemos [eliminar (“descontar”) la estacionalidad] antes de estimar el modelo. <span class="math display">\[y_t = \gamma_0 + \gamma_1 feb_t + ... + \gamma_{11} dic_t + \tilde{y_t}\]</span> para todas las variables del modelo.</p></li>
+<li><p>Luego MCO para el siguiente modelo genera los mismo estimadores que el modelo original. <span class="math display">\[\tilde{y}_t = \beta_1 \tilde{x}_{1t} + ... + \beta_{Kt} \tilde{x}_{Kt}  + \tilde{u}_t\]</span></p></li>
+<li><p>Finalmente, alguna series de tiempo pueden presentar <span class="emph">tendencias y patrones estacionales</span>. En este caso se usa un modelo de regresión con una tendencia y variables binarias estacionales.</p></li>
+</ul>
+</section>
+<section id="ejemplo-8-antidumping-e-importaciones-químicas" class="slide level2">
+<h2>Ejemplo 8: Antidumping e importaciones químicas</h2>
+<ul>
+<li><p>Krupp y Pollard (1996): Efectos de las demandas antidumping de las industrias químicas estadounidenses sobre la importación de diversas sustancias químicas.</p></li>
+<li><p>Antecedentes:</p>
+<ul>
+<li><p>Principios de los 80s: la industria de cloruro de bario en EEUU consideró que China estaba ofreciendo sus exportaciones a EEUU a precios injustamente bajos.</p></li>
+<li><p>Interpusieron una demanda ante la Comisión Estadounidense de Comercio Internacional (CCI) en 10/1983 y la CCI falló a favor en 10/1984.</p></li>
+</ul></li>
+<li><p>Modelo: <span class="math display">\[\begin{eqnarray*}
+\log (chnimp) &amp;=&amp; \beta_0 + \beta_1 \log (chempi) + \beta_2 \log (gas) + \beta_3 \log (rtwex)  \\
+&amp;+&amp; \beta_4 befile6 + \beta_5 affile6 + \beta_6 afdec6 + \sum_{i=2}^{12} \delta_i s_{i,t} + u_t
+\end{eqnarray*}\]</span></p></li>
+</ul>
+</section>
+<section id="ejemplo-8-antidumping-e-importaciones-químicas-1" class="slide level2">
+<h2>Ejemplo 8: Antidumping e importaciones químicas</h2>
+<ul>
+<li><p>Donde:</p>
+<ul>
+<li><p><span class="math inline">\(chnimp\)</span>: volumen de importaciones de cloruro de bario de China.</p></li>
+<li><p><span class="math inline">\(chempi\)</span>: índice de la producción química (controla por la demanda general de cloruro de bario)</p></li>
+<li><p><span class="math inline">\(gas\)</span>: volumen de la producción de gasolina (otra variable de demanda).</p></li>
+<li><p><span class="math inline">\(rtwex\)</span>: índice del tipo de cambio.</p></li>
+<li><p><span class="math inline">\(befile6=1\)</span> si seis meses anteriores a la demanda.</p></li>
+<li><p><span class="math inline">\(affile6=1\)</span> si seis meses posteriores a la demanda.</p></li>
+<li><p><span class="math inline">\(afdec6=1\)</span> si seis meses que siguieron al fallo positivo.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="ejemplo-8-antidumping-e-importaciones-químicas-2" class="slide level2">
+<h2>Ejemplo 8: Antidumping e importaciones químicas</h2>
+<ul>
+<li><p>Preguntas relevantes:</p>
+<ul>
+<li><p>¿Las importaciones eran demasiado altas en el periodo anterior a la demanda inicial?</p></li>
+<li><p>¿Las importaciones cambiaron de manera notable después de la demanda?</p></li>
+<li><p>¿Cuál es la reducción en las importaciones luego del fallo?</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="ejemplo-8-antidumping-e-importaciones-químicas-3" class="slide level2">
+<h2>Ejemplo 8: Antidumping e importaciones químicas</h2>
+<div class="small">
+<div class="cell">
+<div class="cell-output-display">
+<table>
+<caption><em>Variable dependiente: log(chnimp)</em></caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Sin SeasDum</th>
+<th style="text-align: right;">Con SeasDum</th>
+<th style="text-align: right;">Quitando Seas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-17.803</td>
+<td style="text-align: right;">16.779</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;">(21.045)</td>
+<td style="text-align: right;">(32.429)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">log(chempi)</td>
+<td style="text-align: right;">3.117***</td>
+<td style="text-align: right;">3.265***</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;">(0.479)</td>
+<td style="text-align: right;">(0.493)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">log(gas)</td>
+<td style="text-align: right;">0.196</td>
+<td style="text-align: right;">-1.278</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;">(0.907)</td>
+<td style="text-align: right;">(1.389)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">log(rtwex)</td>
+<td style="text-align: right;">0.983*</td>
+<td style="text-align: right;">0.663</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;">(0.400)</td>
+<td style="text-align: right;">(0.471)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">befile6</td>
+<td style="text-align: right;">0.060</td>
+<td style="text-align: right;">0.140</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;">(0.261)</td>
+<td style="text-align: right;">(0.267)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">affile6</td>
+<td style="text-align: right;">-0.032</td>
+<td style="text-align: right;">0.013</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;">(0.264)</td>
+<td style="text-align: right;">(0.279)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">afdec6</td>
+<td style="text-align: right;">-0.565+</td>
+<td style="text-align: right;">-0.521+</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;">(0.286)</td>
+<td style="text-align: right;">(0.302)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">season(ts.data)Feb</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">-0.418</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.304)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">season(ts.data)Mar</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.059</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.265)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">season(ts.data)Apr</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">-0.451+</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.268)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">season(ts.data)May</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.033</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.269)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">season(ts.data)Jun</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">-0.206</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.269)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">season(ts.data)Jul</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.004</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.279)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">season(ts.data)Aug</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">-0.157</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.278)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">season(ts.data)Sep</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">-0.134</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.268)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">season(ts.data)Oct</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.052</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.267)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">season(ts.data)Nov</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">-0.246</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.263)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">season(ts.data)Dec</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.133</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.271)</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">resid(r_lchempi)</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">3.265***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.469)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">resid(r_lgas)</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">-1.278</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(1.321)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">resid(r_lrtwex)</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.663</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.448)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">resid(r_befile6)</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.140</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.254)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">resid(r_affile6)</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.013</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.265)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">resid(r_afdec6)</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">-0.521+</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">(0.287)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> ^^ + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo-8-antidumping-e-importaciones-químicas-4" class="slide level2">
+<h2>Ejemplo 8: Antidumping e importaciones químicas</h2>
+<ul>
+<li><p>El test F de <span class="math inline">\(H_0: \delta_2 = ... = \delta_{12} = 0\)</span> es 0.8559459 con un p-value de 0.5851983.</p></li>
+<li><p><span class="math inline">\(befile6\)</span> es positiva pero no es significativa. No hay evidencia de importaciones inusitadamente altas.</p></li>
+<li><p><span class="math inline">\(affile6\)</span> es negativo pero es pequeño (indica una disminución de -3.2406368% en las importaciones).</p></li>
+<li><p><span class="math inline">\(afdec6\)</span> muestra una disminución sustancial y significativa en las importaciones luego del fallo (aprox. -56.5244799%).</p></li>
+<li><p>Note que incluir variable dummy estacionales es equivalente a eliminar el efecto estacional de todas las variables primero.</p></li>
+</ul>
+</section></section>
+<section>
+<section id="efectos-causales-en-muestras-grandes" class="title-slide slide level1 center">
+<h1>Efectos causales en muestras grandes</h1>
+
+</section>
+<section id="introducción-al-análisis-de-series-de-tiempo-en-muestras-grandes" class="slide level2">
+<h2>Introducción al análisis de series de tiempo en muestras grandes</h2>
+<ul>
+<li><p>Los supuestos utilizados hasta ahora son <span class="emph">demasiado restrictivos</span>.</p>
+<ul>
+<li><p>La exogeneidad estricta, la homocedasticidad y la ausencia de autocorrelación son requisitos muy exigentes para series de tiempo.</p></li>
+<li><p>La inferencia estadística en los modelos se basa en la validez del supuesto de normalidad.</p></li>
+</ul></li>
+<li><p>Si el tamaño de la <span class="emph">muestra es grande</span> se necesitan <span class="emph">supuestos más débiles</span>.</p>
+<ul>
+<li><span class="emph">Requisito clave</span>: series estacionarias y débilmente dependientes.</li>
+</ul></li>
+</ul>
+</section>
+<section id="series-de-tiempo-estacionarias" class="slide level2">
+<h2>Series de tiempo estacionarias</h2>
+<ul>
+<li><p>Recordemos: Un proceso estocástico <span class="math inline">\(y_{t}\)</span> es débilmente estacionario o <span class="emph">estacionario en covarianza</span> si y solo si:</p>
+<ol type="1">
+<li><p><span class="math inline">\(\mathbb{E}\left[y_{t}\right]=\mu&lt;\infty,\,\,\,\forall t\)</span></p></li>
+<li><p><span class="math inline">\(\mathbb{V}(y_{t})=\mathbb{E}\left[(y_{t}-\mathbb{E}[y_{t}])^{2}\right]=\gamma_{0}&lt;\infty,\,\,\,\forall t\)</span></p></li>
+<li><p><span class="math inline">\(Cov(y_{t},y_{t-j})=\mathbb{E}\left[(y_{t}-\mathbb{E}[y_{t}])(y_{t-j}-\mathbb{E}[y_{t-j}])\right]=\gamma_{j}&lt;\infty,\,\,\,\forall t,\forall j\)</span></p></li>
+</ol></li>
+</ul>
+<p><em><span class="emph">Importancia</span>: Si se quiere entender la relación entre dos o más variables utilizando el análisis de regresión, se requiere dar por sentada algún tipo de estabilidad en el tiempo.</em></p>
+</section>
+<section id="series-de-tiempo-débilmente-dependientes" class="slide level2">
+<h2>Series de tiempo débilmente dependientes</h2>
+<ul>
+<li><p>Nueva definición: serie de tiempo débilmente dependiente.</p></li>
+<li><p>Un proceso estocástico <span class="math inline">\(y_{t}\)</span> es <span class="emph">débilmente dependiente</span> si para todo <span class="math inline">\(t\)</span>, <span class="math inline">\(y_{t}\)</span> es “casi independiente” de <span class="math inline">\(y_{t+h}\)</span> con <span class="math inline">\(h\)</span> que crece al infinitivo, esto es: <span class="math display">\[Corr\left(y_{t}, y_{t+h}\right) \rightarrow 0 \text { cuando } h \rightarrow \infty\]</span></p></li>
+<li><p>Discusión:</p>
+<ul>
+<li><p>La correlación entre <span class="math inline">\(y_{t}\)</span> y <span class="math inline">\(y_{t+h}\)</span> debe converger a cero si <span class="math inline">\(h\)</span> crece hasta el infinito.</p></li>
+<li><p>La dependencia débil reemplaza el supuesto del muestreo aleatorio.</p></li>
+<li><p>El teorema del central del límite requiere estacionariedad y alguna forma de dependencia débil.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="ejemplos-de-series-de-tiempo-débilmente-dependientes" class="slide level2">
+<h2>Ejemplos de series de tiempo débilmente dependientes</h2>
+<ul>
+<li><p>Proceso de <span class="emph">medias móviles de orden uno</span>, MA(1). <span class="math display">\[y_{t}=e_{t}+\alpha_{1} e_{t-1}, t=1,2, \ldots\]</span> donde <span class="math inline">\(e_{t}\)</span> es i.i.d. con media cero y varianza <span class="math inline">\(\sigma^2_e\)</span>.</p>
+<ul>
+<li>Interpretación: <span class="math inline">\(y_{t}\)</span> es un promedio ponderado corto entre <span class="math inline">\(e_t\)</span> y <span class="math inline">\(e_{t-1}\)</span>.</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[\begin{eqnarray*}
+    \mathbb{E}\left[y_{t}\right]&amp;=&amp;0 \\
+    \mathbb{V}\left[y_{t}\right]&amp;=&amp; \left(1+\alpha_{1}^{2}\right) \sigma_{e}^{2} \\
+    Cov(y_{t},y_{t-h})&amp;=&amp;\begin{cases}
+  \alpha_{1}\sigma_{e}^{2} &amp; h=1\\
+  0 &amp; h\geq2
+  \end{cases} \\
+    Corr(y_{t},y_{t-h})&amp;=&amp;\begin{cases}
+  \frac{\alpha_{1}}{\left(1+\alpha_{1}^{2}\right)} &amp; h=1\\
+  0 &amp; h\geq2
+  \end{cases}
+\end{eqnarray*}\]</span></p>
+</section>
+<section id="ejemplos-de-series-de-tiempo-débilmente-dependientes-1" class="slide level2">
+<h2>Ejemplos de series de tiempo débilmente dependientes</h2>
+<ul>
+<li><p>Proceso <span class="emph">autorregresivo de orden uno</span> ya conocido, AR(1). <span class="math display">\[y_{t}=\rho_{1} y_{t-1}+e_{t}, t=1,2, \ldots\]</span> donde <span class="math inline">\(e_{t}\)</span> es i.i.d. con media cero y varianza <span class="math inline">\(\sigma^2_e\)</span>.</p>
+<ul>
+<li>Dependencia débil se cumple si <span class="math inline">\(|\rho_1|&lt;1\)</span>.</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[\begin{eqnarray*}
+    \mathbb{E}\left[y_{t}\right]&amp;=&amp;0 \\
+    \mathbb{V}\left[y_{t}\right]&amp;=&amp; \frac{\sigma_{e}^{2}}{1-\rho^2_1} \\
+    Cov(y_{t},y_{t-h})&amp;=&amp; \rho^h_1 \mathbb{V}\left[y_{t}\right]\\
+    Corr(y_{t},y_{t-h})&amp;=&amp; \rho^h_1
+\end{eqnarray*}\]</span></p>
+<ul>
+<li>Aún cuando <span class="math inline">\(y_t\)</span> y <span class="math inline">\(y_{t-h}\)</span> estén correlacionadas, esta correlación se vuelve muy pequeña para <span class="math inline">\(h\)</span> grande si <span class="math inline">\(|\rho_1|&lt;1\)</span>.</li>
+</ul>
+</section>
+<section id="algunos-comentarios" class="slide level2">
+<h2>Algunos comentarios</h2>
+<ul>
+<li><p>Existen muchos tipos de series de tiempo débilmente dependientes, incluidos los híbridos de procesos autorregresivos y de promedio móvil.</p>
+<ul>
+<li>Para ilustrar el concepto solo usamos dos, MA(1) y AR(1).</li>
+</ul></li>
+<li><p>Una <span class="emph">serie con tendencia, aun cuando no sea estacionaria, puede ser débilmente dependiente</span></p>
+<ul>
+<li>Un ejemplo es la tendencia deterministica lineal, donde la serie de tiempo es en realidad independiente en el tiempo).</li>
+</ul></li>
+<li><p>Una serie que es estacionaria alrededor de su tendencia en el tiempo y que además es débilmente dependiente se conoce como <span class="emph">proceso estacionario con tendencia</span>.</p></li>
+</ul>
+</section>
+<section id="supuestos-bajo-muestra-grandes-i" class="slide level2">
+<h2>Supuestos bajo muestra grandes I</h2>
+<p><strong>S1’: Linealidad en parámetros y dependencia débil</strong> <em>Se supone que el modelo es exactamente el mismo que antes, pero ahora se añade el supuesto de que <span class="math inline">\({(y_t,x_{t1},..., x_{tk}): t = 1, 2,...}\)</span> son todas estacionarias y débilmente dependientes.</em></p>
+<ul>
+<li>Bajo linealidad en parámetros significa tenemos el modelo: <span class="math display">\[y_{t}=\beta_{0}+\beta_{1} x_{t 1}+\ldots+\beta_{k} x_{t k}+u_{t}\]</span> donde las <span class="math inline">\(x_{tj}\)</span> pueden incluir rezagos de la variable dependiente y de las variables explicativas.</li>
+</ul>
+<p><strong>S2’: No hay colinealidad perfecta</strong> <em>En la muestra (y, por ende, en los procesos de series de tiempo subyacentes) no hay variables independientes que sean constantes ni que sean una combinación lineal perfecta de las otras.</em></p>
+</section>
+<section id="supuestos-bajo-muestra-grandes-ii" class="slide level2">
+<h2>Supuestos bajo muestra grandes II</h2>
+<p><strong>S3’: Media condicional cero</strong> <em>Las variables explicativas del modelo <span class="math inline">\(\mathbb{x}_t=(x_{t1},x_{t2},...,x_{tk})\)</span> son contemporáneamente exógenas o <span class="math inline">\(\mathbb{E}(u_t | \mathbb{x}_t) = 0\)</span>.</em></p>
+<ul>
+<li><p>Intuitivamente, <span class="math inline">\(\mathbb{E}(u_t | \mathbb{x}_t) = 0\)</span> significa que las <span class="emph">variables explicativas son no informativas</span> de la media del error en el periodo corriente.</p></li>
+<li><p>Este es el <span class="emph">supuesto es mucho más débil que el supuesto de exogeneidad fuerte</span>, ya que no impone restricciones sobre cómo se relaciona <span class="math inline">\(u_t\)</span> con las variables explicativas en otros periodos.</p></li>
+<li><p>Solo requeriremos que <span class="math inline">\(u_t\)</span> tenga una media no condicional cero y no esté correlacionada con cada <span class="math inline">\(x_{tj}\)</span>: <span class="math display">\[\mathbb{E}\left(u_{t}\right)=0, \operatorname{Cov}\left(x_{t j}, u_{t}\right)=0, j=1, \ldots, k\]</span></p></li>
+</ul>
+</section>
+<section id="propiedades-asintóticas-i-consistencia" class="slide level2">
+<h2>Propiedades asintóticas I: Consistencia</h2>
+<p><strong>Teorema</strong> <em>Bajo los supuestos 1’, 2’ y 3’, los estimadores de MCO son consistentes. Sea <span class="math inline">\(\hat{\beta}_{j}\)</span> un estimador de <span class="math inline">\(\beta_{j}\)</span> para una muestra de tamaño <span class="math inline">\(n\)</span>. <span class="math inline">\(\hat{\beta}_{j}\)</span> es un estimador consistente si para todo <span class="math inline">\(\epsilon&gt;0\)</span>, <span class="math inline">\(\Pr[|\hat{\beta}_{j}-\beta_{j}|&gt;\epsilon]\rightarrow0\)</span> cuando <span class="math inline">\(n\rightarrow\infty\)</span>. Alternativamente, se dice también que <span class="math inline">\(\beta_{j}\)</span> es el límite en probabilidad de <span class="math inline">\(\hat{\beta}_{j}\)</span>, <span class="math inline">\(plim(\hat{\beta}_{j})=\beta_{j}\)</span>.</em></p>
+</section>
+<section id="por-qué-es-importante-relajar-el-supuesto-de-exogeneidad-estricta" class="slide level2">
+<h2>¿Por qué es importante relajar el supuesto de exogeneidad estricta?</h2>
+<ul>
+<li><p>La exogeneidad estricta: descarta toda relación dinámica entre las variables explicativas y el término de error.</p>
+<ul>
+<li>descarta la retroalimentación de la variable dependiente sobre sus valores futuros.</li>
+</ul></li>
+<li><p><strong>Modelo estático</strong>: <span class="math display">\[y_{t}=\beta_{0}+\beta_{1} z_{t 1}+\beta_{2} z_{t 2}+u_{t}\]</span></p>
+<ul>
+<li><p>Bajo la dependencia débil, la condición para consistencia: <span class="math display">\[\mathbb{E}\left(u_{t} \mid z_{t 1}, z_{t 2}\right)=0\]</span></p></li>
+<li><p>ST3’ no descarta la correlación entre <span class="math inline">\(u_{t-1}\)</span> y <span class="math inline">\(z_{t1}\)</span>. Es válido suponer que <span class="math inline">\(z_{t1}\)</span> es variable de política: <span class="math inline">\(z_{t 1}=\delta_{0}+\delta_{1} y_{t-1}+v_{t}\)</span>.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="por-qué-es-importante-relajar-el-supuesto-de-exogeneidad-estricta-1" class="slide level2">
+<h2>¿Por qué es importante relajar el supuesto de exogeneidad estricta?</h2>
+<ul>
+<li><p><strong>Modelo de rezagos distribuidos finitos</strong>: Consideremos el modelo: <span class="math display">\[y_{t}=\alpha_{0}+\delta_{0} z_{t}+\delta_{1} z_{t-1}+\delta_{2} z_{t-2}+u_{t}\]</span></p>
+<ul>
+<li><p>Un supuesto muy natural es <span class="math inline">\(\mathbb{E}\left(u_{t} \mid z_{t}, z_{t-1}, z_{t-2}, z_{t-3}, \ldots\right)=0\)</span>.</p></li>
+<li><p>Cuando se determina que <span class="math inline">\(\mathbb{x}_t = (z_t, z_{t-1}, z_{t-2})\)</span>, esto es ningún rezago adicional aporta, el supuesto ST3’ se satisface y MCO serán consistentes.</p></li>
+<li><p>3’ no descarta que <span class="math inline">\(y\)</span> pueda influir en los valores futuros de <span class="math inline">\(z\)</span>.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="por-qué-es-importante-relajar-el-supuesto-de-exogeneidad-estricta-2" class="slide level2">
+<h2>¿Por qué es importante relajar el supuesto de exogeneidad estricta?</h2>
+<ul>
+<li><p><strong>Modelo autoregresivo</strong>: Consideremos ahora el modelo autorregresivo de orden uno, AR(1): <span class="math display">\[y_{t}=\beta_{0}+\beta_{1} y_{t-1}+u_{t}\]</span></p>
+<ul>
+<li><p>Suponemos que <span class="math inline">\(\mathrm{E}\left(u_{t} \mid y_{t-1}, y_{t-2}, \ldots\right)=0\)</span>. Como <span class="math inline">\(\mathbb{x}_t = y_{t-1}\)</span>, esto es ningún rezago adicional aporta información, el supuesto 3’ es válido.</p></li>
+<li><p>El supuesto de exogeneidad estricta 3 no es válido: <span class="math inline">\(Cov\left(y_{t}, u_{t}\right)=\beta_{1} Cov\left(y_{t-1}, u_{t}\right)+\mathbb{V}\left(u_{t}\right)&gt;0\)</span>. Entonces, MCO es sesgado pero consistente.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="supuestos-iii" class="slide level2">
+<h2>Supuestos III</h2>
+<p><strong>Supuesto 4’: Homocedasticidad</strong> <em>Los errores son contemporáneamente homocedásticos, es decir, <span class="math inline">\(\mathbb{V}\left(u_{t} \mid \mathbf{x}_{t}\right)=\sigma^{2}\)</span>.</em></p>
+<p><strong>Supuesto 5’: No hay correlación serial</strong> <em>Condicional en la variables explicativas en los periodos <span class="math inline">\(t\)</span> y <span class="math inline">\(s\)</span>, los errores no están autocorrelacionados, esto es para todo <span class="math inline">\(t \neq s\)</span> se cumple que <span class="math inline">\(Corr\left(u_{t} u_{s} | \mathbf{x}_{t} \mathbf{x}_{s}\right)=0\)</span>.</em></p>
+<ul>
+<li><p>Los supuestos 4’ y 5’ condicionan sólo en las variables explicativas en el periodo corriente <span class="math inline">\(t\)</span> y en los periodos que coinciden con <span class="math inline">\(t\)</span> y <span class="math inline">\(s\)</span>, respectivamente.</p></li>
+<li><p>Bajo 1’ a 5’, los estimadores de MCO son <strong>asintóticamente eficientes</strong>.</p></li>
+</ul>
+<p><strong>Nota</strong>: <em>La correlación serial es un problema en los modelos de regresión estáticos y con rezagos distribuidos finitos.</em></p>
+</section>
+<section id="propiedades-asintóticas-ii-normalidad-asintótica" class="slide level2">
+<h2>Propiedades asintóticas II: Normalidad asintótica</h2>
+<p><strong>Teorema</strong> <em>Bajo los supuestos 1’ a 5’, los estimadores de MCO tienen distribuciones asintóticamente normales. Además, los errores estándar usuales de MCO, los estadísticos t y los estadísticos F son asintóticamente válidos.</em></p>
+<ul>
+<li><p>Los resultados de consistencia y normalidad asintótica proporcionan una justificación para algunos de los ejemplos estimados en clases anteriores.</p></li>
+<li><p>Aún cuando algunos de los supuestos del modelo lineal clásico no sean válidos, los estimadores de MCO siguen siendo consistentes, y los procedimientos de inferencia usuales son válidos.</p></li>
+</ul>
+</section>
+<section id="ejemplo-9-curva-de-phillips-aumentada-por-expectativas" class="slide level2">
+<h2>Ejemplo 9: Curva de Phillips aumentada por expectativas</h2>
+<ul>
+<li><p>Versión lineal de la <strong>curva de Phillips</strong> aumentada por expectativas: <span class="math display">\[inf_{t}-inf_{t}^{e}=\beta_{1}\left(unem_{t}-\mu_{0}\right)+e_{t}\]</span> con <span class="math inline">\(\mu_{0}\)</span> la tasa natural de desempleo e <span class="math inline">\(inf_{t}^{e}\)</span> la tasa de inflación esperada.</p></li>
+<li><p>Disyuntiva a c/p entre la inflación no anticipada y el desempleo cíclico: <span class="math inline">\(\beta_1&lt;0\)</span>.</p></li>
+<li><p>Bajo las [expectativas adaptativas]{emph} <span class="math inline">\(inf_{t}^{e}=inf_{t-1}\)</span>.</p></li>
+<li><p>Curva de Phillips a estimar: <span class="math display">\[\Delta inf_{t}= \beta_{0}+\beta_{1} unem_{t}+e_{t}\]</span> con <span class="math inline">\(\Delta inf_{t}=inf_{t}-inf_{t-1}\)</span> y <span class="math inline">\(\beta_{0}=-\beta_{1} \mu_{0}\)</span>.</p></li>
+</ul>
+</section>
+<section id="ejemplo-9-curva-de-phillips-aumentada-por-expectativas-1" class="slide level2">
+<h2>Ejemplo 9: Curva de Phillips aumentada por expectativas</h2>
+<ul>
+<li>Resultados:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Time series regression with "ts" data:
+Start = 1949, End = 2003
+
+Call:
+dynlm(formula = diff(inf) ~ unem, data = ts.data)
+
+Coefficients:
+(Intercept)         unem  
+     2.8282      -0.5176  </code></pre>
+</div>
+</div>
+<ul>
+<li><p>Si Los supuesto 1’-5’ se cumplen, un incremento de un punto en la tasa de desempleo reduce la inflación no anticipada poco más de medio punto.</p></li>
+<li><p>La tasa natural estimada es: 5.4635543.</p></li>
+</ul>
+</section></section>
+<section>
+<section id="el-problema-de-autocorrelación-o-correlación-serial" class="title-slide slide level1 center">
+<h1>El problema de autocorrelación o correlación serial</h1>
+
+</section>
+<section id="modelos-dinámicamente-completos" class="slide level2">
+<h2>Modelos dinámicamente completos</h2>
+<ul>
+<li><p>Consideremos nuevamente el modelo general: <span class="math display">\[y_{t}=\beta_{0}+\beta_{1} x_{t 1}+\ldots+\beta_{k} x_{t k}+u_{t}\]</span> donde <span class="math inline">\(\mathbf{x}_{t}=\left(x_{t 1}, \ldots, x_{t k}\right)\)</span> pueden o no contener rezagos de <span class="math inline">\(y\)</span> o <span class="math inline">\(z\)</span>.</p></li>
+<li><p>Por consistencia de MCO solo necesitamos que <span class="math inline">\(\mathbb {E}\left(u_{t} \mid \mathbf{x}_{t}\right)\)</span>, pero las <span class="math inline">\(u_t\)</span> podría estar autocorrelacionadas.</p></li>
+<li><p>Si suponemos además que <span class="math inline">\(\mathbb{E}\left(u_{t} \mid \mathbf{x}_{t}, y_{t-1}, \mathbf{x}_{t-1}, \ldots\right)=0\)</span> entonces 3’ y 5’ será ambos válidos. Alternativamente tenemos que: <span class="math display">\[\mathbb{E}\left(y_{t} \mid \mathbf{x}_{t}, y_{t-1}, \mathbf{x}_{t-1}, \ldots\right)=\mathbb {E}\left(y_{t} \mid \mathbf{x}_{t}\right)\]</span></p></li>
+<li><p>Cuando esta condición se cumple, se tiene un <span class="emph">modelo dinámicamente completo</span>.</p>
+<ul>
+<li>Se han incluido suficientes rezagos de <span class="math inline">\(y\)</span> para que rezagos adicionales de <span class="math inline">\(y\)</span> no tengan importancia.</li>
+</ul></li>
+</ul>
+</section>
+<section id="modelos-dinámicamente-completos-1" class="slide level2">
+<h2>Modelos dinámicamente completos</h2>
+<ul>
+<li><p>Un modelo dinámicamente completo debe satisfacer 5’.</p></li>
+<li><p>Tomemos <span class="math inline">\(s&lt;t\)</span>. Usando la ley de expectativas iteradas:</p>
+<span class="math display">\[\begin{aligned}
+\mathbb{E}\left(u_{t} u_{s} \mid \mathbf{x}_{t}, \mathbf{x}_{s}\right) &amp;=\mathbb{E}\left[\mathbb{E}\left(u_{t} u_{s} \mid \mathbf{x}_{t}, \mathbf{x}_{s}, u_{s}\right) \mid \mathbf{x}_{t}, \mathbf{x}_{s}\right] \\
+&amp;=\mathbb{E}\left[u_{s} \mathbb{E}\left(u_{t} \mid \mathbf{x}_{t}, \mathbf{x}_{s}, u_{s}\right) \mid \mathbf{x}_{t}, \mathbf{x}_{s}\right] \\
+&amp;=\mathbb{E}\left[u_{s} \times 0 \mid \mathbf{x}_{t}, \mathbf{x}_{s}\right]  \\
+&amp;=0
+\end{aligned}\]</span>
+<p><span class="math inline">\(\mathbb{E}\left(u_{t} \mid \mathbf{x}_{t}, \mathbf{x}_{s}, u_{s}\right)\)</span> es un subconjunto de <span class="math inline">\(\mathbb{E}\left(u_{t} \mid \mathbf{x}_{t}, y_{t-1}, \mathbf{x}_{t-1}, \ldots\right)=0\)</span>.</p></li>
+<li><p>Entonces, si un modelo es dinámicamente completo significa que <span class="emph">no existe una correlación serial en los errores</span> del modelo.</p></li>
+</ul>
+</section>
+<section id="recordemos-la-prueba-de-breusch-godfrey" class="slide level2">
+<h2>Recordemos la prueba de Breusch-Godfrey</h2>
+<ul>
+<li><p>Suponga un modelo <strong>AR(2)</strong> para los errores: <span class="math display">\[u_{t}=\rho_{1} u_{t-1}+\rho_{2} u_{t-2}+e_{t}\]</span> Bajo ausencia de correlación serial tenemos: <span class="math inline">\(\mathrm{H}_{0}: \rho_{1}=0, \rho_{2}=0\)</span>.</p></li>
+<li><p>Pasos de la <strong>prueba AR(q)</strong> controlando por potencial correlación entre las <span class="math inline">\(x_{tj}\)</span> y <span class="math inline">\(u_t\)</span>:</p>
+<ol type="1">
+<li><p>Efectúe la regresión por MCO de <span class="math inline">\(y_t\)</span> sobre <span class="math inline">\(x_{t1},...,x_{tk}\)</span> y obtenga los residuos de MCO, <span class="math inline">\(\hat{u}_t\)</span>, para todo <span class="math inline">\(t = 1, 2, .., T\)</span>.</p></li>
+<li><p>Realice la regresión de <span class="math inline">\(\hat{u}_t\)</span> sobre <span class="math inline">\(x_{t1},...,x_{tk},\hat{u}_{t-1},...,\hat{u}_{t-q}\)</span>, para todo <span class="math inline">\(t = 1, 2, .., T\)</span> y obtener los coeficientes <span class="math inline">\(\hat{\rho}_1,...,\hat{\rho}_q\)</span> y el <span class="math inline">\(R^2_{\hat{u}}\)</span>.</p></li>
+<li><p>Utilice el estadístico <span class="math inline">\(LM=(n-q)R^2_{\hat{u}}\)</span> para probar <span class="math inline">\(\mathrm{H}_{0}: \rho_1=...=\rho_q=0\)</span>, esto es comparando el estadístico <span class="math inline">\(LM\)</span> calculado con el de la distribución <span class="math inline">\(\chi^2_q\)</span>.</p></li>
+</ol></li>
+</ul>
+</section>
+<section id="errores-estándar-robustos-a-autocorrelación-y-heterocedasticidad-hac" class="slide level2">
+<h2>Errores Estándar Robustos a Autocorrelación y Heterocedasticidad (HAC)</h2>
+<ul>
+<li><p>Cuando existe autocorrelación y/o heterocedasticidad, los errores estándar MCO no son válidos. Se requiere un ajuste en la formula tradicional.</p></li>
+<li><p>Recordemos que para el caso de un regresor tenemos: <span class="math display">\[\hat{\beta}=\beta+\frac{\frac{1}{T}\sum_{t=1}^{T}(x_{t}-\bar{x})u_{t}}{\frac{1}{T}\sum_{t=1}^{T}(x_{t}-\bar{x})^{2}}\]</span> entonces: <span class="math display">\[\mathbb{V}(\hat{\beta}) = \frac{\mathbb{V}\left(\frac{1}{T}\sum_{t=1}^{T}v_{t}\right)}{\left(\mathbb{V}(x)\right)^{2}} = \frac{1}{T^{2}}\frac{\sum_{t=1}^{T}\sum_{s=1}^{T}Cov(v_{t},v_{s})}{\left(\mathbb{V}(x)^2\right)^{2}}\]</span> con <span class="math inline">\(v_{t}=(x_{t}-\bar{x})u_{t}\)</span></p></li>
+</ul>
+</section>
+<section id="errores-estándar-robustos-a-autocorrelación-y-heterocedasticidad-hac-1" class="slide level2">
+<h2>Errores Estándar Robustos a Autocorrelación y Heterocedasticidad (HAC)</h2>
+<ul>
+<li>Cuando existe autocorrelación y/o heteroscedasticidad tendremos que <span class="math inline">\(Cov(v_{t},v_{s})\neq 0\)</span>. Para ganar intuición considere el caso simple <span class="math inline">\(T=2\)</span>: <span class="math display">\[\begin{eqnarray*}
+\mathbb{V}\left(\frac{1}{T}\sum_{t=1}^{T}v_{t}\right) &amp; = &amp; \mathbb{V}\left(\frac{1}{2}(v_{1}+v_{2})\right)\\
+&amp; = &amp; \frac{1}{4}\left[\mathbb{V}(v_{1})+\mathbb{V}(v_{2})+2Cov(v_{1},v_{2})\right]\\
+&amp; = &amp; \frac{1}{2}\sigma_{v}^{2}+\frac{1}{2}\rho_{1}\sigma_{v}^{2} = \frac{1}{2}f_{2}\sigma_{v}^{2}
+\end{eqnarray*}\]</span> con <span class="math inline">\(\rho_{1}=Corr(v_{1},v_{2})\)</span> y <span class="math inline">\(f_{2}=(1+\rho_{1})\)</span>.</li>
+</ul>
+</section>
+<section id="errores-estándar-robustos-a-autocorrelación-y-heterocedasticidad-hac-2" class="slide level2">
+<h2>Errores Estándar Robustos a Autocorrelación y Heterocedasticidad (HAC)</h2>
+<ul>
+<li><p>De forma general: <span class="math display">\[\begin{eqnarray*}
+\mathbb{V}\left(\frac{1}{T}\sum_{t=1}^{T}v_{t}\right) &amp; = &amp; \frac{1}{T}f_{T}\sigma_{v}^{2}
+\end{eqnarray*}\]</span></p></li>
+<li><p>Por tanto: <span class="math display">\[\begin{eqnarray*}
+\mathbb{V}(\hat{\beta}) &amp; = &amp; \frac{\sigma_{v}^{2}}{T\left(\mathbb{V}(x)\right)^{2}}f_{T}
+\end{eqnarray*}\]</span> con: <span class="math inline">\(f_{T}=1+2\sum_{j=1}^{T-1}\left(\frac{T-j}{T}\right)\rho_{j}\)</span></p></li>
+</ul>
+</section>
+<section id="errores-estándar-robustos-a-autocorrelación-y-heterocedasticidad-hac-3" class="slide level2">
+<h2>Errores Estándar Robustos a Autocorrelación y Heterocedasticidad (HAC)</h2>
+<ul>
+<li>Note que <span class="math inline">\(f_{T}\)</span> es el ajuste por correlación serial. Necesitamos estimar este factor. <strong>Newey-West</strong> proponen: <span class="math display">\[\hat{f}_{T}=1+2\sum_{j=1}^{m-1}\left(\frac{m-j}{m}\right)\hat{\rho}_{j}\]</span> con <span class="math inline">\(\hat{\rho}_{j}\)</span> un estimador de <span class="math inline">\(\rho_{j}\)</span> y <span class="math inline">\(m\)</span> un parámetro de truncamiento (regla <span class="math inline">\(m=0.75T^{1/3}\)</span>).</li>
+</ul>
+</section>
+<section id="ejemplo-10-efecto-del-clima-en-el-precio-del-jugo-de-naranja" class="slide level2">
+<h2>Ejemplo 10: Efecto del Clima en el Precio del Jugo de Naranja</h2>
+<ul>
+<li><p><em>¿Cuanto tiempo dura el efecto de una helada sobre el precio del jugo de naranja?</em></p></li>
+<li><p>Usamos datos mensuales para EEUU, estado de la Florida, y contamos con 51 años (ver ejemplo en el libro de Stock y Watson). <span class="math display">\[inffoj = \alpha + \beta_0 fdd_t + \beta_1 fdd_{t-1} + ... + \beta_{12} fdd_{t-12} + u_t\]</span> donde:</p>
+<ul>
+<li><span class="math inline">\(inffoj\)</span> es la variación porcentual mensual (anualizada) del índice de precios real del jugo de narganja.</li>
+<li><span class="math inline">\(fdd_t\)</span> es el índice de heladas en ese mes <span class="math inline">\(t\)</span>. Mide el número de días con temperaturas bajo cero en el mes.</li>
+</ul></li>
+<li><p>Se puede argumentar que <span class="emph">el índice de heladas es una variable estrictamente exógena</span> (en el pasado, el presente y el futuro) ya que el mercado de jugo de naranja en particular no afectará el clima.</p></li>
+</ul>
+</section>
+<section id="ejemplo-10-efecto-del-clima-en-el-precio-del-jugo-de-naranja-1" class="slide level2">
+<h2>Ejemplo 10: Efecto del Clima en el Precio del Jugo de Naranja</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-fig.dim="[6,6]">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/precio_jn-1.png" style="width:95.0%"></p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-fig.dim="[6,6]">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/inf_heladas_jn-1.png" style="width:95.0%"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo-10-efecto-del-clima-en-el-precio-del-jugo-de-naranja-2" class="slide level2">
+<h2>Ejemplo 10: Efecto del Clima en el Precio del Jugo de Naranja</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                 (Intercept) L(fdd, 0:12)0 L(fdd, 0:12)1 L(fdd, 0:12)2
+(Intercept)     6.179201e-02 -2.753452e-03 -4.189257e-03 -2.197886e-03
+L(fdd, 0:12)0  -2.753452e-03  1.942699e-02 -4.543165e-03  8.223062e-04
+L(fdd, 0:12)1  -4.189257e-03 -4.543165e-03  7.631884e-03  2.117213e-03
+L(fdd, 0:12)2  -2.197886e-03  8.223062e-04  2.117213e-03  3.185734e-03
+L(fdd, 0:12)3  -1.009843e-03  1.886794e-03 -4.972575e-04  6.929871e-04
+L(fdd, 0:12)4  -3.229846e-03  8.746614e-04 -2.505078e-04 -1.872822e-04
+L(fdd, 0:12)5  -2.572566e-03 -4.603579e-05  4.267196e-04  2.149932e-04
+L(fdd, 0:12)6  -4.186539e-03  1.407338e-03 -2.808814e-04  1.345613e-04
+L(fdd, 0:12)7  -2.664578e-03  1.060326e-04  8.485687e-05 -2.015023e-05
+L(fdd, 0:12)8  -2.772301e-03  1.608578e-04 -4.423288e-05  6.055796e-05
+L(fdd, 0:12)9  -4.683689e-03  3.641191e-04  3.083498e-04  3.011280e-04
+L(fdd, 0:12)10 -2.959640e-03 -4.434252e-04  1.653307e-04  5.894878e-05
+L(fdd, 0:12)11 -2.682885e-03 -1.864565e-03  9.086160e-04  1.922447e-04
+L(fdd, 0:12)12  5.113136e-05 -2.226151e-03 -1.068820e-03 -2.350612e-06
+               L(fdd, 0:12)3 L(fdd, 0:12)4 L(fdd, 0:12)5 L(fdd, 0:12)6
+(Intercept)    -1.009843e-03 -3.229846e-03 -2.572566e-03 -4.186539e-03
+L(fdd, 0:12)0   1.886794e-03  8.746614e-04 -4.603579e-05  1.407338e-03
+L(fdd, 0:12)1  -4.972575e-04 -2.505078e-04  4.267196e-04 -2.808814e-04
+L(fdd, 0:12)2   6.929871e-04 -1.872822e-04  2.149932e-04  1.345613e-04
+L(fdd, 0:12)3   2.081291e-03 -1.381797e-04  4.599449e-04  4.912142e-05
+L(fdd, 0:12)4  -1.381797e-04  9.327802e-04  7.195908e-05  8.759168e-04
+L(fdd, 0:12)5   4.599449e-04  7.195908e-05  9.188847e-04 -3.623854e-05
+L(fdd, 0:12)6   4.912142e-05  8.759168e-04 -3.623854e-05  2.113167e-03
+L(fdd, 0:12)7   6.078121e-05  2.113466e-04  1.031985e-04  2.736203e-04
+L(fdd, 0:12)8   2.437262e-04  2.906821e-04  3.527567e-04  3.613060e-04
+L(fdd, 0:12)9   2.312539e-04  6.475546e-04  2.827152e-04  1.403522e-03
+L(fdd, 0:12)10 -4.731800e-05  3.492850e-04  7.758813e-05  6.518792e-04
+L(fdd, 0:12)11  7.835812e-06  4.963158e-05  2.544544e-04  3.242780e-04
+L(fdd, 0:12)12 -5.311668e-04 -2.004157e-04 -2.586477e-04 -9.958728e-07
+               L(fdd, 0:12)7 L(fdd, 0:12)8 L(fdd, 0:12)9 L(fdd, 0:12)10
+(Intercept)    -2.664578e-03 -2.772301e-03 -0.0046836890  -2.959640e-03
+L(fdd, 0:12)0   1.060326e-04  1.608578e-04  0.0003641191  -4.434252e-04
+L(fdd, 0:12)1   8.485687e-05 -4.423288e-05  0.0003083498   1.653307e-04
+L(fdd, 0:12)2  -2.015023e-05  6.055796e-05  0.0003011280   5.894878e-05
+L(fdd, 0:12)3   6.078121e-05  2.437262e-04  0.0002312539  -4.731800e-05
+L(fdd, 0:12)4   2.113466e-04  2.906821e-04  0.0006475546   3.492850e-04
+L(fdd, 0:12)5   1.031985e-04  3.527567e-04  0.0002827152   7.758813e-05
+L(fdd, 0:12)6   2.736203e-04  3.613060e-04  0.0014035220   6.518792e-04
+L(fdd, 0:12)7   2.278074e-04  2.250910e-04  0.0003140350   2.526664e-04
+L(fdd, 0:12)8   2.250910e-04  1.152572e-03  0.0006658012   8.115063e-04
+L(fdd, 0:12)9   3.140350e-04  6.658012e-04  0.0024623850   1.081565e-03
+L(fdd, 0:12)10  2.526664e-04  8.115063e-04  0.0010815650   4.753106e-03
+L(fdd, 0:12)11  1.571158e-04  5.696562e-04  0.0007154512  -3.225344e-04
+L(fdd, 0:12)12  6.014426e-06 -1.939837e-04 -0.0001961799   8.770549e-04
+               L(fdd, 0:12)11 L(fdd, 0:12)12
+(Intercept)     -2.682885e-03   5.113136e-05
+L(fdd, 0:12)0   -1.864565e-03  -2.226151e-03
+L(fdd, 0:12)1    9.086160e-04  -1.068820e-03
+L(fdd, 0:12)2    1.922447e-04  -2.350612e-06
+L(fdd, 0:12)3    7.835812e-06  -5.311668e-04
+L(fdd, 0:12)4    4.963158e-05  -2.004157e-04
+L(fdd, 0:12)5    2.544544e-04  -2.586477e-04
+L(fdd, 0:12)6    3.242780e-04  -9.958728e-07
+L(fdd, 0:12)7    1.571158e-04   6.014426e-06
+L(fdd, 0:12)8    5.696562e-04  -1.939837e-04
+L(fdd, 0:12)9    7.154512e-04  -1.961799e-04
+L(fdd, 0:12)10  -3.225344e-04   8.770549e-04
+L(fdd, 0:12)11   2.695701e-03   3.513506e-04
+L(fdd, 0:12)12   3.513506e-04   6.171038e-03</code></pre>
+</div>
+</div>
+</section>
+<section id="ejemplo-10-efecto-del-clima-en-el-precio-del-jugo-de-naranja-3" class="slide level2">
+<h2>Ejemplo 10: Efecto del Clima en el Precio del Jugo de Naranja</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-fig.dim="[6,6]">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/multiplicadores_jn-1.png" style="width:95.0%"></p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-fig.dim="[6,6]">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/multiplicadores_acum_jn-1.png" style="width:95.0%"></p>
+</div>
+</div>
+</div>
+</div>
+<p><img src="figs/logo_econ.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>Ingeniería Comercial – Econometría II</p>
+</div>
+</section></section>
     </div>
   </div>
 
