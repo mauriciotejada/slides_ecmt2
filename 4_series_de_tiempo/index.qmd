@@ -1109,14 +1109,14 @@ testF2 <- linearHypothesis(reg,"pe + L(pe) + L(pe, 2) = 0")
 - Alta correlación entre $pe_t$, $pe_{t-1}$ y $pe_{t-2}$ dificulta la estimación individual.
 
 - Test F de significancia conjunta 
-$$H_0: pe_t = pe_{t-1} = pe_{t-2}=0$$ 
+$$H_0: \beta_{1} = \beta_{2} = \beta_{3}=0$$ 
   es `r testF$F[2]` con un p-value de `r testF$'Pr(>F)'[2]`.
 
 ## Ejemplo 6: Exención tributaria y tasas de fertilidad
 
-- Multiplicador de largo plazo, $MLP = pe_t +pe_{t-1} +pe_{t-2}$, es `r mult_lp`.
+- Multiplicador de largo plazo, $MLP = \beta_{1} +\beta_{2} +\beta_{3}$, es `r mult_lp`.
 
-- Test F para la hipótesis $H_0: pe_t + pe_{t-1} + pe_{t-2}=0$ 
+- Test F para la hipótesis $H_0: \beta_{1} + \beta_{2} + \beta_{3}=0$ 
 es `r testF2$F[2]` con un p-value de `r testF2$'Pr(>F)'[2]`
 
 - Alternativamente:
@@ -1504,28 +1504,7 @@ $$Corr\left(y_{t}, y_{t+h}\right) \rightarrow 0 \text { cuando } h \rightarrow \
   - El teorema del central del límite requiere estacionariedad y alguna forma de dependencia débil. 
   
 
-## Ejemplos de series de tiempo débilmente dependientes
- 
-- Proceso de [medias móviles de orden uno]{.emph}, MA(1).
-$$y_{t}=e_{t}+\alpha_{1} e_{t-1}, t=1,2, \ldots$$
-donde $e_{t}$ es i.i.d. con media cero y varianza $\sigma^2_e$.
-
-  - Interpretación: $y_{t}$ es un promedio ponderado corto entre $e_t$ y $e_{t-1}$.
-  
-\begin{eqnarray*}
-    \mathbb{E}\left[y_{t}\right]&=&0 \\
-    \mathbb{V}\left[y_{t}\right]&=& \left(1+\alpha_{1}^{2}\right) \sigma_{e}^{2} \\
-    Cov(y_{t},y_{t-h})&=&\begin{cases}
-  \alpha_{1}\sigma_{e}^{2} & h=1\\
-  0 & h\geq2
-  \end{cases} \\
-    Corr(y_{t},y_{t-h})&=&\begin{cases}
-  \frac{\alpha_{1}}{\left(1+\alpha_{1}^{2}\right)} & h=1\\
-  0 & h\geq2
-  \end{cases}
-\end{eqnarray*}
-
-## Ejemplos de series de tiempo débilmente dependientes
+## Un ejemplo de series de tiempo débilmente dependientes
 
 - Proceso [autorregresivo de orden uno]{.emph} ya conocido,  AR(1).
 $$y_{t}=\rho_{1} y_{t-1}+e_{t}, t=1,2, \ldots$$
@@ -1545,9 +1524,7 @@ donde $e_{t}$ es i.i.d. con media cero y varianza $\sigma^2_e$.
 
 ## Algunos comentarios
 
-- Existen muchos tipos de series de tiempo débilmente dependientes, incluidos los híbridos de procesos autorregresivos y de promedio móvil.
-
-  - Para ilustrar el concepto solo usamos dos, MA(1) y AR(1).
+- Existen muchos tipos de series de tiempo débilmente dependientes. Para ilustrar el concepto solo usamos el AR(1).
 
 - Una [serie con tendencia, aun cuando no sea estacionaria, puede ser débilmente dependiente]{.emph}
 

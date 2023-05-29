@@ -1410,14 +1410,14 @@ pill        -31.304988800  3.9815591 -7.86249501 5.633695e-11</code></pre>
 <ul>
 <li><p>Los coeficientes en las variables son por separado es estadísticamente insignificantes.</p></li>
 <li><p>Alta correlación entre <span class="math inline">\(pe_t\)</span>, <span class="math inline">\(pe_{t-1}\)</span> y <span class="math inline">\(pe_{t-2}\)</span> dificulta la estimación individual.</p></li>
-<li><p>Test F de significancia conjunta <span class="math display">\[H_0: pe_t = pe_{t-1} = pe_{t-2}=0\]</span> es 3.972964 con un p-value de 0.011652.</p></li>
+<li><p>Test F de significancia conjunta <span class="math display">\[H_0: \beta_{1} = \beta_{2} = \beta_{3}=0\]</span> es 3.972964 con un p-value de 0.011652.</p></li>
 </ul>
 </section>
 <section id="ejemplo-6-exención-tributaria-y-tasas-de-fertilidad-2" class="slide level2">
 <h2>Ejemplo 6: Exención tributaria y tasas de fertilidad</h2>
 <ul>
-<li><p>Multiplicador de largo plazo, <span class="math inline">\(MLP = pe_t +pe_{t-1} +pe_{t-2}\)</span>, es 0.1007191.</p></li>
-<li><p>Test F para la hipótesis <span class="math inline">\(H_0: pe_t + pe_{t-1} + pe_{t-2}=0\)</span> es 11.4212385 con un p-value de 0.0012408</p></li>
+<li><p>Multiplicador de largo plazo, <span class="math inline">\(MLP = \beta_{1} +\beta_{2} +\beta_{3}\)</span>, es 0.1007191.</p></li>
+<li><p>Test F para la hipótesis <span class="math inline">\(H_0: \beta_{1} + \beta_{2} + \beta_{3}=0\)</span> es 11.4212385 con un p-value de 0.0012408</p></li>
 <li><p>Alternativamente: <span class="math display">\[gfr_{t}=\beta_{0}+\beta^*_{1} \Delta pe_{t}+ \beta^*_{2} \Delta pe_{t-1} + \beta^*_{3} pe_{t-2} + \beta_{4} ww2_{t}+\beta_{5} pill_{t}+u_{t}\]</span> con <span class="math inline">\(\beta^*_{3}\)</span> el MLP.</p></li>
 </ul>
 <div class="cell" data-paged.print="false">
@@ -2039,29 +2039,8 @@ pill        -31.30498880  3.98155913 -7.8624950 5.633695e-11</code></pre>
 </ul></li>
 </ul>
 </section>
-<section id="ejemplos-de-series-de-tiempo-débilmente-dependientes" class="slide level2">
-<h2>Ejemplos de series de tiempo débilmente dependientes</h2>
-<ul>
-<li><p>Proceso de <span class="emph">medias móviles de orden uno</span>, MA(1). <span class="math display">\[y_{t}=e_{t}+\alpha_{1} e_{t-1}, t=1,2, \ldots\]</span> donde <span class="math inline">\(e_{t}\)</span> es i.i.d. con media cero y varianza <span class="math inline">\(\sigma^2_e\)</span>.</p>
-<ul>
-<li>Interpretación: <span class="math inline">\(y_{t}\)</span> es un promedio ponderado corto entre <span class="math inline">\(e_t\)</span> y <span class="math inline">\(e_{t-1}\)</span>.</li>
-</ul></li>
-</ul>
-<p><span class="math display">\[\begin{eqnarray*}
-    \mathbb{E}\left[y_{t}\right]&amp;=&amp;0 \\
-    \mathbb{V}\left[y_{t}\right]&amp;=&amp; \left(1+\alpha_{1}^{2}\right) \sigma_{e}^{2} \\
-    Cov(y_{t},y_{t-h})&amp;=&amp;\begin{cases}
-  \alpha_{1}\sigma_{e}^{2} &amp; h=1\\
-  0 &amp; h\geq2
-  \end{cases} \\
-    Corr(y_{t},y_{t-h})&amp;=&amp;\begin{cases}
-  \frac{\alpha_{1}}{\left(1+\alpha_{1}^{2}\right)} &amp; h=1\\
-  0 &amp; h\geq2
-  \end{cases}
-\end{eqnarray*}\]</span></p>
-</section>
-<section id="ejemplos-de-series-de-tiempo-débilmente-dependientes-1" class="slide level2">
-<h2>Ejemplos de series de tiempo débilmente dependientes</h2>
+<section id="un-ejemplo-de-series-de-tiempo-débilmente-dependientes" class="slide level2">
+<h2>Un ejemplo de series de tiempo débilmente dependientes</h2>
 <ul>
 <li><p>Proceso <span class="emph">autorregresivo de orden uno</span> ya conocido, AR(1). <span class="math display">\[y_{t}=\rho_{1} y_{t-1}+e_{t}, t=1,2, \ldots\]</span> donde <span class="math inline">\(e_{t}\)</span> es i.i.d. con media cero y varianza <span class="math inline">\(\sigma^2_e\)</span>.</p>
 <ul>
@@ -2081,10 +2060,7 @@ pill        -31.30498880  3.98155913 -7.8624950 5.633695e-11</code></pre>
 <section id="algunos-comentarios" class="slide level2">
 <h2>Algunos comentarios</h2>
 <ul>
-<li><p>Existen muchos tipos de series de tiempo débilmente dependientes, incluidos los híbridos de procesos autorregresivos y de promedio móvil.</p>
-<ul>
-<li>Para ilustrar el concepto solo usamos dos, MA(1) y AR(1).</li>
-</ul></li>
+<li><p>Existen muchos tipos de series de tiempo débilmente dependientes. Para ilustrar el concepto solo usamos el AR(1).</p></li>
 <li><p>Una <span class="emph">serie con tendencia, aun cuando no sea estacionaria, puede ser débilmente dependiente</span></p>
 <ul>
 <li>Un ejemplo es la tendencia deterministica lineal, donde la serie de tiempo es en realidad independiente en el tiempo).</li>
