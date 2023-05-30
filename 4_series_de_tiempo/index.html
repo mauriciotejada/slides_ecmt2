@@ -1513,15 +1513,7 @@ pill        -31.30498880  3.98155913 -7.8624950 5.633695e-11</code></pre>
 <li><p>La adición de una tendencia en el tiempo elimina este problema: <span class="math display">\[y_t = \beta_0 + \beta_1 x_{1t} + ... + \beta_{Kt} x_{Kt} + \gamma t + u_t, t=1,2, \ldots\]</span></p></li>
 </ul>
 </section>
-<section id="el-modelo-de-regresión-y-la-tendencia-1" class="slide level2">
-<h2>El modelo de regresión y la tendencia</h2>
-<ul>
-<li><p>Incluir una tendencia en el modelo es equivalente a la <strong>eliminación previa de la tendencia</strong> en las series de datos originales.</p></li>
-<li><p>En el modelo anterior <span class="math display">\[y_t = \beta_0 + \beta_1 x_{1t} + ... + \beta_{Kt} x_{Kt}  + \gamma t + u_t, t=1,2, \ldots\]</span> interpretamos los estimadores MCO como descuentos de efectos parciales.</p></li>
-<li><p>Podemos <span class="emph">eliminar (“descontar”) la tendencia</span> antes de estimar el modelo: <span class="math display">\[y_t = \alpha_0 + \alpha_1 t + \tilde{y_t}, t=1,2, \ldots\]</span> para todas las variables del modelo.</p></li>
-<li><p>Luego usar MCO en el modelo (genera estimadores idénticos al modelo orginal): <span class="math display">\[\tilde{y}_t = \beta_1 \tilde{x}_{1t} + ... + \beta_{Kt} \tilde{x}_{Kt}  + \tilde{u}_t, t=1,2, \ldots\]</span></p></li>
-</ul>
-</section>
+
 <section id="ejemplo-7-inversión-y-precios-de-vivienda" class="slide level2">
 <h2>Ejemplo 7: Inversión y precios de vivienda</h2>
 <ul>
@@ -1624,15 +1616,7 @@ pill        -31.30498880  3.98155913 -7.8624950 5.633695e-11</code></pre>
 <li><p>Por ejemplo, si la serie de tiempo es mensual tenemos: <span class="math display">\[y_t = \beta_0 + \beta_1 x_{1t} + ... + \beta_{Kt} x_{Kt} + \gamma_1 feb_t + ... + \gamma_{11} dic_t  + u_t\]</span> donde <span class="math inline">\(mes_t\)</span> es 1 en el mes correspondiente y 0 en otro caso. Note que hemos omitido una variable binaria <span class="math inline">\(ene_t\)</span> para evitar colinealidad perfecta.</p></li>
 </ul>
 </section>
-<section id="estacionalidad-1" class="slide level2">
-<h2>Estacionalidad</h2>
-<ul>
-<li><p>Incluir variables binarias estacionales en una regresión es equivalente a la <span class="emph">eliminación de la estacionalidad de los datos</span>.</p></li>
-<li><p>De igual forma que con la tendencia, podemos [eliminar (“descontar”) la estacionalidad] antes de estimar el modelo. <span class="math display">\[y_t = \gamma_0 + \gamma_1 feb_t + ... + \gamma_{11} dic_t + \tilde{y_t}\]</span> para todas las variables del modelo.</p></li>
-<li><p>Luego MCO para el siguiente modelo genera los mismo estimadores que el modelo original. <span class="math display">\[\tilde{y}_t = \beta_1 \tilde{x}_{1t} + ... + \beta_{Kt} \tilde{x}_{Kt}  + \tilde{u}_t\]</span></p></li>
-<li><p>Finalmente, alguna series de tiempo pueden presentar <span class="emph">tendencias y patrones estacionales</span>. En este caso se usa un modelo de regresión con una tendencia y variables binarias estacionales.</p></li>
-</ul>
-</section>
+
 <section id="ejemplo-8-antidumping-e-importaciones-químicas" class="slide level2">
 <h2>Ejemplo 8: Antidumping e importaciones químicas</h2>
 <ul>
@@ -2089,41 +2073,9 @@ pill        -31.30498880  3.98155913 -7.8624950 5.633695e-11</code></pre>
 <h2>Propiedades asintóticas I: Consistencia</h2>
 <p><strong>Teorema</strong> <em>Bajo los supuestos 1’, 2’ y 3’, los estimadores de MCO son consistentes. Sea <span class="math inline">\(\hat{\beta}_{j}\)</span> un estimador de <span class="math inline">\(\beta_{j}\)</span> para una muestra de tamaño <span class="math inline">\(n\)</span>. <span class="math inline">\(\hat{\beta}_{j}\)</span> es un estimador consistente si para todo <span class="math inline">\(\epsilon&gt;0\)</span>, <span class="math inline">\(\Pr[|\hat{\beta}_{j}-\beta_{j}|&gt;\epsilon]\rightarrow0\)</span> cuando <span class="math inline">\(n\rightarrow\infty\)</span>. Alternativamente, se dice también que <span class="math inline">\(\beta_{j}\)</span> es el límite en probabilidad de <span class="math inline">\(\hat{\beta}_{j}\)</span>, <span class="math inline">\(plim(\hat{\beta}_{j})=\beta_{j}\)</span>.</em></p>
 </section>
-<section id="por-qué-es-importante-relajar-el-supuesto-de-exogeneidad-estricta" class="slide level2">
-<h2>¿Por qué es importante relajar el supuesto de exogeneidad estricta?</h2>
-<ul>
-<li><p>La exogeneidad estricta: descarta toda relación dinámica entre las variables explicativas y el término de error.</p>
-<ul>
-<li>descarta la retroalimentación de la variable dependiente sobre sus valores futuros.</li>
-</ul></li>
-<li><p><strong>Modelo estático</strong>: <span class="math display">\[y_{t}=\beta_{0}+\beta_{1} z_{t 1}+\beta_{2} z_{t 2}+u_{t}\]</span></p>
-<ul>
-<li><p>Bajo la dependencia débil, la condición para consistencia: <span class="math display">\[\mathbb{E}\left(u_{t} \mid z_{t 1}, z_{t 2}\right)=0\]</span></p></li>
-<li><p>ST3’ no descarta la correlación entre <span class="math inline">\(u_{t-1}\)</span> y <span class="math inline">\(z_{t1}\)</span>. Es válido suponer que <span class="math inline">\(z_{t1}\)</span> es variable de política: <span class="math inline">\(z_{t 1}=\delta_{0}+\delta_{1} y_{t-1}+v_{t}\)</span>.</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="por-qué-es-importante-relajar-el-supuesto-de-exogeneidad-estricta-1" class="slide level2">
-<h2>¿Por qué es importante relajar el supuesto de exogeneidad estricta?</h2>
-<ul>
-<li><p><strong>Modelo de rezagos distribuidos finitos</strong>: Consideremos el modelo: <span class="math display">\[y_{t}=\alpha_{0}+\delta_{0} z_{t}+\delta_{1} z_{t-1}+\delta_{2} z_{t-2}+u_{t}\]</span></p>
-<ul>
-<li><p>Un supuesto muy natural es <span class="math inline">\(\mathbb{E}\left(u_{t} \mid z_{t}, z_{t-1}, z_{t-2}, z_{t-3}, \ldots\right)=0\)</span>.</p></li>
-<li><p>Cuando se determina que <span class="math inline">\(\mathbb{x}_t = (z_t, z_{t-1}, z_{t-2})\)</span>, esto es ningún rezago adicional aporta, el supuesto ST3’ se satisface y MCO serán consistentes.</p></li>
-<li><p>3’ no descarta que <span class="math inline">\(y\)</span> pueda influir en los valores futuros de <span class="math inline">\(z\)</span>.</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="por-qué-es-importante-relajar-el-supuesto-de-exogeneidad-estricta-2" class="slide level2">
-<h2>¿Por qué es importante relajar el supuesto de exogeneidad estricta?</h2>
-<ul>
-<li><p><strong>Modelo autoregresivo</strong>: Consideremos ahora el modelo autorregresivo de orden uno, AR(1): <span class="math display">\[y_{t}=\beta_{0}+\beta_{1} y_{t-1}+u_{t}\]</span></p>
-<ul>
-<li><p>Suponemos que <span class="math inline">\(\mathrm{E}\left(u_{t} \mid y_{t-1}, y_{t-2}, \ldots\right)=0\)</span>. Como <span class="math inline">\(\mathbb{x}_t = y_{t-1}\)</span>, esto es ningún rezago adicional aporta información, el supuesto 3’ es válido.</p></li>
-<li><p>El supuesto de exogeneidad estricta 3 no es válido: <span class="math inline">\(Cov\left(y_{t}, u_{t}\right)=\beta_{1} Cov\left(y_{t-1}, u_{t}\right)+\mathbb{V}\left(u_{t}\right)&gt;0\)</span>. Entonces, MCO es sesgado pero consistente.</p></li>
-</ul></li>
-</ul>
-</section>
+
+
+
 <section id="supuestos-iii" class="slide level2">
 <h2>Supuestos III</h2>
 <p><strong>Supuesto 4’: Homocedasticidad</strong> <em>Los errores son contemporáneamente homocedásticos, es decir, <span class="math inline">\(\mathbb{V}\left(u_{t} \mid \mathbf{x}_{t}\right)=\sigma^{2}\)</span>.</em></p>
@@ -2147,7 +2099,7 @@ pill        -31.30498880  3.98155913 -7.8624950 5.633695e-11</code></pre>
 <ul>
 <li><p>Versión lineal de la <strong>curva de Phillips</strong> aumentada por expectativas: <span class="math display">\[inf_{t}-inf_{t}^{e}=\beta_{1}\left(unem_{t}-\mu_{0}\right)+e_{t}\]</span> con <span class="math inline">\(\mu_{0}\)</span> la tasa natural de desempleo e <span class="math inline">\(inf_{t}^{e}\)</span> la tasa de inflación esperada.</p></li>
 <li><p>Disyuntiva a c/p entre la inflación no anticipada y el desempleo cíclico: <span class="math inline">\(\beta_1&lt;0\)</span>.</p></li>
-<li><p>Bajo las [expectativas adaptativas]{emph} <span class="math inline">\(inf_{t}^{e}=inf_{t-1}\)</span>.</p></li>
+<li><p>Bajo las <span class="emph">expectativas adaptativas</span> <span class="math inline">\(inf_{t}^{e}=inf_{t-1}\)</span>.</p></li>
 <li><p>Curva de Phillips a estimar: <span class="math display">\[\Delta inf_{t}= \beta_{0}+\beta_{1} unem_{t}+e_{t}\]</span> con <span class="math inline">\(\Delta inf_{t}=inf_{t}-inf_{t-1}\)</span> y <span class="math inline">\(\beta_{0}=-\beta_{1} \mu_{0}\)</span>.</p></li>
 </ul>
 </section>
@@ -2192,21 +2144,7 @@ Coefficients:
 </ul></li>
 </ul>
 </section>
-<section id="modelos-dinámicamente-completos-1" class="slide level2">
-<h2>Modelos dinámicamente completos</h2>
-<ul>
-<li><p>Un modelo dinámicamente completo debe satisfacer 5’.</p></li>
-<li><p>Tomemos <span class="math inline">\(s&lt;t\)</span>. Usando la ley de expectativas iteradas:</p>
-<span class="math display">\[\begin{aligned}
-\mathbb{E}\left(u_{t} u_{s} \mid \mathbf{x}_{t}, \mathbf{x}_{s}\right) &amp;=\mathbb{E}\left[\mathbb{E}\left(u_{t} u_{s} \mid \mathbf{x}_{t}, \mathbf{x}_{s}, u_{s}\right) \mid \mathbf{x}_{t}, \mathbf{x}_{s}\right] \\
-&amp;=\mathbb{E}\left[u_{s} \mathbb{E}\left(u_{t} \mid \mathbf{x}_{t}, \mathbf{x}_{s}, u_{s}\right) \mid \mathbf{x}_{t}, \mathbf{x}_{s}\right] \\
-&amp;=\mathbb{E}\left[u_{s} \times 0 \mid \mathbf{x}_{t}, \mathbf{x}_{s}\right]  \\
-&amp;=0
-\end{aligned}\]</span>
-<p><span class="math inline">\(\mathbb{E}\left(u_{t} \mid \mathbf{x}_{t}, \mathbf{x}_{s}, u_{s}\right)\)</span> es un subconjunto de <span class="math inline">\(\mathbb{E}\left(u_{t} \mid \mathbf{x}_{t}, y_{t-1}, \mathbf{x}_{t-1}, \ldots\right)=0\)</span>.</p></li>
-<li><p>Entonces, si un modelo es dinámicamente completo significa que <span class="emph">no existe una correlación serial en los errores</span> del modelo.</p></li>
-</ul>
-</section>
+
 <section id="recordemos-la-prueba-de-breusch-godfrey" class="slide level2">
 <h2>Recordemos la prueba de Breusch-Godfrey</h2>
 <ul>
@@ -2283,73 +2221,7 @@ Coefficients:
 </div>
 </div>
 </section>
-<section id="ejemplo-10-efecto-del-clima-en-el-precio-del-jugo-de-naranja-2" class="slide level2">
-<h2>Ejemplo 10: Efecto del Clima en el Precio del Jugo de Naranja</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>                 (Intercept) L(fdd, 0:12)0 L(fdd, 0:12)1 L(fdd, 0:12)2
-(Intercept)     6.179201e-02 -2.753452e-03 -4.189257e-03 -2.197886e-03
-L(fdd, 0:12)0  -2.753452e-03  1.942699e-02 -4.543165e-03  8.223062e-04
-L(fdd, 0:12)1  -4.189257e-03 -4.543165e-03  7.631884e-03  2.117213e-03
-L(fdd, 0:12)2  -2.197886e-03  8.223062e-04  2.117213e-03  3.185734e-03
-L(fdd, 0:12)3  -1.009843e-03  1.886794e-03 -4.972575e-04  6.929871e-04
-L(fdd, 0:12)4  -3.229846e-03  8.746614e-04 -2.505078e-04 -1.872822e-04
-L(fdd, 0:12)5  -2.572566e-03 -4.603579e-05  4.267196e-04  2.149932e-04
-L(fdd, 0:12)6  -4.186539e-03  1.407338e-03 -2.808814e-04  1.345613e-04
-L(fdd, 0:12)7  -2.664578e-03  1.060326e-04  8.485687e-05 -2.015023e-05
-L(fdd, 0:12)8  -2.772301e-03  1.608578e-04 -4.423288e-05  6.055796e-05
-L(fdd, 0:12)9  -4.683689e-03  3.641191e-04  3.083498e-04  3.011280e-04
-L(fdd, 0:12)10 -2.959640e-03 -4.434252e-04  1.653307e-04  5.894878e-05
-L(fdd, 0:12)11 -2.682885e-03 -1.864565e-03  9.086160e-04  1.922447e-04
-L(fdd, 0:12)12  5.113136e-05 -2.226151e-03 -1.068820e-03 -2.350612e-06
-               L(fdd, 0:12)3 L(fdd, 0:12)4 L(fdd, 0:12)5 L(fdd, 0:12)6
-(Intercept)    -1.009843e-03 -3.229846e-03 -2.572566e-03 -4.186539e-03
-L(fdd, 0:12)0   1.886794e-03  8.746614e-04 -4.603579e-05  1.407338e-03
-L(fdd, 0:12)1  -4.972575e-04 -2.505078e-04  4.267196e-04 -2.808814e-04
-L(fdd, 0:12)2   6.929871e-04 -1.872822e-04  2.149932e-04  1.345613e-04
-L(fdd, 0:12)3   2.081291e-03 -1.381797e-04  4.599449e-04  4.912142e-05
-L(fdd, 0:12)4  -1.381797e-04  9.327802e-04  7.195908e-05  8.759168e-04
-L(fdd, 0:12)5   4.599449e-04  7.195908e-05  9.188847e-04 -3.623854e-05
-L(fdd, 0:12)6   4.912142e-05  8.759168e-04 -3.623854e-05  2.113167e-03
-L(fdd, 0:12)7   6.078121e-05  2.113466e-04  1.031985e-04  2.736203e-04
-L(fdd, 0:12)8   2.437262e-04  2.906821e-04  3.527567e-04  3.613060e-04
-L(fdd, 0:12)9   2.312539e-04  6.475546e-04  2.827152e-04  1.403522e-03
-L(fdd, 0:12)10 -4.731800e-05  3.492850e-04  7.758813e-05  6.518792e-04
-L(fdd, 0:12)11  7.835812e-06  4.963158e-05  2.544544e-04  3.242780e-04
-L(fdd, 0:12)12 -5.311668e-04 -2.004157e-04 -2.586477e-04 -9.958728e-07
-               L(fdd, 0:12)7 L(fdd, 0:12)8 L(fdd, 0:12)9 L(fdd, 0:12)10
-(Intercept)    -2.664578e-03 -2.772301e-03 -0.0046836890  -2.959640e-03
-L(fdd, 0:12)0   1.060326e-04  1.608578e-04  0.0003641191  -4.434252e-04
-L(fdd, 0:12)1   8.485687e-05 -4.423288e-05  0.0003083498   1.653307e-04
-L(fdd, 0:12)2  -2.015023e-05  6.055796e-05  0.0003011280   5.894878e-05
-L(fdd, 0:12)3   6.078121e-05  2.437262e-04  0.0002312539  -4.731800e-05
-L(fdd, 0:12)4   2.113466e-04  2.906821e-04  0.0006475546   3.492850e-04
-L(fdd, 0:12)5   1.031985e-04  3.527567e-04  0.0002827152   7.758813e-05
-L(fdd, 0:12)6   2.736203e-04  3.613060e-04  0.0014035220   6.518792e-04
-L(fdd, 0:12)7   2.278074e-04  2.250910e-04  0.0003140350   2.526664e-04
-L(fdd, 0:12)8   2.250910e-04  1.152572e-03  0.0006658012   8.115063e-04
-L(fdd, 0:12)9   3.140350e-04  6.658012e-04  0.0024623850   1.081565e-03
-L(fdd, 0:12)10  2.526664e-04  8.115063e-04  0.0010815650   4.753106e-03
-L(fdd, 0:12)11  1.571158e-04  5.696562e-04  0.0007154512  -3.225344e-04
-L(fdd, 0:12)12  6.014426e-06 -1.939837e-04 -0.0001961799   8.770549e-04
-               L(fdd, 0:12)11 L(fdd, 0:12)12
-(Intercept)     -2.682885e-03   5.113136e-05
-L(fdd, 0:12)0   -1.864565e-03  -2.226151e-03
-L(fdd, 0:12)1    9.086160e-04  -1.068820e-03
-L(fdd, 0:12)2    1.922447e-04  -2.350612e-06
-L(fdd, 0:12)3    7.835812e-06  -5.311668e-04
-L(fdd, 0:12)4    4.963158e-05  -2.004157e-04
-L(fdd, 0:12)5    2.544544e-04  -2.586477e-04
-L(fdd, 0:12)6    3.242780e-04  -9.958728e-07
-L(fdd, 0:12)7    1.571158e-04   6.014426e-06
-L(fdd, 0:12)8    5.696562e-04  -1.939837e-04
-L(fdd, 0:12)9    7.154512e-04  -1.961799e-04
-L(fdd, 0:12)10  -3.225344e-04   8.770549e-04
-L(fdd, 0:12)11   2.695701e-03   3.513506e-04
-L(fdd, 0:12)12   3.513506e-04   6.171038e-03</code></pre>
-</div>
-</div>
-</section>
+
 <section id="ejemplo-10-efecto-del-clima-en-el-precio-del-jugo-de-naranja-3" class="slide level2">
 <h2>Ejemplo 10: Efecto del Clima en el Precio del Jugo de Naranja</h2>
 <div class="columns">
