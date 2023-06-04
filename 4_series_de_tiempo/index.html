@@ -2239,6 +2239,593 @@ Coefficients:
 </div>
 </div>
 </div>
+</section></section>
+<section>
+<section id="no-estacionariedad" class="title-slide slide level1 center">
+<h1>No estacionariedad</h1>
+
+</section>
+<section id="introducción-1" class="slide level2">
+<h2>Introducción</h2>
+<ul>
+<li><p>Usaremos el concepto de estacionariedad débil o en covarianza.</p></li>
+<li><p>La no estacionariedad de una serie de tiempo está fuertemente ligada a la existencia de:</p>
+<ul>
+<li><p>Tendencias.</p></li>
+<li><p>Quiebres Estructurales.</p></li>
+</ul></li>
+<li><p><span class="emph">Nos centraremos en la tendencia</span>:</p>
+<ul>
+<li><p>Tendencia deterministica (ya estudiada en capítulos anteriores): <span class="math display">\[y_{t}=\alpha+\beta t + u_{t}\]</span></p></li>
+<li><p>Tendencia estocástica (Caminatas Aleatorias): <span class="math display">\[\begin{aligned}
+y_{t} &amp; =  y_{t-1}+u_{t} \\
+y_{t} &amp; =  \phi_{0}+y_{t-1}+u_{t}
+\end{aligned}\]</span></p></li>
+</ul></li>
+</ul>
+</section>
+<section id="tendencia-deterministica-td" class="slide level2">
+<h2>Tendencia deterministica (TD)</h2>
+<ul>
+<li><p>La tendencia es bien definida y no cambia en el tiempo. Por ejemplo: <span class="math display">\[y_{t}=\alpha+\beta t+u_{t}\]</span></p>
+<p><span class="math inline">\(\alpha\)</span>y <span class="math inline">\(\beta\)</span> son parámetros, <span class="math inline">\(t\)</span> es un indice temporal, <span class="math inline">\(u_{t}\)</span> es un error con <span class="math inline">\(\mathbb{E}[u_{t}]=0\)</span> y <span class="math inline">\(\mathbb{V}[u_{t}]=\sigma^{2}\)</span>. Otros ejemplos serían tendencia cuadráticas o polinómicas.</p></li>
+<li><p>Es fácil de verificar que en el caso de la tendencia lineal:</p>
+<ul>
+<li><p><span class="math inline">\(\mathbb{E}[y_{t}]=\alpha+\beta t\)</span></p></li>
+<li><p><span class="math inline">\(\mathbb{V}[y_{t}]=\sigma^{2}\)</span></p></li>
+</ul></li>
+<li><p>La <span class="emph">fuente de no estacionariedad es la media</span>: La media va cambiando en el tiempo (aumenta si <span class="math inline">\(\beta&gt;0\)</span>).</p></li>
+</ul>
+</section>
+<section id="tendencia-deterministica-td-1" class="slide level2">
+<h2>Tendencia deterministica (TD)</h2>
+<ul>
+<li><p>Así, la series de tiempo es una fluctuación estacionaria alrededor de una tendencia deterministica.</p></li>
+<li><p>El proceso <span class="math inline">\(z_t=y_{t}-\beta t=\alpha+u_{t}\)</span> es estacionario.</p></li>
+<li><p>Controlar por la tendencia o eliminarla usando MCO <span class="emph">soluciona el problema de no estacionariedad</span>.</p></li>
+</ul>
+</section>
+<section id="caminata-aleatoria-rw" class="slide level2">
+<h2>Caminata aleatoria (RW)</h2>
+<ul>
+<li><p>Procesos donde la tendencia cambia aleatoriamente en el tiempo. <span class="math display">\[y_{t}=y_{t-1}+u_{t}\]</span> con <span class="math inline">\(u_{t}\)</span> un error con <span class="math inline">\(\mathbb{E}[u_{t}]=0\)</span> y <span class="math inline">\(\mathbb{V}[u_{t}]=\sigma^{2}\)</span>.</p></li>
+<li><p>Iterando desde <span class="math inline">\(t=0\)</span> en adelante tenemos (normalizamos <span class="math inline">\(y_0=0\)</span>): <span class="math display">\[\begin{aligned}
+y_{0} &amp; =  0\\
+y_{1} &amp; =  y_{0}+u_{1}=u_{1}\\
+y_{2} &amp; =  y_{1}+u_{2}=u_{1}+u_{2}\ \ \  ...\\
+y_{t} &amp; =  y_{t-1}+u_{t}=\sum_{i=1}^{t}u_{i}
+\end{aligned}\]</span></p></li>
+</ul>
+</section>
+<section id="caminata-aleatoria-rw-1" class="slide level2">
+<h2>Caminata aleatoria (RW)</h2>
+<ul>
+<li><p>Entonces: <span class="math display">\[\begin{aligned}
+\mathbb{E}[y_{t}]&amp;=0 \\
+\mathbb{V}[y_{t}]&amp;=t\sigma^{2}
+\end{aligned}\]</span> La <span class="emph">fuente de no estacionariedad es la varianza</span>.</p></li>
+<li><p>El proceso <span class="math inline">\(z_t=y_{t}-y_{t-1}=u_{t}\)</span> es estacionario. Por tanto, tomar la diferencia <span class="emph">soluciona el problema de no estacionariedad</span>.</p></li>
+</ul>
+</section>
+<section id="caminata-aleatoria-con-drift-rwd" class="slide level2">
+<h2>Caminata aleatoria con drift (RWD)</h2>
+<ul>
+<li><p>Procesos donde ademas que la tendencia cambia aleatoriamente en el tiempo, la serie va creciendo. <span class="math display">\[y_{t}=\phi_{0}+y_{t-1}+u_{t}\]</span> con <span class="math inline">\(u_{t}\)</span> un error con <span class="math inline">\(\mathbb{E}[u_{t}]=0\)</span> y <span class="math inline">\(\mathbb{V}[u_{t}]=\sigma^{2}\)</span>.</p></li>
+<li><p>Iterando desde <span class="math inline">\(t=0\)</span> en adelante tenemos (normalizamos <span class="math inline">\(y_0=0\)</span>): <span class="math display">\[\begin{aligned}
+  y_{0} &amp; =  0\\
+  y_{1} &amp; =  \phi_{0}+y_{0}+u_{1}=\phi_{0}+u_{1}\\
+  y_{2} &amp; =  \phi_{0}+y_{1}+u_{2}=2\phi_{0}+u_{1}+u_{2}\ \ \ ...\\
+  y_{t} &amp; =  \phi_{0}+y_{t-1}+u_{t}=t\phi_{0}+\sum_{i=1}^{t}u_{i}
+\end{aligned}\]</span></p></li>
+</ul>
+</section>
+<section id="caminata-aleatoria-con-drift-rwd-1" class="slide level2">
+<h2>Caminata aleatoria con drift (RWD)</h2>
+<ul>
+<li><p>Entonces: <span class="math display">\[\begin{aligned}
+\mathbb{E}[y_{t}]&amp;=t\phi_{0} \\
+\mathbb{V}[y_{t}]&amp;=t\sigma^{2}
+\end{aligned}\]</span> Las <span class="emph">fuentes de no estacionariedad son la media y la varianza</span>. Un RWD es una TD mas un RW.</p></li>
+<li><p>El proceso <span class="math inline">\(z_t=y_{t}-y_{t-1}=\phi_0+u_{t}\)</span> es estacionario. Por tanto, tomar la diferencia [soluciona el problema de no estacionariedad]]{.emph}.</p></li>
+</ul>
+</section>
+<section id="procesos-estacionarios-vs.-no-estacionarios." class="slide level2">
+<h2>Procesos estacionarios vs.&nbsp;no estacionarios.</h2>
+<ul>
+<li>Es <span class="emph">muy difícil distinguir</span> entre RWD y TD, y entre RW y AR(1) aunque son procesos completamente diferentes.</li>
+</ul>
+
+<img data-src="index_files/figure-revealjs/simulaciones-1.png" style="width:85.0%" class="r-stretch"></section>
+<section id="tests-de-no-estacionariedad-raíz-unitaria" class="slide level2">
+<h2>Tests de no estacionariedad (raíz unitaria)</h2>
+<ul>
+<li><p><span class="emph">Dickey-Fuller (1979) (test DF)</span> desarrollan una prueba de presencia de raíz unitaria basado en el estadístico <span class="math inline">\(t\)</span>.</p></li>
+<li><p>DF consideran tres regresiones de prueba: <span class="math display">\[\begin{aligned}
+\Delta y_{t} &amp; =  \gamma y_{t-1}+u_{t}\\
+\Delta y_{t} &amp; =  a_{0}+\gamma y_{t-1}+u_{t}\\
+\Delta y_{t} &amp; =  a_{0}+\gamma y_{t-1}+a{}_{2}t+u_{t}
+\end{aligned}\]</span></p></li>
+<li><p>La hipótesis nula de no estacionariedad es: <span class="math display">\[\mathrm{H}_{0}:\gamma=0 \rightarrow  \phi=1\,\ \ \ \ RW/RWD\]</span></p></li>
+</ul>
+</section>
+<section id="tests-de-no-estacionariedad-raíz-unitaria-1" class="slide level2">
+<h2>Tests de no estacionariedad (raíz unitaria)</h2>
+<ul>
+<li><p>Estadístico de prueba: <span class="math display">\[t=\frac{\hat{\gamma}-0}{\sqrt{\hat{\mathbb{V}(\gamma)}}}\]</span></p></li>
+<li><p><strong>Problema</strong>: a diferencia del caso de regresión estándar, bajo <span class="math inline">\(\mathrm{H}_{0}\)</span> <span class="emph">el estadístico no tiene distribución asintótica normal</span>.</p>
+<ul>
+<li>Los valores críticos los dan Dickey y Fuller (1979).</li>
+</ul></li>
+</ul>
+</section>
+<section id="tests-de-no-estacionariedad-raíz-unitaria-2" class="slide level2">
+<h2>Tests de no estacionariedad (raíz unitaria)</h2>
+<ul>
+<li><p><span class="emph">Estrategia</span>: Partir con el modelo (3) y probar raíz unitaria. Si no RU, probar presencia de tendencia y pasar al modelo con test F (2) si es el caso. Probar raíz unitaria en modelo (2). Si no RU, probar presencia de constante y pasar al modelo con test F (1) si es el caso. Probar raíz unitaria en modelo (1).</p></li>
+<li><p>Por ejemplo para 100 observaciones:</p></li>
+</ul>
+<div class="small">
+<table>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Modelo</th>
+<th>Hipótesis</th>
+<th>Estadístico</th>
+<th>Valor Crítico (95 y 99%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\Delta y_{t}=a_{0}+\gamma y_{t-1}+a_{2}t+u_{t}\)</span></td>
+<td><span class="math inline">\(\gamma=0\)</span></td>
+<td><span class="math inline">\(\tau_{\tau}\)</span></td>
+<td>-3.45 y -4.04</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><span class="math inline">\(\gamma=a_2=0\)</span></td>
+<td><span class="math inline">\(\phi_3\)</span></td>
+<td>6.49 y 8.73</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><span class="math inline">\(a_0=\gamma=a_2=0\)</span></td>
+<td><span class="math inline">\(\phi_2\)</span></td>
+<td>4.88 y 6.50</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Delta y_{t}=a_{0}+\gamma y_{t-1}+u_{t}\)</span></td>
+<td><span class="math inline">\(\gamma=0\)</span></td>
+<td><span class="math inline">\(\tau_{\mu}\)</span></td>
+<td>-2.89 y -3.51</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><span class="math inline">\(a_0=\gamma\)</span></td>
+<td><span class="math inline">\(\phi_1\)</span></td>
+<td>4.71 y 6.70</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Delta y_{t}=\gamma y_{t-1}+u_{t}\)</span></td>
+<td><span class="math inline">\(\gamma=0\)</span></td>
+<td><span class="math inline">\(\tau\)</span></td>
+<td>-1.95 y -2.60</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="test-de-no-estacionariedad-aumentado" class="slide level2">
+<h2>Test de no estacionariedad aumentado</h2>
+<ul>
+<li><p>DF suponen que <span class="math inline">\(u_{t}\)</span> en la ecuación de prueba no tiene autocorrelación: problemas de especificación, AR(p) vs.&nbsp;AR(1).</p></li>
+<li><p>Si <span class="math inline">\(u_{t}\)</span> tiene autocorrelación, Dickey y Fuller (1979) sugieren incorporar rezagos de la variable dependiente: <span class="math display">\[\begin{aligned}
+\Delta y_{t}  = &amp; \gamma y_{t-1}+\sum_{i=2}^{p}\beta_{i}\Delta y_{t-i+1}+u_{t}\\
+\Delta y_{t}  = &amp; a_{0}+\gamma y_{t-1}+\sum_{i=2}^{p}\beta_{i}\Delta y_{t-i+1}+u_{t}\\
+\Delta y_{t}  = &amp; a_{0}+\gamma y_{t-1}+a{}_{2}t+\sum_{i=2}^{p}\beta_{i}\Delta y_{t-i+1}+u_{t}
+\end{aligned}\]</span></p></li>
+<li><p>Usar AIC y BIC para elegir <span class="math inline">\(p\)</span>.</p></li>
+</ul>
+</section></section>
+<section>
+<section id="modelo-de-vectores-autorregresivos" class="title-slide slide level1 center">
+<h1>Modelo de Vectores Autorregresivos</h1>
+
+</section>
+<section id="modelos-var-en-su-forma-estructural" class="slide level2">
+<h2>Modelos VAR en su forma estructural</h2>
+<ul>
+<li><p>En los modelos RDF <span class="emph">falta de retroalimentación</span>. ¿Es <span class="math inline">\(x_{t}\)</span> realmente exógena?</p></li>
+<li><p>El modelo que toma en cuenta posible endogeneidad (determinación conjunta de <span class="math inline">\(y\)</span> y <span class="math inline">\(x\)</span>) es: <span class="math display">\[\begin{aligned}
+  y_{t}  = &amp; b_{10}-b_{12}x_{t}+\gamma_{11}y_{t-1}+\gamma_{12}x_{t-1}+\epsilon_{yt}\\
+  x_{t}  = &amp; b_{20}-b_{21}y_{t}+\gamma_{21}y_{t-1}+\gamma_{22}x_{t-1}+\epsilon_{xt}
+\end{aligned}\]</span></p></li>
+<li><p>Este es un ejemplo de un vector autoregresivo (VAR) de primer orden.</p></li>
+<li><p>Supuestos:</p>
+<ol type="1">
+<li><span class="math inline">\((y_{t},x_{t})\)</span> son estacionarias;</li>
+<li><span class="math inline">\((\epsilon_{Yt},\epsilon_{Xt})\)</span> son ruido blanco con <span class="math inline">\(\sigma_{Y}\)</span> y <span class="math inline">\(\sigma_{X}\)</span> y no están correlacionados <span class="math inline">\(\mathbb{E}[\epsilon_{ys}\epsilon_{xw}]=0\ \ \forall s,w\)</span>.</li>
+</ol></li>
+</ul>
+</section>
+<section id="modelos-var-en-su-forma-reducida" class="slide level2">
+<h2>Modelos VAR en su forma reducida</h2>
+<ul>
+<li><p>Escribamos el modelo VAR(1) estructural en su forma matricial: <span class="math display">\[\left[\begin{array}{cc}
+1 &amp; b_{12}\\
+b_{21} &amp; 1
+\end{array}\right]\left[\begin{array}{c}
+y_{t}\\
+x_{t}
+\end{array}\right]=\left[\begin{array}{c}
+b_{10}\\
+b_{20}
+\end{array}\right]+\left[\begin{array}{cc}
+\gamma_{11} &amp; \gamma_{12}\\
+\gamma_{21} &amp; \gamma_{22}
+\end{array}\right]\left[\begin{array}{c}
+y_{t-1}\\
+x_{t-1}
+\end{array}\right]+\left[\begin{array}{c}
+\epsilon_{Yt}\\
+\epsilon_{Xt}
+\end{array}\right]\]</span></p></li>
+<li><p>Definimos <span class="math inline">\(\mathrm{z}_{t}=\left(y_{t},x_{t}\right)'\)</span>, entonces en forma compacta: <span class="math display">\[B \mathrm{z}_{t}=\Gamma_{0}+\Gamma_{1}\mathrm{z}_{t-1}+\mathrm{\varepsilon}_{t}\]</span> donde: <span class="math inline">\(A_{0}=B^{-1}\Gamma_{0}\)</span>, <span class="math inline">\(A_{1}=B^{-1}\Gamma_{1}\)</span> y <span class="math inline">\(\mathrm{e}_{t}=B^{-1}\mathrm{\varepsilon}_{t}\)</span>.</p></li>
+<li><p>Extendiendo la ecuación anterior: <span class="math display">\[\begin{aligned}
+y_{t} &amp; =  a_{10}+a_{11}y_{t-1}+a_{12}x_{t-1}+e_{1t}\\
+x_{t} &amp; =  a_{20}+a_{21}y_{t-1}+a_{22}x_{t-1}+e_{2t}
+\end{aligned}\]</span></p></li>
+</ul>
+</section>
+<section id="modelos-var-en-su-forma-reducida-1" class="slide level2">
+<h2>Modelos VAR en su forma reducida</h2>
+<ul>
+<li><p>Note que para la matriz de efectos contemporáneos <span class="math inline">\(B\)</span> tenemos que: <span class="math display">\[B^{-1}=\left[\begin{array}{cc}
+1 &amp; b_{12}\\
+b_{21} &amp; 1
+\end{array}\right]^{-1}=\frac{1}{1-b_{12}b_{21}}\left[\begin{array}{cc}
+1 &amp; -b_{12}\\
+-b_{21} &amp; 1
+\end{array}\right]\]</span></p></li>
+<li><p>Usando este resultado: <span class="math display">\[e_{1t}=\frac{\epsilon_{yt}-b_{12}\epsilon_{xt}}{1-b_{12}b_{21}}\,\,\,\,\,\,\,\,\,e_{2t}=\frac{\epsilon_{xt}-b_{21}\epsilon_{yt}}{1-b_{12}b_{21}}\]</span></p></li>
+</ul>
+</section>
+<section id="modelos-var-en-su-forma-reducida-2" class="slide level2">
+<h2>Modelos VAR en su forma reducida</h2>
+<ul>
+<li>La matriz de varianzas y covarianzas de los errores de la forma reducida es: <span class="math display">\[\Sigma=\left[\begin{array}{cc}
+  \mathbb{E}[e_{1t}^{2}] &amp; \mathbb{E}[e_{1t}e_{2t}]\\
+  \mathbb{E}[e_{1t}e_{2t}] &amp; \mathbb{E}[e_{2t}^{2}]
+  \end{array}\right]\]</span> donde: <span class="math display">\[\mathbb{E}[e_{1t}^{2}]=\frac{\sigma_{y}^{2}+b_{12}^{2}\sigma_{z}^{2}}{(1-b_{12}b_{21})^{2}}\,\,\,\,\,\mathbb{E}[e_{2t}^{2}]=\frac{\sigma_{z}^{2}+b_{21}^{2}\sigma_{y}^{2}}{(1-b_{12}b_{21})^{2}}\,\,\,\,\, \mathbb{E}[e_{1t}e_{2t}]=\frac{-(b_{21}\sigma_{y}^{2}+b_{12}\sigma_{z}^{2})}{(1-b_{12}b_{21})^{2}}\]</span></li>
+</ul>
+</section>
+<section id="estimación-de-los-modelos-var" class="slide level2">
+<h2>Estimación de los modelos VAR</h2>
+<ul>
+<li><p>Sims (1980) critica los modelos estructurales (ecuaciones simultáneas) en dos dimensiones:</p>
+<ul>
+<li><p>Restricciones arbitrareas (y en algunos casos increíbles).</p></li>
+<li><p>Decisión acerca de si una variable es endógena o exógena.</p></li>
+</ul></li>
+<li><p>Consideremos la siguiente generalización VAR(p): <span class="math display">\[\mathrm{z}_{t}=A_{0}+A_{1}\mathrm{z}_{t-1}+A_{2}\mathrm{z}_{t-2}+...+A_{p}\mathrm{z}_{t-p}+e_{t}\]</span> donde <span class="math inline">\(\mathrm{z}_{t}\)</span> es un vector de <span class="math inline">\(n\)</span> variables y <span class="math inline">\(p\)</span> es el número de rezagos (entonces, tenemos <span class="math inline">\(n+pn^{2}\)</span> parámetros a estimar).</p></li>
+</ul>
+</section>
+<section id="estimación-de-los-modelos-var-1" class="slide level2">
+<h2>Estimación de los modelos VAR</h2>
+<ul>
+<li><p>Decisiones:</p>
+<ul>
+<li><p>¿Qué variables incluir en <span class="math inline">\(\mathrm{z}_{t}\)</span>? Teoría económica.</p></li>
+<li><p>¿Cuantos rezagos <span class="math inline">\((p)\)</span> incluir? Pruebas estadísticas formales.</p></li>
+</ul></li>
+<li><p>El lado derecho de la forma reducida del VAR tiene únicamente variables predeterminadas (las mismas en todas las ecuaciones).</p>
+<ul>
+<li><span class="emph">Cada ecuación puede ser estimada por separado por MCO</span>, esto a pesar de estar los errores de las ecuaciones correlacionados.</li>
+</ul></li>
+</ul>
+</section>
+<section id="identificación-del-var-estructural" class="slide level2">
+<h2>Identificación del VAR estructural</h2>
+<ul>
+<li><p>Es posible recuperar los parámetros del VAR estructural y los shocks estructurales?</p></li>
+<li><p>La respuesta es no a menos que se impongan ciertas restricciones.</p></li>
+<li><p>Retomemos el VAR(1) con 2 variables: <span class="math display">\[\mathrm{z}_{t}=A_{0}+A_{1}\mathrm{z}_{t-1}+e_{t}\]</span></p></li>
+<li><p>Note que: <span class="math inline">\(\hat{A}_{0}=B^{-1}\Gamma_{0}\)</span>, <span class="math inline">\(\hat{A}_{1}=B^{-1}\Gamma_{1}\)</span> y <span class="math inline">\(\hat{\Sigma}=\left(B^{-1}\right)^{2}V(\varepsilon_{t})\)</span>.</p>
+<ul>
+<li><p>Forma reducida: <span class="math inline">\(2+4\times1+3=9\)</span></p></li>
+<li><p>Forma Estructural: <span class="math inline">\(2+4\times1+2+2=10\)</span></p></li>
+</ul></li>
+<li><p>Es necesaria <span class="math inline">\(1\)</span> restricción. En general en un VAR(p) con <span class="math inline">\(n\)</span> variables se requieren <span class="math inline">\(\frac{n^{2}-n}{2}\)</span> restricciones.</p></li>
+</ul>
+</section>
+<section id="identificación-del-var-estructural-1" class="slide level2">
+<h2>Identificación del VAR estructural</h2>
+<ul>
+<li><p>Imponer <span class="math inline">\(b_{21}=0\)</span> en el VAR estructural: <span class="math inline">\(y\)</span> <span class="emph">no tiene efecto contemporáneo en</span> <span class="math inline">\(x\)</span>. <span class="math display">\[\begin{aligned}
+y_{t}  = &amp; b_{10}-b_{12}x_{t}+\gamma_{11}y_{t-1}+\gamma_{12}x_{t-1}+\epsilon_{yt}\\
+x_{t}  = &amp; b_{20}+\gamma_{21}y_{t-1}+\gamma_{22}x_{t-1}+\epsilon_{xt}
+\end{aligned}\]</span></p>
+<p>y <span class="math inline">\(e_{1t} = \epsilon_{yt}-b_{12}\epsilon_{xt}\)</span>, <span class="math inline">\(e_{2t} = \epsilon_{xt}\)</span>.</p></li>
+</ul>
+</section>
+<section id="identificación-del-var-estructural-2" class="slide level2">
+<h2>Identificación del VAR estructural</h2>
+<ul>
+<li>Los parámetros estructurales están identificados a partir de los estimados de la forma reducida: <span class="math display">\[\begin{aligned}
+\hat{a}_{10} &amp; =  b_{10}-b_{12}b_{20}\\
+\hat{a}_{11} &amp; =  \gamma_{11}-b_{12}\gamma_{21}\\
+\hat{a}_{12} &amp; =  \gamma_{12}-b_{12}\gamma_{22}\\
+\hat{a}_{20} &amp; =  b_{20}\\
+\hat{a}_{21} &amp; =  \gamma_{21}\\
+\hat{a}_{22} &amp; =  \gamma_{22}\\
+\hat{\mathbb{V}(e_{1})} &amp; =  \sigma_{y}^{2}+b_{12}^{2}\sigma_{x}^{2}\\
+\hat{\mathbb{V}(e_{2})} &amp; =  \sigma_{x}^{2}\\
+\hat{Cov(e_{1},e_{2})} &amp; =  -b_{12}\sigma_{x}^{3}
+\end{aligned}\]</span></li>
+</ul>
+</section>
+<section id="identificación-del-var-estructural-3" class="slide level2">
+<h2>Identificación del VAR estructural</h2>
+<ul>
+<li><p>En general para un VAR con <span class="math inline">\(k\)</span> variables: <span class="math inline">\(B\)</span> es una matriz triangular (superior). <span class="math display">\[B=\left[\begin{array}{cccc}
+1 &amp; b_{12} &amp; ... &amp; b_{1k}\\
+0 &amp; 1 &amp; ... &amp; b_{2k}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{array}\right]\]</span></p></li>
+<li><p><strong>Interpretación</strong>: <span class="math inline">\((y_{1t},y_{2t},y_{3t},...,y_{kt})\)</span> están ordenandas de más endógena a menos endógena.</p>
+<ul>
+<li><p><span class="math inline">\(y_{1t}\)</span> es afectados contemporáneamente por <span class="math inline">\((y_{2t},y_{3t},...,y_{kt})\)</span>.</p></li>
+<li><p><span class="math inline">\(y_{2t}\)</span> es afectados contemporáneamente por <span class="math inline">\((y_{3t},...,y_{kt})\)</span>.</p></li>
+</ul>
+<p>…</p>
+<ul>
+<li><span class="math inline">\(y_{kt}\)</span> es afectados contemporáneamente por <span class="math inline">\(y_{kt}\)</span>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="función-de-impulso-respuesta-fir" class="slide level2">
+<h2>Función de Impulso Respuesta (FIR)</h2>
+<ul>
+<li><p>Las FIR es la representación gráfica de los efectos de shocks sobre las variables del modelo VAR <span class="math inline">\(j\)</span> periodos adelante.</p></li>
+<li><p>Usemos por simplicidad un VAR(1) de dos variable con intercepto cero: <span class="math display">\[\begin{aligned}
+y_{t}  = &amp; a_{11}y_{t-1}+a_{12}x_{t-1}+\left(\epsilon_{Yt}-b_{12}\epsilon_{Xt}\right)\\
+x_{t}  = &amp; a_{21}y_{t-1}+a_{22}x_{t-1}+\left(\epsilon_{Xt}\right)
+\end{aligned}\]</span></p></li>
+<li><p>Efecto de un shock <span class="math inline">\(\epsilon_{yt}\)</span> de tamaño <span class="math inline">\(\sigma_{y}\)</span> (el mismo ejercicio se puede hacer con un shock en <span class="math inline">\(\epsilon_{yt}\)</span>):</p></li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(Y\)</span></th>
+<th><span class="math inline">\(X\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(0\)</span></td>
+<td><span class="math inline">\(\sigma_{Y}\)</span></td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(1\)</span></td>
+<td><span class="math inline">\(a_{11}\sigma_{Y}\)</span></td>
+<td><span class="math inline">\(a_{21}\sigma_{Y}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(2\)</span></td>
+<td><span class="math inline">\(a_{11}^{2}\sigma_{Y}+a_{12}a_{21}\sigma_{Y}\)</span></td>
+<td><span class="math inline">\(a_{21}a_{11}\sigma_{Y}+a_{22}a_{21}\sigma_{Y}\)</span></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="descomposición-de-la-varianza-dv" class="slide level2">
+<h2>Descomposición de la Varianza (DV)</h2>
+<ul>
+<li><p>Recordemos nuevamente que: <span class="math display">\[\begin{aligned}
+y_{t}  = &amp; a_{11}y_{t-1}+a_{12}x_{t-1}+\left(\epsilon_{yt}-b_{12}\epsilon_{xt}\right)\\
+x_{t}  = &amp; a_{21}y_{t-1}+a_{22}x_{t-1}+\left(\epsilon_{xt}\right)
+\end{aligned}\]</span></p></li>
+<li><p>La predicción a un período adelante es: <span class="math display">\[\begin{aligned}
+\mathbb{E}_{t}y_{t+1}  = &amp; a_{11}Y_{t}+a_{12}x_{t}+\left(\epsilon_{yt+1}-b_{12}\epsilon_{xt+1}\right)\\
+\mathbb{E}_{t}x_{t+1}  = &amp; a_{21}Y_{t}+a_{22}x_{t}+\left(\epsilon_{xt+1}\right)
+\end{aligned}\]</span></p></li>
+<li><p>Los errores de predicción satisfacen: <span class="math display">\[\begin{aligned}
+y_{t+1}-\mathbb{E}_{t}y_{t+1}  = &amp; \epsilon_{yt+1}-b_{12}\epsilon_{xt+1}\\
+x_{t+1}-\mathbb{E}_{t}x_{t+1}  = &amp; \epsilon_{xt+1}
+\end{aligned}\]</span></p></li>
+</ul>
+</section>
+<section id="descomposición-de-la-varianza-dv-1" class="slide level2">
+<h2>Descomposición de la Varianza (DV)</h2>
+<ul>
+<li><p>Aplicando el operador varianza: <span class="math display">\[\begin{aligned}
+\sigma_{y}^{2}(1)  = &amp; \sigma_{y}^{2}+b_{12}^{2}\sigma_{x}^{2}\\
+\sigma_{x}^{2}(1)  = &amp; \sigma_{x}^{2}
+\end{aligned}\]</span></p></li>
+<li><p>Entonces, para el caso de <span class="math inline">\(y\)</span>: <span class="math display">\[\begin{aligned}
+\%\sigma_{y}^{2}(1)\,debido\,a\,\epsilon_{yt}  = &amp; \frac{\sigma_{y}^{2}}{\sigma_{y}^{2}(1)}\\
+\%\sigma_{y}^{2}(1)\,debido\,a\,\epsilon_{xt}  = &amp; \frac{b_{12}^{2}\sigma_{x}^{2}}{\sigma_{y}^{2}(1)}
+\end{aligned}\]</span></p></li>
+</ul>
+</section>
+<section id="descomposición-de-la-varianza-dv-2" class="slide level2">
+<h2>Descomposición de la Varianza (DV)</h2>
+<ul>
+<li><p>Para el caso de <span class="math inline">\(x\)</span> <span class="math display">\[\begin{aligned}
+\%\sigma_{x}^{2}(1)\,debido\,a\,\epsilon_{yt}  = &amp; 0\\
+\%\sigma_{x}^{2}(1)\,debido\,a\,\epsilon_{xt}  = &amp; \frac{\sigma_{x}^{2}}{\sigma_{x}^{2}(1)}
+\end{aligned}\]</span></p></li>
+<li><p>Este ejercicio se repite para 2, 3, …, <span class="math inline">\(j\)</span> periodos adelante.</p></li>
+</ul>
+</section>
+<section id="elección-del-rezago-óptimo" class="slide level2">
+<h2>Elección del rezago óptimo</h2>
+<ul>
+<li><p>Aumento en el número de rezago reduce sustancialmente los grados de libertad.</p></li>
+<li><p>Con <span class="math inline">\(n\)</span> variable y <span class="math inline">\(p\)</span> rezagos, un rezago adicional implica estimar <span class="math inline">\(n\times p\)</span> nuevos parámetros.</p></li>
+<li><p>Existe un <span class="math inline">\(p\)</span> óptimo tal que cualquier rezago menor genera mala especificación y cualquier rezago mayor tiene muy pocos grados de libertad.</p></li>
+<li><p>Una alternativa es usar los criterios de información: <span class="math display">\[\begin{aligned}
+AIC  = &amp; Tlog|\Sigma|+2N\\
+BIC  = &amp; Tlog|\Sigma|+Nlog(T)
+\end{aligned}\]</span> donde <span class="math inline">\(N\)</span> es el total de parámetros estimados en todas las ecuaciones.</p></li>
+</ul>
+</section>
+<section id="test-de-causalidad-de-granger-1" class="slide level2">
+<h2>Test de causalidad de Granger</h2>
+<ul>
+<li><p>Una variable Granger causa a otra si tiene información relevante a predecir el comportamiento de dicha variable.</p></li>
+<li><p>Suponga un VAR(2) con <span class="math inline">\(2\)</span> variables: <span class="math display">\[\begin{aligned}
+y_{t}  = &amp; a_{10}+a_{11}^{1}y_{t-1}+a_{12}^{1}x_{t-1}+a_{11}^{2}y_{t-2}+a_{12}^{2}x_{t-2}+e_{1t}\\
+x_{t}  = &amp; a_{20}+a_{21}^{1}y_{t-1}+a_{22}^{1}x_{t-1}+a_{21}^{2}y_{t-2}+a_{22}^{2}x_{t-2}+e_{2t}
+\end{aligned}\]</span> entonces:</p>
+<ul>
+<li><p>Decimos que <span class="math inline">\(x_{t}\)</span> no Granger causa a <span class="math inline">\(y_{t}\)</span> si: <span class="math inline">\(a_{12}^{1}=a_{12}^{2}=0\)</span>.</p></li>
+<li><p>Decimos que <span class="math inline">\(y_{t}\)</span> no Granger causa a <span class="math inline">\(x_{t}\)</span> si: <span class="math inline">\(a_{21}^{1}=a_{21}^{2}=0\)</span>.</p></li>
+</ul></li>
+<li><p>Un test F sobre cada ecuación permite probar las hipótesis de causalidad a la Granger.</p></li>
+</ul>
+</section>
+<section id="ejemplo-11-modelo-var-para-identificar-shocks-monetarios" class="slide level2">
+<h2>Ejemplo 11: Modelo VAR para identificar shocks monetarios</h2>
+<p>Usemos datos del PNB, del deflactor de precios del PNB y de la tasa de interés para los EEUU:</p>
+
+<img data-src="index_files/figure-revealjs/var_usa-1.png" style="width:90.0%" class="r-stretch"></section>
+<section id="ejemplo-11-modelo-var-para-identificar-shocks-monetarios-1" class="slide level2">
+<h2>Ejemplo 11: Modelo VAR para identificar shocks monetarios</h2>
+<ul>
+<li>Partamos por un VAR(1):</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>$dlrealgnp.t
+                       Estimate Std. Error    t value     Pr(&gt;|t|)
+dlrealgnp.t.l1       0.25266954 0.06606677  3.8244570 1.732178e-04
+fedfunds.t.l1       -0.07020124 0.02304962 -3.0456568 2.622027e-03
+dlgnpdeflactor.t.l1  0.04945582 0.13238764  0.3735683 7.091060e-01
+const                0.97519927 0.14212025  6.8617898 7.657579e-11
+
+$fedfunds.t
+                      Estimate Std. Error   t value     Pr(&gt;|t|)
+dlrealgnp.t.l1       0.3485736 0.06949273  5.015972 1.129131e-06
+fedfunds.t.l1        0.9171332 0.02424488 37.827905 3.430035e-95
+dlgnpdeflactor.t.l1  0.4953839 0.13925273  3.557445 4.637648e-04
+const               -0.2334530 0.14949003 -1.561662 1.198877e-01
+
+$dlgnpdeflactor.t
+                      Estimate  Std. Error    t value     Pr(&gt;|t|)
+dlrealgnp.t.l1      0.02010743 0.023300013  0.8629793 3.891428e-01
+fedfunds.t.l1       0.02032199 0.008128996  2.4999383 1.319413e-02
+dlgnpdeflactor.t.l1 0.79216934 0.046689639 16.9667052 4.162995e-41
+const               0.04951477 0.050122072  0.9878836 3.243574e-01</code></pre>
+</div>
+</div>
+</section>
+<section id="ejemplo-11-modelo-var-para-identificar-shocks-monetarios-2" class="slide level2">
+<h2>Ejemplo 11: Modelo VAR para identificar shocks monetarios</h2>
+<ul>
+<li>Selección de Rezagos:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>$selection
+AIC(n)  HQ(n)  SC(n) FPE(n) 
+     6      3      1      6 
+
+$criteria
+                 1           2           3           4           5           6
+AIC(n) -3.14791384 -3.26471095 -3.42992284 -3.48193451 -3.52660357 -3.55322434
+HQ(n)  -3.06951159 -3.12750700 -3.23391720 -3.22712718 -3.21299455 -3.18081362
+SC(n)  -2.95405698 -2.92546144 -2.94528068 -2.85189970 -2.75117611 -2.63240423
+FPE(n)  0.04294225  0.03821098  0.03239686  0.03076337  0.02943229  0.02867737
+                 7
+AIC(n) -3.53813090
+HQ(n)  -3.10691849
+SC(n)  -2.47191814
+FPE(n)  0.02913899</code></pre>
+</div>
+</div>
+<ul>
+<li>Al <span class="emph">mejor modelo parece ser un VAR(6)</span> según el criterio AIC.</li>
+</ul>
+</section>
+<section id="ejemplo-11-modelo-var-para-identificar-shocks-monetarios-3" class="slide level2">
+<h2>Ejemplo 11: Modelo VAR para identificar shocks monetarios</h2>
+<ul>
+<li>Test de causalidad de Granger:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Granger causality H0: dlrealgnp.t do not Granger-cause fedfunds.t
+    dlgnpdeflactor.t
+
+data:  VAR object var_est
+F-Test = 4.4243, df1 = 12, df2 = 564, p-value = 8.64e-07</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Granger causality H0: dlgnpdeflactor.t do not Granger-cause dlrealgnp.t
+    fedfunds.t
+
+data:  VAR object var_est
+F-Test = 2.8497, df1 = 12, df2 = 564, p-value = 0.0008107</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Granger causality H0: fedfunds.t do not Granger-cause dlrealgnp.t
+    dlgnpdeflactor.t
+
+data:  VAR object var_est
+F-Test = 3.78, df1 = 12, df2 = 564, p-value = 1.52e-05</code></pre>
+</div>
+</div>
+</section>
+<section id="ejemplo-11-modelo-var-para-identificar-shocks-monetarios-4" class="slide level2">
+<h2>Ejemplo 11: Modelo VAR para identificar shocks monetarios</h2>
+<p>Análisis de impulso respuesta:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-fig.dim="[7,5]">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/var_usa_firy-1.png" style="width:100.0%"></p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-fig.dim="[7,5]">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/var_usa_firpi-1.png" style="width:100.0%"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo-11-modelo-var-para-identificar-shocks-monetarios-5" class="slide level2">
+<h2>Ejemplo 11: Modelo VAR para identificar shocks monetarios</h2>
+<p>Análisis de descomposición de la varianza del error de predicción:</p>
+<div class="cell" data-fig.dim="[12,7.5]">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/var_usa_dv-1.png" style="width:70.0%"></p>
+</div>
+</div>
 <p><img src="figs/logo_econ.png" class="slide-logo"></p>
 <div class="footer footer-default">
 <p>Ingeniería Comercial – Econometría II</p>
