@@ -5,9 +5,10 @@
 <script src="index_files/libs/quarto-html/popper.min.js"></script>
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.269">
+  <meta name="generator" content="quarto-1.3.361">
 
   <meta name="author" content="Mauricio M. Tejada">
   <title>Econometría II</title>
@@ -25,11 +26,11 @@
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
       width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -72,44 +73,44 @@
     font-weight: 400;
   }
 
-  .callout.callout-captioned.callout-style-simple .callout-body {
+  .callout.callout-titled.callout-style-simple .callout-body {
     margin-top: 0.2em;
   }
 
-  .callout:not(.callout-captioned) .callout-body {
+  .callout:not(.callout-titled) .callout-body {
       display: flex;
   }
 
-  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
     padding-left: 1.6em;
   }
 
-  .callout.callout-captioned .callout-header {
+  .callout.callout-titled .callout-header {
     padding-top: 0.2em;
     margin-bottom: -0.2em;
   }
 
-  .callout.callout-captioned .callout-caption  p {
+  .callout.callout-titled .callout-title  p {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
   }
     
-  .callout.callout-captioned.callout-style-simple .callout-content  p {
+  .callout.callout-titled.callout-style-simple .callout-content  p {
     margin-top: 0;
   }
 
-  .callout.callout-captioned.callout-style-default .callout-content  p {
+  .callout.callout-titled.callout-style-default .callout-content  p {
     margin-top: 0.7em;
   }
 
-  .callout.callout-style-simple div.callout-caption {
+  .callout.callout-style-simple div.callout-title {
     border-bottom: none;
     font-size: .9rem;
     font-weight: 600;
     opacity: 75%;
   }
 
-  .callout.callout-style-default  div.callout-caption {
+  .callout.callout-style-default  div.callout-title {
     border-bottom: none;
     font-weight: 600;
     opacity: 85%;
@@ -141,7 +142,7 @@
     background-size: 0.9rem 0.9rem;
   }
 
-  .callout-caption {
+  .callout-title {
     display: flex
   }
     
@@ -154,16 +155,16 @@
     display: none !important;
   }
 
-  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
     margin-bottom: 0.5rem;
   }
 
-  .callout.callout-captioned .callout-icon::before {
+  .callout.callout-titled .callout-icon::before {
     margin-top: .5rem;
     padding-right: .5rem;
   }
 
-  .callout:not(.callout-captioned) .callout-icon::before {
+  .callout:not(.callout-titled) .callout-icon::before {
     margin-top: 1rem;
     padding-right: .5rem;
   }
@@ -178,7 +179,7 @@
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
   }
 
-  div.callout-note.callout-style-default .callout-caption {
+  div.callout-note.callout-style-default .callout-title {
     background-color: #dae6fb
   }
 
@@ -190,7 +191,7 @@
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
   }
 
-  div.callout-important.callout-style-default .callout-caption {
+  div.callout-important.callout-style-default .callout-title {
     background-color: #f7dddc
   }
 
@@ -202,7 +203,7 @@
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
   }
 
-  div.callout-warning.callout-style-default .callout-caption {
+  div.callout-warning.callout-style-default .callout-title {
     background-color: #fcefdc
   }
 
@@ -214,7 +215,7 @@
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
   }
 
-  div.callout-tip.callout-style-default .callout-caption {
+  div.callout-tip.callout-style-default .callout-title {
     background-color: #ccf1e3
   }
 
@@ -226,7 +227,7 @@
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
   }
 
-  div.callout-caution.callout-style-default .callout-caption {
+  div.callout-caution.callout-style-default .callout-title {
     background-color: #ffe5d0
   }
 
@@ -325,7 +326,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Econometría II</h1>
-  <p class="subtitle"><strong>Unidad 4: Modelos de Variable Dependiente Limitada</strong></p>
+  <p class="subtitle"><strong>Unidad 5: Modelos de Variable Dependiente Dicotómica</strong></p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -339,13 +340,911 @@ Mauricio M. Tejada
 </div>
 
 </section>
-<section class="slide level2">
+<section>
+<section id="introducción" class="title-slide slide level1 center">
+<h1>Introducción</h1>
 
+</section>
+<section id="ideas-básicas" class="slide level2">
+<h2>Ideas básicas</h2>
+<ul>
+<li><p>A menudo nos interesa explicar un resultado cualitativo. Ejemplos:</p>
+<ul>
+<li><p>Queremos estudiar participación laboral o no de mujeres casadas.</p></li>
+<li><p>Queremos saber si un joven es arrestado por un delito o no durante un cierto período de tiempo.</p></li>
+<li><p>Queremos saber si un empleado participa o no en un plan voluntario de ahorro para mejorar sus pensiones.</p></li>
+</ul></li>
+<li><p>En todos estos casos la variable <span class="math inline">\(y\)</span> que queremos explicar es binaria (cero-uno). Esto es, a veces tenemos una variable dummy al lado derecho del modelo.</p></li>
+</ul>
+</section>
+<section id="ideas-básicas-1" class="slide level2">
+<h2>Ideas básicas</h2>
+<ul>
+<li><p>Podemos plantear la relación entre <span class="math inline">\(y\)</span> y las variables variables <span class="math inline">\(x_{1}\)</span>, <span class="math inline">\(x_{2}\)</span>, …, <span class="math inline">\(x_{k}\)</span> como: <span class="math display">\[\begin{equation*}
+P(y=1|x_{1},x_{2},...,x_{k})=p(x_{1},x_{2},...,x_{k})=p(\mathbf{x})\mathbf{,}
+\end{equation*}\]</span> donde <span class="math inline">\(\mathbf{x}\)</span> representa todas las variables explicativas.</p></li>
+<li><p>Este modelo es llamado modelo probabilístico ya que modelamos la probabilidad de <em>exito</em>, esto es <span class="math inline">\(y=1\)</span>.</p></li>
+<li><p>La probabilidad de fracaso es <span class="math inline">\(P(y=0|\mathbf{x})=1-P(y=1|\mathbf{x})=1-p(\mathbf{x})\)</span>.</p></li>
+<li><p>En un modelo de regresión estamos interesados en el efecto parcial de <span class="math inline">\(x_{j}\)</span> sobre <span class="math inline">\(p(\mathbf{x})\)</span>: <span class="math display">\[\begin{eqnarray*}
+&amp;&amp; \frac{\partial p(\mathbf{x)}}{\partial x_{j}} \longleftarrow x_j \text{ continua} \\
+&amp;&amp; p(x_{1},...,x_{K-1},1)-p(x_{1},...,x_{K-1},0) \longleftarrow x_K \text{ dummy}
+\end{eqnarray*}\]</span> ahora el reto es nuevamente estimar estos efectos parciales.</p></li>
+</ul>
+</section>
+<section id="punto-de-partida-el-modelo-lineal-de-probabilidad" class="slide level2">
+<h2>Punto de partida: El modelo lineal de probabilidad</h2>
+<ul>
+<li><p>El modelo lineal de probabilidad no es otra cosa que el modelo de regresión lineal estándar donde la variable dependiente <span class="emph"><span class="math inline">\(y\)</span> es una variable binaria</span>. Si escribimos el modelo como: <span class="math display">\[\begin{equation*}
+y=\beta _{0}+\beta _{1}x_{1}+\beta _{2}x_{2}+...+\beta _{k}x_{k}+u
+\end{equation*}\]</span>% donde <span class="math inline">\(y\)</span> es binaria, la clave es interpretar los <span class="math inline">\(\beta\)</span>s.</p></li>
+<li><p>Suponga que <span class="math inline">\(y\)</span> indica pertenencia a un sindicato, y por tanto valores 0 o 1. Suponga que <span class="math inline">\(\beta _{1}=0.035\)</span> y <span class="math inline">\(x_{1}\)</span> es años de escolaridad. ¿Qué significa que un año más de escolaridad <span class="math inline">\(educ\)</span> incremente <span class="math inline">\(y\)</span> en <span class="math inline">\(0.035\)</span>?</p></li>
+<li><p>Para responder debemos formular la función de media condicional del modelo de regresión: <span class="math display">\[\begin{equation*}
+E(y|\mathbf{x})=\beta _{0}+\beta _{1}x_{1}+\beta _{2}x_{2}+...+\beta
+_{k}x_{k}
+\end{equation*}\]</span></p></li>
+</ul>
+</section>
+<section id="punto-de-partida-el-modelo-lineal-de-probabilidad-1" class="slide level2">
+<h2>Punto de partida: El modelo lineal de probabilidad</h2>
+<ul>
+<li><p>Recordemos de estadística que cuando enfrentamos una variable probabilística binaria el valor esperado es: <span class="math display">\[\begin{equation*}
+E(y|\mathbf{x})= 1 \times p(\mathbf{x}) + 0 \times (1-p(\mathbf{x}))
+\end{equation*}\]</span> por tanto: <span class="math display">\[\begin{equation*}
+E(y|\mathbf{x})=p(\mathbf{x})=\beta _{0}+\beta _{1}x_{1}+\beta _{2}x_{2}+...+\beta
+_{k}x_{k}
+\end{equation*}\]</span> tenemos la <span class="emph">probabilidad de exito</span>: la probabilidad predicha de que <span class="math inline">\(y = 1\)</span> dado <span class="math inline">\(x\)</span>.</p></li>
+<li><p><span class="math inline">\(\beta\)</span> = cambio en la probabilidad de que <span class="math inline">\(y = 1\)</span> para un cambio unitario en <span class="math inline">\(x\)</span>: <span class="math display">\[
+\beta=\frac{\operatorname{Pr}(y=1 \mid x+\Delta x)-\operatorname{Pr}(y=1 \mid X=x)}{\Delta x}
+\]</span></p></li>
+</ul>
+</section>
+<section id="ejemplo-1-denegar-crédito-hipotecario-vs.-relación-entre-los-pagos-de-la-deuda-y-los-ingresos" class="slide level2">
+<h2>Ejemplo 1: Denegar crédito hipotecario vs.&nbsp;relación entre los pagos de la deuda y los ingresos</h2>
+<ul>
+<li>Modelo estimado: <span class="math inline">\(deny = \beta_0 + \beta_1 (P/I)\)</span>:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+t test of coefficients:
+
+             Estimate Std. Error t value  Pr(&gt;|t|)    
+(Intercept) -0.079910   0.031967 -2.4998   0.01249 *  
+pirat        0.603535   0.098483  6.1283 1.036e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<ul>
+<li><p>¿Cuál es el valor predicho para la relación P/I = .3? <span class="math inline">\(\Pr (deny = 1| P/Iratio = .3) = -.080 + .604×.3 = .151\)</span></p></li>
+<li><p>Cálculo de “efectos:” aumento de la relación P/I de .3 a .4: <span class="math inline">\(\Pr (deny = 1| P / Iratio = .4) = -.080 + .604×.4 = .212\)</span></p>
+<p>El efecto sobre la probabilidad de negación de un aumento en la relación P/I de .3 a .4 es aumentar la probabilidad en .061, es decir, en 6.1 puntos porcentuales.</p></li>
+</ul>
+</section>
+<section id="ejemplo-1-denegar-crédito-hipotecario-vs.-relación-entre-los-pagos-de-la-deuda-y-los-ingresos-1" class="slide level2">
+<h2>Ejemplo 1: Denegar crédito hipotecario vs.&nbsp;relación entre los pagos de la deuda y los ingresos</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="ejemplo-1-denegar-crédito-hipotecario-vs.-relación-entre-los-pagos-de-la-deuda-y-los-ingresos-2" class="slide level2">
+<h2>Ejemplo 1: Denegar crédito hipotecario vs.&nbsp;relación entre los pagos de la deuda y los ingresos</h2>
+<ul>
+<li>Ahora incluyamos la variable de descendencia <em>afro-americana</em>:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+t test of coefficients:
+
+             Estimate Std. Error t value  Pr(&gt;|t|)    
+(Intercept) -0.090514   0.028600 -3.1649  0.001571 ** 
+pirat        0.559195   0.088666  6.3067 3.387e-10 ***
+blackyes     0.177428   0.024946  7.1124 1.502e-12 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Probabilidad predicha de negación para el solicitante afroamericano con P/I = .3: <span class="math inline">\(\Pr (deny = 1) = -.091 + .559×.3 + .177×1 = .254\)</span></p></li>
+<li><p>Mientras que para el solicitante blanco con P/I = .3: <span class="math inline">\(\Pr (deny = 1)= -.091 + .559×.3 + .177×0 = .077\)</span></p></li>
+<li><p>Diferencia = .177 = 17.7 puntos porcentuales</p></li>
+</ul>
+<p><em>Nota: Todavía hay mucho espacio para el sesgo variable omitida.</em></p>
+</section>
+<section id="ventajas-y-desventajas-del-modelo-lineal-de-probabilidad" class="slide level2">
+<h2>Ventajas y desventajas del modelo lineal de probabilidad</h2>
+<ul>
+<li><p>El modelo de probabilidad lineal modela <span class="math inline">\(\Pr(y=1| x)\)</span> como una función lineal de <span class="math inline">\(x\)</span>.</p></li>
+<li><p>Ventajas:</p>
+<ul>
+<li><p>Fácil de estimar e interpretar</p></li>
+<li><p>La inferencia es la misma que para la regresión múltiple (necesita errores estándar robustos de heterocedasticidad)</p></li>
+</ul></li>
+<li><p>Desventajas:</p>
+<ul>
+<li><p>Un LPM dice que el cambio en la probabilidad predicha para un cambio dado en <span class="math inline">\(x\)</span> es el mismo para todos los valores de <span class="math inline">\(x\)</span>, pero eso no tiene sentido. Piense en el ejemplo de HMDA.</p></li>
+<li><p>Las probabilidades predichas de LPM pueden ser <span class="math inline">\(&lt;0\)</span> o <span class="math inline">\(&gt;1\)</span>.</p></li>
+<li><p>Estas desventajas se pueden resolver utilizando un modelo de probabilidad no lineal: regresión probit y logit</p></li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="modelos-logit-y-probit" class="title-slide slide level1 center">
+<h1>Modelos Logit y Probit</h1>
+
+</section>
+<section id="ideas-básicas-2" class="slide level2">
+<h2>Ideas básicas</h2>
+<ul>
+<li><p>El problema con el modelo de probabilidad lineal es que modela la probabilidad de <span class="math inline">\(y=1\)</span> como lineal: <span class="math display">\[Pr(y = 1| x) = \beta_0 + \beta_1 x\]</span></p></li>
+<li><p>En cambio, queremos:</p>
+<ul>
+<li><p>Pr(Y = 1| X) ser creciente en X para β1&gt;0, y</p></li>
+<li><p>0 ≤ Pr(Y = 1| X) ≤ 1 para todo X</p></li>
+</ul></li>
+<li><p>Esto requiere el uso de una forma funcional no lineal para la probabilidad: ¿Qué tal una curva en S?.</p></li>
+</ul>
+</section>
+<section id="el-modelo-probit" class="slide level2">
+<h2>El modelo Probit</h2>
+<ul>
+<li><p>La <span class="emph">regresión probit</span> modela la probabilidad de que <span class="math inline">\(y=1\)</span> usando la <span class="emph">función de distribución normal estándar acumulativa</span>.</p></li>
+<li><p>El modelo de regresión probit es, <span class="math display">\[\Pr(y = 1| x) = \Phi(\beta_0 + \beta_1 x_1 + ... + \beta_k x_k)\]</span> donde <span class="math inline">\(\Phi(z)\)</span> es la función de distribución normal acumulativa y <span class="math inline">\(z = \beta_0 + \beta_1 x_1 + ... + \beta_k x_k\)</span> es el “valor z” o “índice z” del modelo probit.</p></li>
+<li><p>Por ejemplo con un solo <span class="math inline">\(x\)</span> y supongamos <span class="math inline">\(\beta_0 = -2\)</span>, <span class="math inline">\(\beta_1= 3\)</span> y <span class="math inline">\(x = 0.4\)</span> tenemos: <span class="math display">\[Pr(y = 1| x=0.4) = \Phi(-2 + 3×0.4) = \Phi(-0.8)\]</span><br>
+<span class="math inline">\(Pr(y = 1| x = 0.4) =\)</span> área por debajo de la densidad normal estándar a la izquierda de <span class="math inline">\(z = -0.8\)</span>.</p></li>
+</ul>
+</section>
+<section id="el-modelo-probit-1" class="slide level2">
+<h2>El modelo Probit</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<section id="el-modelo-probit-2" class="slide level2">
+<h2>El modelo Probit</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="el-modelo-probit-3" class="slide level2">
+<h2>El modelo Probit</h2>
+<ul>
+<li><p>¿Por qué usar la distribución de probabilidad normal acumulativa? La “forma de S” nos da lo que queremos:</p>
+<ul>
+<li><p><span class="math inline">\(\Pr(y = 1| x)\)</span> aumenta en <span class="math inline">\(x\)</span> para <span class="math inline">\(\beta_1&gt;0\)</span>.</p></li>
+<li><p><span class="math inline">\(0 ≤ Pr(y = 1| x) ≤ 1\)</span> para todo <span class="math inline">\(x\)</span>.</p></li>
+</ul></li>
+<li><p><strong>Fácil de usar</strong>:</p>
+<ul>
+<li>Las probabilidades se tabulan en las tablas normales acumulativas (y también se calculan fácilmente utilizando R)</li>
+</ul></li>
+<li><p><strong>Interpretación relativamente sencilla</strong>:</p>
+<ul>
+<li>Como <span class="math inline">\(\beta_0 + \beta_1 x_1 + ... + \beta_k x_k\)</span> es el valor <span class="math inline">\(z\)</span> predicho dado las <span class="math inline">\(x\)</span>, <span class="math inline">\(\beta_1\)</span> es el cambio en el valor <span class="math inline">\(z\)</span> para un cambio de unidad en <span class="math inline">\(x_1\)</span> manteniendo las otras <span class="math inline">\(x\)</span> constante.</li>
+</ul></li>
+</ul>
+</section>
+<section id="efectos-marginales-en-un-modelo-probit" class="slide level2">
+<h2>Efectos marginales en un modelo Probit</h2>
+<ul>
+<li><p>En los modelo Probit los <span class="math inline">\(\beta\)</span> ya no tienen una interpretación directa como en el caso del modelo lineal.</p></li>
+<li><p>El <span class="emph">efecto parcial promedio estimado (APE)</span> o <span class="emph">efecto marginal promedio</span>) para una variable continua <span class="math inline">\(x_j\)</span> es <span class="math display">\[\begin{equation*}
+E\left[ \frac{\partial \Pr(y=1|x)}{\partial x_j} |x\right] = \phi(z)\beta_j,
+\end{equation*}\]</span> donde <span class="math inline">\(\Phi(z)\)</span> es la función densidad normal y <span class="math inline">\(z = \beta_0 + \beta_1 x_1 + ... + \beta_k x_k\)</span>. Promediamos el efecto parcial en toda la distribución poblacional de <span class="math inline">\(z\)</span>.</p></li>
+<li><p>Suponga ahora que <span class="math inline">\(x_{j}\)</span> es una variable binaria. Entonces, su APE es <span class="math display">\[\begin{equation*}
+E[\Pr(y=1|x_{-j},x_j=1)-\Pr(y=1|x_{-j},x_j=0)|x]
+\end{equation*}\]</span>% donde <span class="math inline">\(x_{-j}\)</span> representa todas las variables excepto la <span class="math inline">\(j\)</span>.</p></li>
+</ul>
+</section>
+<section id="estimar-un-modelo-probit-en-r" class="slide level2">
+<h2>Estimar un modelo Probit en R</h2>
+<ul>
+<li>El comando para estimar modelos Probit en R es:</li>
+</ul>
+<pre><code>resultado &lt;- glm(y ~ x1 + x2 + ... + xk, family = binomial(link = "probit"), data = base_datos)</code></pre>
+<ul>
+<li><p>Notas:</p>
+<ul>
+<li>Se puede usar después el comando <code>coeftest(resultado, vcov. = vcovHC, type = "HC1")</code> para obtener los errores estándar robustos a heteroscedasticidad de White.</li>
+</ul></li>
+<li><p>El comando para estimar efectos marginales en R es:</p></li>
+</ul>
+<pre><code>efectos &lt;- probitmfx(y ~ x1 + x2 + ... + xk, data = base_datos, atmean = TRUE, robust = TRUE) </code></pre>
+<ul>
+<li><p>Notas:</p>
+<ul>
+<li><p><code>atmean = TRUE</code> calcula los efectos marginales en los promedios de las variables <span class="math inline">\(x\)</span> (<code>FALSE</code> calcula el promedio de los efectos marginales).</p></li>
+<li><p><code>robust = TRUE</code> calcula los erróres estándar robustos de White.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="ejemplo-2-denegar-crédito-hipotecario-vs.-relación-entre-los-pagos-de-la-deuda-y-los-ingresos-nuevamente" class="slide level2">
+<h2>Ejemplo 2: Denegar crédito hipotecario vs.&nbsp;relación entre los pagos de la deuda y los ingresos (nuevamente)</h2>
+<p>Modelo estimado: <span class="math inline">\(deny = \Phi (\beta_0 + \beta_1 (P/I))\)</span>:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+z test of coefficients:
+
+            Estimate Std. Error  z value  Pr(&gt;|z|)    
+(Intercept) -2.19415    0.18901 -11.6087 &lt; 2.2e-16 ***
+pirat        2.96787    0.53698   5.5269 3.259e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Coeficiente positivo: ¿Tiene sentido?</p></li>
+<li><p>Probabilidades predichas: <span class="math inline">\(\Pr (deny = 1| P/Iratio = 0.3) = \Phi(-2.19+2.97\times 0.3) = \Phi(-1.30) = 0.097\)</span></p></li>
+<li><p>Efecto del cambio en la relación P/I de 0.3 a 0.4: <span class="math inline">\(\Pr (deny = 1| P/Iratio = 0.4) = \Phi(-2.19+2.97 \times 0.4) =\Phi (-1.00) = 0.159\)</span> La probabilidad predicha aumenta de 0.097 a 0.159</p></li>
+</ul>
+</section>
+<section id="ejemplo-2-denegar-crédito-hipotecario-vs.-relación-entre-los-pagos-de-la-deuda-y-los-ingresos-nuevamente-1" class="slide level2">
+<h2>Ejemplo 2: Denegar crédito hipotecario vs.&nbsp;relación entre los pagos de la deuda y los ingresos (nuevamente)</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<section id="ejemplo-2-denegar-crédito-hipotecario-vs.-relación-entre-los-pagos-de-la-deuda-y-los-ingresos-nuevamente-2" class="slide level2">
+<h2>Ejemplo 2: Denegar crédito hipotecario vs.&nbsp;relación entre los pagos de la deuda y los ingresos (nuevamente)</h2>
+<p>Modelo estimado: <span class="math inline">\(deny = \Phi (\beta_0 + \beta_1 (P/I) + \beta_2 black)\)</span>:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+z test of coefficients:
+
+             Estimate Std. Error  z value  Pr(&gt;|z|)    
+(Intercept) -2.258787   0.176608 -12.7898 &lt; 2.2e-16 ***
+pirat        2.741779   0.497673   5.5092 3.605e-08 ***
+blackyes     0.708155   0.083091   8.5227 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Efecto estimado de la raza para la relación P/I = 0.3:</p>
+<ul>
+<li><p><span class="math inline">\(\Pr (deny = 1|0.3,1)= \Phi(-2.26+2.74\times 0.3+0.71 \times 1) = 0.2332769\)</span></p></li>
+<li><p><span class="math inline">\(Pr (deny = 1|0.3,0)= \Phi(-2.26+2.74\times 0.3+0.71\times 0) = 0.0754652\)</span></p></li>
+</ul></li>
+<li><p>Diferencia en las probabilidades de rechazo = 0.1578117 (15.8 puntos porcentuales)</p></li>
+</ul>
+</section>
+<section id="el-modelo-logit" class="slide level2">
+<h2>El modelo Logit</h2>
+<ul>
+<li><p>La regresión Logit modela la probabilidad de <span class="math inline">\(y=1\)</span> dadas las x usando la función de distribución logística estándar acumulada. <span class="math display">\[Pr(y = 1| x) = F(\beta_0 + \beta_1 x_1 + ... + \beta_k x_k)\]</span> donde <span class="math inline">\(F()\)</span> es la función de distribución logística acumulada: <span class="math display">\[
+F(\beta_0 + \beta_1 x_1 + ... + \beta_k x_k)=\frac{1}{1+e^{-\left(\beta_0 + \beta_1 x_1 + ... + \beta_k x_k\right)}}
+\]</span></p></li>
+<li><p>Dado que los modelos Logit y Probit usan diferentes funciones de probabilidad, los coeficientes (<span class="math inline">\(\beta\)</span>) estimados son diferentes.</p></li>
+</ul>
+</section>
+<section id="el-modelo-logit-1" class="slide level2">
+<h2>El modelo Logit</h2>
+<ul>
+<li><p>Por ejemplo con un solo <span class="math inline">\(x\)</span> y supongamos <span class="math inline">\(\beta_0 = -3\)</span>, <span class="math inline">\(\beta_1= 2\)</span> y <span class="math inline">\(x = 0.4\)</span> entonces tenemos: <span class="math display">\[Pr(y = 1| x=0.4) = 1/(1+e^{–(-3 + 2 \times 0.4)}) = 1/(1+e^{–(–2.2)}) = 0.0998\]</span></p></li>
+<li><p>¿Por qué molestarse con logit si tenemos probit?</p>
+<ul>
+<li>La razón principal es histórica: logit es computacionalmente más rápido y más fácil, pero eso no importa hoy en día.</li>
+</ul></li>
+<li><p>En la práctica, logit y probit son muy similares, ya que los resultados empíricos generalmente no dependen de la elección logit / probit, ambos tienden a usarse en la práctica.</p></li>
+</ul>
+</section>
+<section id="ejemplo-3-denegar-crédito-hipotecario-vs.-relación-entre-los-pagos-de-la-deuda-y-los-ingresos-una-vez-más" class="slide level2">
+<h2>Ejemplo 3: Denegar crédito hipotecario vs.&nbsp;relación entre los pagos de la deuda y los ingresos (una vez más)</h2>
+<p>Modelo estimado: <span class="math inline">\(deny = F (\beta_0 + \beta_1 (P/I))\)</span>:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+z test of coefficients:
+
+            Estimate Std. Error  z value  Pr(&gt;|z|)    
+(Intercept) -4.02843    0.35898 -11.2218 &lt; 2.2e-16 ***
+pirat        5.88450    1.00015   5.8836 4.014e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="ejemplo-3-denegar-crédito-hipotecario-vs.-relación-entre-los-pagos-de-la-deuda-y-los-ingresos-una-vez-más-1" class="slide level2">
+<h2>Ejemplo 3: Denegar crédito hipotecario vs.&nbsp;relación entre los pagos de la deuda y los ingresos (una vez más)</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="ejemplo-3-denegar-crédito-hipotecario-vs.-relación-entre-los-pagos-de-la-deuda-y-los-ingresos-una-vez-más-2" class="slide level2">
+<h2>Ejemplo 3: Denegar crédito hipotecario vs.&nbsp;relación entre los pagos de la deuda y los ingresos (una vez más)</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+z test of coefficients:
+
+            Estimate Std. Error  z value  Pr(&gt;|z|)    
+(Intercept) -4.12556    0.34597 -11.9245 &lt; 2.2e-16 ***
+pirat        5.37036    0.96376   5.5723 2.514e-08 ***
+blackyes     1.27278    0.14616   8.7081 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Efecto estimado de la raza para la relación P/I = 0.3:</p>
+<ul>
+<li><p><span class="math inline">\(\Pr (deny = 1|0.3,1)= F(-4.13+5.37\times 0.3+1.27 \times 1) = 0.2241459\)</span></p></li>
+<li><p><span class="math inline">\(Pr (deny = 1|0.3,0)= F(-4.13+5.37\times 0.3+1.27 \times 0) = 0.0748514\)</span></p></li>
+</ul></li>
+<li><p>Diferencia en las probabilidades de rechazo = 0.1492945 (14.9 puntos porcentuales)</p></li>
+</ul>
+</section>
+<section id="ejemplo-4-quiénes-son-los-militantes-de-hezbolá-en-siria" class="slide level2">
+<h2>Ejemplo 4: ¿Quiénes son los militantes de Hezbolá en Siria?</h2>
+<p><em>Alan Krueger y Jitka Maleckova, “Education, Poverty and Terrorism: Is There a Causal Connection?” Journal of Economic Perspectives, otoño de 2003, 119-144.</em></p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><p>Ver el paper para obtener más información sobre los datos utilizados.</p></li>
+<li><p>Regresión logit: 1 = muerto en evento militar de Hezbolá</p></li>
+</ul>
+</div><div class="column" style="width:60%;">
+<p><img data-src="figs/table_krueger_2.png"></p>
+</div>
+</div>
+</section>
+<section id="ejemplo-4-quiénes-son-los-militantes-de-hezbolá-en-siria-1" class="slide level2">
+<h2>Ejemplo 4: ¿Quiénes son los militantes de Hezbolá en Siria?</h2>
+<ul>
+<li><p>Calculemos el efecto de la escolaridad comparando las probabilidades predichas utilizando la regresión logit de la columna (3): <span class="math display">\[\begin{aligned}
+Pr(y=1&amp;|secundaria = 1, pobreza = 0, edad = 20) = \\
+&amp;= 1/[1+e–(–5.965+.281×1 – .335×0 – .083×20)]\\
+      &amp; = 1/[1 + e7.344] = .000646 \\
+Pr(y=1&amp;|secundaria = 0, pobreza = 0, edad = 20) =\\
+&amp; = 1/[1+e–(–5.965+.281×0 – .335×0 – .083×20)] \\
+      &amp; = 1/[1 + e7.625] = .000488
+\end{aligned}\]</span></p></li>
+<li><p>Entonces: <span class="math display">\[\begin{aligned}
+&amp;Pr(y=1|secundaria = 1, pobreza = 0, edad = 20) \\
+&amp;– Pr(y=1|secundaria = 0, pobreza = 0, edad = 20) = 0.000158
+\end{aligned}\]</span></p></li>
+</ul>
+</section>
+<section id="ejemplo-4-quiénes-son-los-militantes-de-hezbolá-en-siria-2" class="slide level2">
+<h2>Ejemplo 4: ¿Quiénes son los militantes de Hezbolá en Siria?</h2>
+<ul>
+<li><p>Ambas afirmaciones son ciertas:</p>
+<ul>
+<li><p>La probabilidad de ser un militante de Hezbolá aumenta en 0,0158 puntos porcentuales, si se asiste a la escuela secundaria.</p></li>
+<li><p>La probabilidad de ser un militante de Hezbolá aumenta en un 32%, si se asiste a la escuela secundaria (.000158 / .000488 = .32).</p></li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="estimación-e-inferencia" class="title-slide slide level1 center">
+<h1>Estimación e inferencia</h1>
+
+</section>
+<section id="estimación" class="slide level2">
+<h2>Estimación</h2>
+<p>Nos centraremos en el modelo Probit con un solo regresor para simplificar la discusión: <span class="math display">\[Pr(y = 1| x) = \Phi(\beta_0 + \beta_1 x)\]</span></p>
+<ul>
+<li><p>¿Cómo podemos estimar <span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span>?</p></li>
+<li><p>¿Cuál es la distribución muestral de los estimadores?</p></li>
+<li><p>¿Por qué podemos usar los métodos habituales de inferencia?</p></li>
+<li><p>Primero motivar a través de mínimos cuadrados no lineales Luego discutimos la estimación de máxima verosimilitud (lo que realmente se hace en la práctica)</p></li>
+</ul>
+</section>
+<section id="mínimos-cuadrados-no-lineales" class="slide level2">
+<h2>Mínimos cuadrados no lineales</h2>
+<ul>
+<li><p>Recordemos MCO: <span class="math display">\[\min _{\hat{\beta}_0, \hat{\beta}_1} \sum_{i=1}^n\left[y_i-\left(\hat{\beta}_0+\hat{\beta}_1 x_i\right)\right]^2\]</span> El resultado son los estimadores MCO <span class="math inline">\(\hat{\beta}_0\)</span> y <span class="math inline">\(\hat{\beta}_0\)</span>.</p></li>
+<li><p>Los <span class="emph">mínimos cuadrados no lineales</span> extienden la idea de MCO a modelos en los que los parámetros entran de forma no lineal: <span class="math display">\[\min _{\hat{\beta}_0, \hat{\beta}_1} \sum_{i=1}^n\left[y_i-\Phi\left(\hat{\beta}_0+\hat{\beta}_1 x_i\right)\right]^2\]</span></p></li>
+<li><p>¿Cómo resolver este problema de minimización? El cálculo no da una solución explícita.</p>
+<ul>
+<li>Resuelto numéricamente usando la computadora (algoritmos de minimización especializados)</li>
+</ul></li>
+</ul>
+</section>
+<section id="estimación-por-máximo-verosimilitud-mv" class="slide level2">
+<h2>Estimación por Máximo Verosimilitud (MV)</h2>
+<ul>
+<li><p>En la práctica, no se utilizan mínimos cuadrados no lineales. Un estimador más eficiente (menor varianza) es MV.</p></li>
+<li><p>La <span class="emph">función de verosimilitud</span> es la densidad condicional de <span class="math inline">\(y_1,...,y_n\)</span> dada <span class="math inline">\(x_1,...,x_n\)</span>, tratada como una función de los parámetros desconocidos <span class="math inline">\(\hat{\beta}_0\)</span> y <span class="math inline">\(\hat{\beta}1\)</span>.</p></li>
+<li><p>El estimador de máxima verosimilitud (MV) es el valor de <span class="math inline">\((\hat{\beta}_0,\hat{\beta}_1)\)</span> que maximiza la función de verosimilitud.</p>
+<ul>
+<li>MV es el valor de <span class="math inline">\((\hat{\beta}_0,\hat{\beta}_1)\)</span> que mejor describe la distribución completa de los datos.</li>
+</ul></li>
+<li><p>En muestras grandes, el MV es:</p>
+<ul>
+<li><p>Consistente.</p></li>
+<li><p>Distribuido normalmente.</p></li>
+<li><p>Eficiente (tiene la varianza más pequeña de todos los estimadores).</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="caso-especial-estimación-mv-sin-variables-dependientes" class="slide level2">
+<h2>Caso especial: Estimación MV sin variables dependientes</h2>
+<ul>
+<li><p>Distribución de Bernoulli: <span class="math display">\[
+y=\left\{\begin{array}{l}
+1 \text { con probabilidad } p \\
+0 \text { con probabilidad } 1-p
+\end{array}\right.
+\]</span></p></li>
+<li><p>Datos: <span class="math inline">\(y_1,..., y_n\)</span> (i.i.d.)</p></li>
+<li><p>La derivación de la probabilidad comienza con la densidad de <span class="math inline">\(y_1\)</span>:</p></li>
+<li><p>Sabemos que <span class="math inline">\(\Pr(y_1 = 1) = p\)</span> y <span class="math inline">\(\Pr(y_1 = 0) = 1–p\)</span> entonces: <span class="math display">\[Pr(y = y_1) = p^{y_1} (1-p)^{(1-y_1)}\]</span></p></li>
+</ul>
+</section>
+<section id="caso-especial-estimación-mv-sin-variables-dependientes-1" class="slide level2">
+<h2>Caso especial: Estimación MV sin variables dependientes</h2>
+<ul>
+<li><p>La densidad conjunta <span class="math inline">\((y_1,y_2)\)</span>, dado que son independientes, es: <span class="math display">\[
+\begin{aligned}
+\Pr\left(y\right. &amp; \left.=y_1, y=y_2\right)=\Pr\left(y=y_1\right) \times \Pr\left(y=y_2\right) \\
+&amp; =\left[p^{y_1}(1-p)^{1-y_1}\right] \times\left[p^{y_2}(1-p)^{1-y_2}\right] \\
+&amp; =p^{\left(y_1+y_2\right)}(1-p)^{\left[2-\left(y_1+y_2\right)\right]}
+\end{aligned}
+\]</span></p></li>
+<li><p>La densidad conjunta <span class="math inline">\((y_1,y_2,...,y_n)\)</span>, dado que son independientes, es: <span class="math display">\[
+\begin{aligned}
+&amp; \Pr\left(y=y_1, y=y_2, \ldots, y=y_n\right) \\
+&amp; =\left[p^{y_1}(1-p)^{1-y_1}\right] \times\left[p^{y_2}(1-p)^{1-y_2}\right] \times \ldots \times\left[p^{y_n}(1-p)^{1-y_n}\right] \\
+&amp; =p^{\sum_{i=1}^n y_i}(1-p)^{\left(n-\sum_{i=1}^n y_i\right)}
+\end{aligned}
+\]</span></p></li>
+</ul>
+</section>
+<section id="caso-especial-estimación-mv-sin-variables-dependientes-2" class="slide level2">
+<h2>Caso especial: Estimación MV sin variables dependientes</h2>
+<ul>
+<li><p>La probabilidad de observar <span class="math inline">\((y_1,y_2,...,y_n)\)</span> es la densidad conjunta en función de los parámetros desconocidos, en este caso <span class="math inline">\(p\)</span>: <span class="math display">\[
+f(p; y_1, \ldots, y_n)=p^{\sum_{i=1}^n y_i}(1-p)^{\left(n-\sum_{i=1}^n y_i\right)}
+\]</span></p></li>
+<li><p>El estimador MV <span class="math inline">\(\hat{p}^{MV}\)</span> maximiza la probabilidad. Es más fácil trabajar con el logaritmo de la probabilidad, <span class="math inline">\(ln[f(p; y_1,...,y_n)]\)</span>: <span class="math display">\[
+\ln [f(p; y_1, \ldots, y_n)]=\left(\sum_{i=1}^n y_i\right) \ln (p)+\left(n-\sum_{i=1}^n y_i\right) \ln (1-p)
+\]</span></p></li>
+<li><p>Maximiza la probabilidad estableciendo la derivada = 0: <span class="math display">\[
+\frac{d \ln f\left(p ; y_1, \ldots, y_n\right)}{d p}=\left(\sum_{i=1}^n y_i\right) \frac{1}{p}+\left(n-\sum_{i=1}^n y_i\right)\left(\frac{-1}{1-p}\right)=0
+\]</span></p></li>
+</ul>
+</section>
+<section id="caso-especial-estimación-mv-sin-variables-dependientes-3" class="slide level2">
+<h2>Caso especial: Estimación MV sin variables dependientes</h2>
+<ul>
+<li><p>Resolvemos por <span class="math inline">\(p\)</span>: <span class="math display">\[
+\begin{gathered}
+\left(\sum_{i=1}^n y_i\right) \frac{1}{\hat{p}^{M L E}}+\left(n-\sum_{i=1}^n y_i\right)\left(\frac{-1}{1-\hat{p}^{M L E}}\right)=0 \\
+\left(\sum_{i=1}^n y_i\right) \frac{1}{\hat{p}^{M L E}}=\left(n-\sum_{i=1}^n y_i\right) \frac{1}{1-\hat{p}^{M L E}} \\
+\frac{\bar{y}}{1-\bar{y}}=\frac{\hat{p}^{M L E}}{1-\hat{p}^{M L E}} \\
+\hat{p}^{MV}=\bar{y}=\text { fracción de 1s en la muestra}  
+\end{gathered}
+\]</span></p></li>
+<li><p>Este mismo enfoque se generaliza a modelos más complicados.</p></li>
+</ul>
+</section>
+<section id="caso-especial-estimación-mv-sin-variables-dependientes-4" class="slide level2">
+<h2>Caso especial: Estimación MV sin variables dependientes</h2>
+<ul>
+<li><p>Para <span class="math inline">\(y_i\)</span> i.i.d. Bernoulli, el estimador MV es el <em>estimador natural</em> de <span class="math inline">\(p\)</span>, la fracción de 1s o <span class="math inline">\(\bar{y}\)</span>.</p></li>
+<li><p>Ya conocemos lo esencial de la inferencia:</p>
+<ul>
+<li><p>En <span class="math inline">\(n\)</span> grande, la distribución muestral de <span class="math inline">\(\hat{p}^{MV}=\bar{y}\)</span> se distribuye normalmente.</p></li>
+<li><p>La inferencia es <em>como de costumbre</em>: prueba de hipótesis suando el estadístico t, intervalo de confianza como <span class="math inline">\(\pm\)</span> 1.96SE.</p></li>
+</ul></li>
+<li><p>La teoría de la estimación de MV dice que es el estimador más eficiente de <span class="math inline">\(p\)</span>, ¡de todos los estimadores posibles! – al menos para <span class="math inline">\(n\)</span> grande (Mucho más fuerte que el teorema de Gauss-Markov).</p>
+<ul>
+<li>Por esta razón, MV es el estimador primario utilizado para modelos en los que los parámetros (coeficientes) entran de forma no lineal.</li>
+</ul></li>
+</ul>
+</section>
+<section id="estimación-mv-con-una-variable-dependiente" class="slide level2">
+<h2>Estimación MV con una variable dependiente</h2>
+<ul>
+<li><p>Nada en esencia es diferente, reemplazamos <span class="math inline">\(p=\Pr(y=1|x)=\Phi(\beta_0 + \beta_1 x)\)</span>.</p></li>
+<li><p>La derivación comienza con la densidad de <span class="math inline">\(y_1\)</span> dado <span class="math inline">\(x_1\)</span>: <span class="math display">\[
+\begin{aligned}
+&amp; \operatorname{Pr}\left(y_1=1 \mid x_1\right)=\Phi\left(\beta_0+\beta_1 x_1\right) \\
+&amp; \operatorname{Pr}\left(y_1=0 \mid x_1\right)=1-\Phi\left(\beta_0+\beta_1 x_1\right)
+\end{aligned}
+\]</span> <span class="math display">\[
+\operatorname{Pr}\left(y_1=y_1 \mid x_1\right)=\Phi\left(\beta_0+\beta_1 x_1\right)^{y_1}\left[1-\Phi\left(\beta_0+\beta_1 x_1\right)\right]^{1-y_1}
+\]</span></p></li>
+<li><p>La función de probabilidad es la densidad conjunta de <span class="math inline">\((y_1,...,y_n)\)</span> dada <span class="math inline">\((x_1,...,x_n)\)</span>, tratada como una función de <span class="math inline">\(\beta_0, \beta_1\)</span>: <span class="math display">\[
+\begin{aligned}
+f\left(\beta_0, \beta_1 ;\right. &amp; \left.y_1, \ldots, y_n \mid x_1, \ldots, x_n\right) \\
+= &amp; \left\{\Phi\left(\beta_0+\beta_1 x_1\right)^{y_1}\left[1-\Phi\left(\beta_0+\beta_1 x_1\right)\right]^{1-y_1}\right\} \times \\
+&amp; \ldots \times\left\{\Phi\left(\beta_0+\beta_1 x_n\right)^{y_n}\left[1-\Phi\left(\beta_0+\beta_1 x_n\right)\right]^{1-y_n}\right\}
+\end{aligned}
+\]</span></p></li>
+</ul>
+</section>
+<section id="estimación-mv-con-una-variable-dependiente-1" class="slide level2">
+<h2>Estimación MV con una variable dependiente</h2>
+<ul>
+<li><p>El estimador MV <span class="math inline">\((\hat{\beta}^{MV}_0, \hat{\beta}^{MV}_1)\)</span> maximiza <span class="math inline">\(\ln[f\left(\beta_0, \beta_1 ;\right. \left.y_1, \ldots, y_n \mid x_1, \ldots, x_n\right)]\)</span>.</p></li>
+<li><p><strong>Problema</strong>: No podemos resolver explícitamente, por lo tanto para obtener el estimador MV se maximiza utilizando métodos numéricos</p></li>
+<li><p>Como en el caso de no <span class="math inline">\(x\)</span>, en muestras grandes:</p>
+<ul>
+<li><p><span class="math inline">\((\hat{\beta}^{MV}_0, \hat{\beta}^{MV}_1)\)</span> son consistentes.</p></li>
+<li><p><span class="math inline">\((\hat{\beta}^{MV}_0, \hat{\beta}^{MV}_1)\)</span> se distribuyen normalmente y por tanto todos los procedimientos de infrencia vistos aplican.</p></li>
+<li><p><span class="math inline">\((\hat{\beta}^{MV}_0, \hat{\beta}^{MV}_1)\)</span> son asintóticamente eficientes – entre todos los estimadores (suponiendo que el modelo probit es el modelo correcto)</p></li>
+</ul></li>
+<li><p>Todo esto se extiende a múltiples variables <span class="math inline">\(x\)</span> y para el caso del modelo Logti solo cambia la función <span class="math inline">\(F(\cdot)\)</span>.</p></li>
+</ul>
+</section></section>
+<section>
+<section id="bondad-de-ajuste" class="title-slide slide level1 center">
+<h1>Bondad de ajuste</h1>
+
+</section>
+<section id="medidas-de-bondad-de-ajuste-para-modelos-logit-y-probit" class="slide level2">
+<h2>Medidas de bondad de ajuste para modelos Logit y Probit</h2>
+<p>El <span class="math inline">\(R^2\)</span> y el <span class="math inline">\(\bar{R}^2\)</span> no tienen sentido aquí (¿por qué?).</p>
+<p>&nbsp;</p>
+<p>Utilizamos otras dos medidas especializadas:</p>
+<ul>
+<li><p>La <span class="emph">fracción predicha correctamente</span> = fracción de <span class="math inline">\(y\)</span> para la cual la probabilidad predicha es <span class="math inline">\(&gt;50%\)</span> cuando <span class="math inline">\(y_i=1\)</span>, o es <span class="math inline">\(&lt;50%\)</span> cuando <span class="math inline">\(y_i=0\)</span>.</p></li>
+<li><p>El <span class="emph">pseudo-<span class="math inline">\(R^2\)</span></span> mide la mejora en el valor de la probabilidad logarítmica, en relación con no tener <span class="math inline">\(x\)</span>. El pseudo-<span class="math inline">\(R^2\)</span> simplifica al <span class="math inline">\(R^2\)</span> en el modelo lineal con errores normalmente distribuidos.</p></li>
+</ul>
+</section>
+<section id="ejemplo-5-denegar-crédito-hipotecario-modelo-completo" class="slide level2">
+<h2>Ejemplo 5: Denegar crédito hipotecario (modelo completo)</h2>
+<p>Ahora el ejemplo en detalle:</p>
+<ul>
+<li><p>Las hipotecas (préstamos hipotecarios) son una parte esencial de la compra de una casa.</p></li>
+<li><p>Pregunta de investigación: <em>¿Hay acceso diferenciado a créditos hipotecarios por raza?</em></p>
+<ul>
+<li>¿Si dos personas idénticas, solo diferentes en raza, solicitan un préstamo hipotecario, hay alguna diferencia en la probabilidad de denegación?</li>
+</ul></li>
+<li><p>Datos: Boston, Massachusetts, procesos de solicitud de créditos hipotecarios 1990-1991</p>
+<ul>
+<li>Características individuales, características de la propiedad y denegación/aceptación de préstamos</li>
+</ul></li>
+</ul>
+</section>
+<section id="ejemplo-5-denegar-crédito-hipotecario-modelo-completo-1" class="slide level2">
+<h2>Ejemplo 5: Denegar crédito hipotecario (modelo completo)</h2>
+<ul>
+<li><p>Proceso de solicitud de un crédito hipotecario:</p>
+<ul>
+<li><p>Ir a un banco o compañía hipotecaria</p></li>
+<li><p>Completar una solicitud (información personal + financiera)</p></li>
+<li><p>Reunirse con el oficial de créditos.</p></li>
+</ul></li>
+<li><p>Entonces el oficial de préstamos decide, por ley, de una manera ciega a la raza. EL oficial quiere maximizar la probabilidad de repago. Usa las siguiente variables financieras:</p>
+<ul>
+<li><p>Relación P/I</p></li>
+<li><p>Relación entre gastos de vivienda e ingresos</p></li>
+<li><p>Relación préstamo-valor de la vivienda</p></li>
+<li><p>Historial de crédito personal</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="ejemplo-5-denegar-crédito-hipotecario-modelo-completo-2" class="slide level2">
+<h2>Ejemplo 5: Denegar crédito hipotecario (modelo completo)</h2>
+<ul>
+<li><p>La regla de decisión del oficial de crédito esra no lineal:</p>
+<ul>
+<li>Ratio préstamo - valor propiedad <span class="math inline">\(&gt;=\)</span> 95%: alto riesgo.</li>
+<li>Ratio préstamo - valor propiedad <span class="math inline">\(&gt;=\)</span> 80%: riego medio.</li>
+<li>Ratio préstamo - valor propiedad <span class="math inline">\(&lt;\)</span> 80%: riego bajo.</li>
+</ul></li>
+<li><p>Principal problema con las regresiones vistas antes es posible sesgo por variable omitida.</p>
+<ul>
+<li>Las siguientes variables (i) ingresan la decisión del oficial de préstamos y (ii) están o podrían estar correlacionadas con la raza: riqueza, tipo de empleo, historial crediticio, estado familiar.</li>
+</ul></li>
+</ul>
+</section>
+<section id="ejemplo-5-denegar-crédito-hipotecario-modelo-completo-3" class="slide level2">
+<h2>Ejemplo 5: Denegar crédito hipotecario (modelo completo)</h2>
+<div class="small">
+
+<table style="text-align:center">
+<tbody><tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="3">
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="3">
+deny
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>OLS</em>
+</td>
+<td>
+<em>logistic</em>
+</td>
+<td>
+<em>probit</em>
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+blackyes
+</td>
+<td>
+-0.060 (0.094)
+</td>
+<td>
+0.646 (0.850)
+</td>
+<td>
+0.184 (0.479)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+pirat
+</td>
+<td>
+0.418<sup>***</sup> (0.118)
+</td>
+<td>
+5.159<sup>***</sup> (1.513)
+</td>
+<td>
+2.528<sup>***</sup> (0.748)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+hirat
+</td>
+<td>
+-0.058 (0.110)
+</td>
+<td>
+-0.688 (1.447)
+</td>
+<td>
+-0.450 (0.760)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+lvrat_fmedium
+</td>
+<td>
+0.031<sup>**</sup> (0.013)
+</td>
+<td>
+0.464<sup>***</sup> (0.160)
+</td>
+<td>
+0.214<sup>***</sup> (0.082)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+lvrat_fhigh
+</td>
+<td>
+0.191<sup>***</sup> (0.050)
+</td>
+<td>
+1.472<sup>***</sup> (0.328)
+</td>
+<td>
+0.785<sup>***</sup> (0.184)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+chist
+</td>
+<td>
+0.031<sup>***</sup> (0.005)
+</td>
+<td>
+0.292<sup>***</sup> (0.039)
+</td>
+<td>
+0.155<sup>***</sup> (0.021)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+mhist
+</td>
+<td>
+0.021<sup>*</sup> (0.011)
+</td>
+<td>
+0.280<sup>**</sup> (0.138)
+</td>
+<td>
+0.148<sup>**</sup> (0.073)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+phistyes
+</td>
+<td>
+0.196<sup>***</sup> (0.035)
+</td>
+<td>
+1.229<sup>***</sup> (0.202)
+</td>
+<td>
+0.700<sup>***</sup> (0.114)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+insuranceyes
+</td>
+<td>
+0.699<sup>***</sup> (0.045)
+</td>
+<td>
+4.561<sup>***</sup> (0.578)
+</td>
+<td>
+2.563<sup>***</sup> (0.305)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+selfempyes
+</td>
+<td>
+0.061<sup>***</sup> (0.021)
+</td>
+<td>
+0.668<sup>***</sup> (0.214)
+</td>
+<td>
+0.360<sup>***</sup> (0.113)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+blackyes:pirat
+</td>
+<td>
+0.269 (0.383)
+</td>
+<td>
+-1.845 (2.909)
+</td>
+<td>
+-0.449 (1.593)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+blackyes:hirat
+</td>
+<td>
+0.192 (0.411)
+</td>
+<td>
+2.609 (3.048)
+</td>
+<td>
+1.358 (1.718)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+-0.170<sup>***</sup> (0.027)
+</td>
+<td>
+-5.701<sup>***</sup> (0.546)
+</td>
+<td>
+-3.003<sup>***</sup> (0.274)
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="3" style="text-align:right">
+<sup><em></em></sup><em>p&lt;0.1; <sup><strong></strong></sup><strong>p&lt;0.05; <sup></sup></strong></em>p&lt;0.01
+</td>
+</tr>
+
+</tbody></table>
+</div>
+</section>
+<section id="ejemplo-5-denegar-crédito-hipotecario-modelo-completo-4" class="slide level2">
+<h2>Ejemplo 5: Denegar crédito hipotecario (modelo completo)</h2>
+<ul>
+<li>Podemos usar el paquete <code>mfx</code> para estimar los efectos marginales (calculados en los promedios de las variables). Para el modelo Probit:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+probitmfx(formula = deny ~ black * (pirat + hirat) + lvrat_f + 
+    chist + mhist + phist + insurance + selfemp, data = HMDA)
+
+Marginal Effects:
+                    dF/dx  Std. Err.       z     P&gt;|z|    
+blackyes        0.0304707  0.0727185  0.4190 0.6751991    
+pirat           0.3822055  0.0911893  4.1913 2.773e-05 ***
+hirat          -0.0680903  0.1099750 -0.6191 0.5358218    
+lvrat_fmedium   0.0336302  0.0132899  2.5305 0.0113899 *  
+lvrat_fhigh     0.1852840  0.0562908  3.2916 0.0009964 ***
+chist           0.0234072  0.0032479  7.2069 5.723e-13 ***
+mhist           0.0224011  0.0110578  2.0258 0.0427825 *  
+phistyes        0.1539401  0.0345460  4.4561 8.347e-06 ***
+insuranceyes    0.7940003  0.0602700 13.1741 &lt; 2.2e-16 ***
+selfempyes      0.0655993  0.0238238  2.7535 0.0058958 ** 
+blackyes:pirat -0.0678962  0.2121872 -0.3200 0.7489815    
+blackyes:hirat  0.2053511  0.2501086  0.8210 0.4116189    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+dF/dx is for discrete change for the following variables:
+
+[1] "blackyes"      "lvrat_fmedium" "lvrat_fhigh"   "phistyes"     
+[5] "insuranceyes"  "selfempyes"   </code></pre>
+</div>
+</div>
+</section>
+<section id="ejemplo-5-denegar-crédito-hipotecario-modelo-completo-5" class="slide level2">
+<h2>Ejemplo 5: Denegar crédito hipotecario (modelo completo)</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear hypothesis test
+
+Hypothesis:
+blackyes:pirat = 0
+blackyes:hirat = 0
+
+Model 1: restricted model
+Model 2: deny ~ black * (pirat + hirat) + lvrat_f + chist + mhist + phist + 
+    insurance + selfemp
+
+Note: Coefficient covariance matrix supplied.
+
+  Res.Df Df      F Pr(&gt;F)
+1   2369                 
+2   2367  2 0.3277 0.7206</code></pre>
+</div>
+</div>
+</section>
+<section id="ejemplo-5-denegar-crédito-hipotecario-modelo-completo-6" class="slide level2">
+<h2>Ejemplo 5: Denegar crédito hipotecario (modelo completo)</h2>
+<ul>
+<li><p>Los coeficientes sobre las variables financieras tienen sentido.</p></li>
+<li><p>La variable afro-americano es estadísticamente significativa en todas las especificaciones.</p></li>
+<li><p>Las interacciones entre la raza y las variables financieras no son significativas.</p></li>
+<li><p>Incluir controles reduce drásticamente el efecto de la raza sobre la probabilidad de negación.</p></li>
+<li><p>LPM, probit, logit: estimaciones similares del efecto de la raza sobre la probabilidad de negación.</p></li>
+<li><p>Los efectos estimados son grandes en un sentido del “mundo real”.</p></li>
+</ul>
 
 <img src="figs/logo_econ.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p>Ingeniería Comercial – Econometría II</p>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -377,7 +1276,7 @@ Mauricio M. Tejada
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -619,9 +1518,23 @@ Mauricio M. Tejada
       tabsets.forEach(function(tabset) {
         const tabby = new Tabby('#' + tabset.id);
       });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
       const clipboard = new window.ClipboardJS('.code-copy-button', {
-        target: function(trigger) {
-          return trigger.previousElementSibling;
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
         }
       });
       clipboard.on('success', function(e) {
@@ -669,7 +1582,7 @@ Mauricio M. Tejada
           },
           interactive: true,
           interactiveBorder: 10,
-          theme: 'quarto-reveal',
+          theme: 'light-border',
           placement: 'bottom-start'
         };
           config['offset'] = [0,0];
