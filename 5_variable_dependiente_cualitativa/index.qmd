@@ -3,14 +3,11 @@ title: "Econometría II"
 subtitle: "**Unidad 5: Modelos de Variable Dependiente Dicotómica**"
 author: "Mauricio M. Tejada"
 institute: "*Departamento de Economía, Universidad Diego Portales*"
-format:
-  revealjs:
-    theme: serif_mod.scss
-    logo: "figs/logo_econ.png"
+format: 
+  udp-revealjs:
     footer: "Ingeniería Comercial -- Econometría II"
-    slide-number: c/t
-    show-slide-number: all
-    #embed-resources: true
+incremental: false
+embed-resources: true
 ---
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}

@@ -3,15 +3,12 @@ title: "Econometría II"
 subtitle: "**Unidad 2: Variables Instrumentales**"
 author: "Mauricio M. Tejada"
 institute: "*Departamento de Economía, Universidad Diego Portales*"
-format:
-  revealjs:
-    theme: serif_mod.scss
-    logo: "figs/logo_econ.png"
+
+format: 
+  udp-revealjs:
     footer: "Ingeniería Comercial -- Econometría II"
-    slide-number: c/t
-    show-slide-number: all
-    embed-resources: true
-    self-contained-math: true
+incremental: false
+embed-resources: true
 ---
 
 ```{r setup, message=FALSE, warning=FALSE, include=FALSE}

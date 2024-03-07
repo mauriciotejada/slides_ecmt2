@@ -3,15 +3,13 @@ title: "Econometría II"
 subtitle: "**Temas Administrativos**"
 author: "Mauricio M. Tejada"
 institute: "*Departamento de Economía, Universidad Diego Portales*"
-format:
-  revealjs:
-    theme: serif_mod.scss
-    logo: "figs/logo_econ.png"
+format: 
+  udp-revealjs:
     footer: "Ingeniería Comercial -- Econometría II"
-    slide-number: c/t
-    show-slide-number: all
-    embed-resources: true
+incremental: false
+embed-resources: true
 ---
+
 
 ## Temas Administrativos
 
@@ -25,11 +23,11 @@ format:
 
 2. *Horarios:*
 
-    - Clases: Lunes y Miércoles 11:30 a 12:50. Sala B-603.
+    - Clases: Lunes y Miércoles 11:30 a 12:50. Sala B-505.
 
     - Horas de Oficina: Miércoles 14:30 a 16:00. Oficia 510 Edificio Cubo.
 
-    -  Ayudantía: Viernes 10:00 a 11:20. Sala a ser anunciada.
+    - Horario de Ayudantía: A ser anunciado.
 
 . . .
 
@@ -108,17 +106,19 @@ format:
 
 ## Evaluación 
 
-Formas de evaluación:
+Formas de evaluación (en base esquema 8445):
+
+* **Nota de Presentación (70%):** actividades a llevarse a cabo durante el semestre.
     
-* **Evaluación 1 (20%):**  semana del 17 al 21 de abril.
+    * **Solemne 1 (20%):**  semana del 15 al 19 de abril.
 
-* **Evaluación 2 (20%):** semana del 12 al 16 de junio.
+    * **Solemne 2 (20%):** semana del 10 a 14 de junio.
 
-* **Tareas (15%):** se desarrollarán durante el semestre.
+    * **Controles (20%):** ejercicios algebraicos y empíricos a desarrollarse durante el semestre.
 
-* **Ejercicios empíricos (15%):** se desarrollarán durante el semestre.
+    * **Trabajo (20%):** presentación y entrega semana del 24 al 28 de junio.
 
-* **Examen (30%):** semana del 5 al 13 de julio.
+* **Examen (30%):** del 8 al 17 de julio.
 
 ## Evaluación 
 
@@ -126,15 +126,15 @@ Para la evaluación del curso tome en cuenta lo siguiente:
 
 ::: {.incremental}
 
-- No existe eximición del examen final, el mismo que cubre toda la materia.
+- No hay eximición de la evaluación final o examen. La nota mínima de presentación al examen es 3,5. 
 
-- Las evaluaciones se tomarán en semana de pruebas y los horarios serán asignados por la escuela. 
+- Si un/a estudiante falta a una evaluación, deberá rendir de forma obligatoria el examen para reemplazar la nota pendiente (ya no deberá presentar justificación en secretaría de estudios). Quienes estén en esta condición, deben cumplir la misma exigencia de nota mínima de presentación (nota 3,5).
 
-- Justificativos sobre inasistencia a evaluaciones deben ser remitidos a Secretaria de Estudios. Son ellos los que evaluaran la admisibilidad de los mismos.
+- Solo una evaluación (evaluación 1 o 2) puede ser reemplazada con el examen o evaluación final.
 
-- Si el o la estudiante falta a una evaluación parcial, se reponderará la misma en el examen final. 
+- Solo los/as estudiantes que rindieron ambas evaluaciones podrán justificar su inasistencia a su examen. 
 
-- Conductas deshonestas, plagio y cualquier acción que vicie el proceso de aprendizaje será llevada al Comité de Ética.
+- Conductas deshonestas, plagio y cualquier acción que vicie el proceso de aprendizaje será llevada al *Comité de Ética*.
 
 :::
 
@@ -152,66 +152,10 @@ Para la evaluación del curso tome en cuenta lo siguiente:
 
 ## Programación
 
-:::: {.columns}
-
-::: {.column width="25%"}
-*Marzo*
-
-    8-10: Unidad 1 (1)
-    
-    13-17: Unidad 1 (2) 
-    
-    20-24: Unidad 1 (2)
-    
-    27-31: Unidad 1/2 (2)
-
-:::
-
-::: {.column width="25%"}
-*Abril*
-
-    3-7: Unidad 2 (2)
-    
-    10-14: Unidad 2 (2)
-    
-    17-21: Eval 1
-    
-    24-28: Unidad 2/3 (2)
-
-:::
-
-::: {.column width="25%"}
-*Mayo*
-
-    1-5: Receso
-    
-    8-12: Unidad 3 (2)
-    
-    15-19: Unidad 3 (2)
-    
-    22-26: Unidad 3 (2)
-    
-    29-31: Unidad 3/4 (2)
-:::
-
-
-::: {.column width="25%"}
-*Junio*
-
-    5-9: Unidad 4 (2)
-    
-    12-16: Eval 2
-    
-    19-23: Unidad 4 (1)
-    
-    26-30: Unidad 5 (1)
-
-
-*Julio*
-
-    3-7: Unidad 5 (1)
-    
-:::
-::::
-
+|Marzo|Abril|Mayo|Junio|Julio|
+|:---:|:---:|:---:|:---:|:---:|
+|6 Clases     |7 Clases      |8 Clases      |6 Clases      |2 Clases.      |
+|Unidad 1 (3) | Unidad 2 (6) | Unidad 3 (8) | Unidad 4 (6) | Unidad 5 (2)  |
+|Unidad 2 (3) | Unidad 3 (1) |              |              |               |
+|             |*Solemne 1* |              | *Solemne 2* |               | 
 
