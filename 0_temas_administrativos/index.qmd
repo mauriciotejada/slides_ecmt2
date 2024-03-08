@@ -19,8 +19,6 @@ embed-resources: true
 
     - Ayudante: A ser anunciado.
 
-. . .
-
 2. *Horarios:*
 
     - Clases: Lunes y Miércoles 11:30 a 12:50. Sala B-505.
@@ -28,8 +26,6 @@ embed-resources: true
     - Horas de Oficina: Miércoles 14:30 a 16:00. Oficia 510 Edificio Cubo.
 
     - Horario de Ayudantía: A ser anunciado.
-
-. . .
 
 3. *Comunicación:*
 
@@ -46,7 +42,7 @@ embed-resources: true
 
 - Un énfasis especial se pondrá en el uso de estos modelos y estimadores para resolver problemas específicos. 
 
-. . .
+
 
 **Objetivo:**
 
@@ -110,13 +106,13 @@ Formas de evaluación (en base esquema 8445):
 
 * **Nota de Presentación (70%):** actividades a llevarse a cabo durante el semestre.
     
-    * **Solemne 1 (20%):**  semana del 15 al 19 de abril.
+    * **Solemne 1 (30%):**  semana del 15 al 19 de abril.
 
-    * **Solemne 2 (20%):** semana del 10 a 14 de junio.
+    * **Solemne 2 (30%):** semana del 10 a 14 de junio.
 
     * **Controles (20%):** ejercicios algebraicos y empíricos a desarrollarse durante el semestre.
 
-    * **Trabajo (20%):** presentación y entrega semana del 24 al 28 de junio.
+    * **Trabajo (20%):** presentación y entrega semana del 24 al 28 de junio (e-portafolio).
 
 * **Examen (30%):** del 8 al 17 de julio.
 
@@ -150,7 +146,7 @@ Para la evaluación del curso tome en cuenta lo siguiente:
 
 - Ustedes son los únicos responsables de todo el contenido que presentan en evaluaciones.
 
-## Programación
+## Programación tentativa
 
 |Marzo|Abril|Mayo|Junio|Julio|
 |:---:|:---:|:---:|:---:|:---:|
