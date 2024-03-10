@@ -21,7 +21,7 @@ embed-resources: true
 
 2. *Horarios:*
 
-    - Clases: Lunes y Miércoles 11:30 a 12:50. Sala B-505.
+    - Clases: Lunes y Miércoles 11:30 a 12:50. Sala B505.
 
     - Horas de Oficina: Miércoles 14:30 a 16:00. Oficia 510 Edificio Cubo.
 
