@@ -53,23 +53,27 @@ embed-resources: true
 
 - **Unidad 1:** Repaso del Modelo de Regresión Lineal
   
-  - MCO, propiedes, inferencia, uso de variable dummy, variables instrumentales.
+  - MCO, propiedades, inferencia, uso de variable dummy. 
+  
+- **Unidad 2:** Variables instrumentales
 
-- **Unidad 2:** Modelos para Datos de Panel
+  - Endogeneidad, estimación, inferencia, pruebas de validez y sobreidentificación.
+
+- **Unidad 3:** Modelos para Datos de Panel
 
   - Modelo de componentes de error, efectos fijos, efectos aleatorios, inferencia.
   
-- **Unidad 3:** Modelos de Series Temporales
+- **Unidad 4:** Modelos de Series Temporales
 
   - Procesos estacionarios univariados y multivariados, raíces unitarias, cointegración.
 
 ## Contenidos
 
-- **Unidad 4:** Modelos de Variable Dependiente Limitada
+- **Unidad 5:** Modelos de Variable Dependiente Limitada
 
   - Variable dependiente dicotómica, selección muestral.
 
-- **Unidad 5:** Otros Métodos de Estimación^[Si el tiempo lo permite.]
+- **Unidad 6:** Otros Métodos de Estimación^[Si el tiempo lo permite.]
 
   - Método generalizado de momentos y aplicaciones
 
@@ -151,7 +155,7 @@ Para la evaluación del curso tome en cuenta lo siguiente:
 |Marzo|Abril|Mayo|Junio|Julio|
 |:---:|:---:|:---:|:---:|:---:|
 |6 Clases     |7 Clases      |8 Clases      |6 Clases      |2 Clases.      |
-|Unidad 1 (3) | Unidad 2 (6) | Unidad 3 (8) | Unidad 4 (6) | Unidad 5 (2)  |
-|Unidad 2 (3) | Unidad 3 (1) |              |              |               |
-|             |*Solemne 1* |              | *Solemne 2* |               | 
+|Unidad 1 (3) | Unidad 3 (7) | Unidad 3 (1) | Unidad 4 (3) | Unidad 5 (2)  |
+|Unidad 2 (3) |              | Unidad 4 (7) | Unidad 5 (3) |               |
+|             |*Solemne 1*   |              | *Solemne 2*  |               | 
 
