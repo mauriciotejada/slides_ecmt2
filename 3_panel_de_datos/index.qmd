@@ -1320,4 +1320,63 @@ tiempo, $\delta_{t}$.
 En paneles cortos ($T$ pequeño respecto de $N$), $\delta_{t}$ se modela
 como "fijo" (con una variable dummy para cada $t$).
 
+## Panel de Datos
 
+### Ejemplo 6: La Ecuación Gravitacional del Comercio y Múltiples Efectos Fijos
+
+- La ecuación gravitacional del comercio es una de las ecuaciones más usadas en economía internacional empírica. 
+
+- La ecuación básica es: $E\left(\right.$ Trade $\left._{i, j, p, t}\right)=\gamma_i^{\text {X}} \times \gamma_j^{\text {M}} \times \gamma_p^{\text {Prod}} \times \gamma_t^{\text {Year }} \times$ Dist$_{i j}^\beta$
+
+- Donde:
+    - Trade$_{i, j, p, t}$ es el comercio entre el país $i$ y el país $j$ del producto $p$ en el año $t$.
+    - $\gamma_i^{\text {X}}$ es un efecto fijo del país exportador.
+    - $\gamma_j^{\text {M}}$ es un efecto fijo del país importador.
+    - $\gamma_p^{\text {Prod}}$ es un efecto fijo del producto.
+    - $\gamma_t^{\text {Year }}$ es un efecto fijo del año.
+    - Dist$_{i j}$ es la distancia entre los países $i$ y $j$.
+    
+- Parámetro de interés: *la elasticidad del comercio a la distancia entre países $\beta$*.
+
+## Panel de Datos
+
+### Ejemplo 6: La Ecuación Gravitacional del Comercio y Múltiples Efectos Fijos
+
+- Ecuacion a estimar en logaritmos:
+$$\ln(\text{Trade}_{i, j, p, t})=\alpha_i^{\text {X}}+\alpha_j^{\text {M}}+\alpha_p^{\text {Prod}}+\alpha_t^{\text {Year }}+\beta\ln(\text{Dist}_{i j})+\epsilon_{i, j, p, t}$$
+
+- **Base de datos**: Comercio en la Zona Euro (Eurostat, 2017) 
+
+```{r}
+#| echo: true
+#| scroll: true
+library(fixest)
+db <- as.data.frame(force(trade))
+head(db, n=6)
+tail(db, n=6)
+```
+
+## Panel de Datos
+
+### Ejemplo 6: La Ecuación Gravitacional del Comercio y Múltiples Efectos Fijos
+
+- Estimación de efectos fijos:
+```{r}
+#| echo: true
+gravity_ols <- feols(log(Euros) ~ log(dist_km) | Origin + Destination + Product + Year, 
+                     db, vcov = "twoway")
+summary(gravity_ols)
+```
+
+- Para comparar diferentes modelos el paquete provee un comando útil: `etable(mod1, mod2, ... , vcov = "twoway")`.
+
+## Panel de Datos
+
+### Ejemplo 6: La Ecuación Gravitacional del Comercio y Múltiples Efectos Fijos
+
+- Recuperamos los efectos fijos (si se requiere) usando:
+```{r}
+#| echo: true
+fixedEffects <- fixef(gravity_ols)
+summary(fixedEffects)
+```
