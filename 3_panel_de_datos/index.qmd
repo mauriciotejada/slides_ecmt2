@@ -56,6 +56,8 @@ ser dividida en dos categorías:
 *Precios de viviendas en dos años diferentes:*
 
 ```{r}
+#| echo: true
+#| scroll: true
 #| warning: false
  
 library(haven)
@@ -107,6 +109,7 @@ Controlando por cambios en el tiempo en la media de la distribución:
 ## Ejemplo 1: Evolución de las Tasas de Fertilidad (Sander, 1992)
 
 ```{r}
+#| echo: true
 db <- read_dta("http://fmwww.bc.edu/ec-p/data/wooldridge/fertil1.dta")
 aggregate(kids~year, data = db, FUN = mean)
 aggregate(kids~year, data = db, FUN = var)
@@ -115,6 +118,7 @@ aggregate(kids~year, data = db, FUN = var)
 ## Ejemplo 1: Evolución de las Tasas de Fertilidad (Sander, 1992)
 
 ```{r}
+#| echo: true
 reg <- lm(kids~educ+age+I(age^2)+black+east+northcen+west+farm
           +othrural+town+smcity+y74+y76+y78+y80+y82+y84, data = db)
 summary(reg)
@@ -126,6 +130,7 @@ summary(reg)
     conjunta.
 
 ```{r}
+#| echo: true
 library(AER)
 linearHypothesis(reg, c("y74=0","y76=0","y78=0","y80=0","y82=0","y84=0"))
 ```
@@ -135,6 +140,7 @@ linearHypothesis(reg, c("y74=0","y76=0","y78=0","y80=0","y82=0","y84=0"))
 -   Es probable que existe heterocedasticidad. Usamos el test Breusch-Pagan con $H_0$ homoscedasticidad.
 
 ```{r}
+#| echo: true
 bptest(reg)
 ```
 
@@ -200,6 +206,8 @@ Procedimiento MCG Factibles
 Implementación:
 
 ```{r}
+#| echo: true
+#| scroll: true
 reg1 <- lm(kids~educ+age+I(age^2)+black+east+northcen+west+farm
            +othrural+town+smcity+y74+y76+y78+y80+y82+y84, data = db)
 
@@ -320,6 +328,7 @@ test $t$.
 ## Ejemplo 2: Efecto ubicación de un incinerador de basura sobre los precios de las viviendas (Kiel y McClain, 1995)
 
 ```{r}
+#| echo: true
 db <- read_dta("http://fmwww.bc.edu/ec-p/data/wooldridge/kielmc.dta")
 
 reg_efp <- lm(rprice~y81+nearinc+y81nrinc+age+agesq+intst+land+area+
@@ -332,6 +341,7 @@ summary(reg_efp)
 Alternativamente (para medir el efecto porcentual):
 
 ```{r}
+#| echo: true
 reg_perefp <- lm(log(rprice)~y81+nearinc+y81*nearinc+age+agesq+intst+
                      land+area+rooms+baths, data = db)
 summary(reg_perefp)
@@ -344,6 +354,7 @@ summary(reg_perefp)
 Estadísticas de delincuencia a nivel estado para dos años
 
 ```{r}
+#| echo: true
 library(dplyr)
 db <- read_dta("http://fmwww.bc.edu/ec-p/data/wooldridge/prison.dta")
 db_8690 <- db %>% 
@@ -519,6 +530,7 @@ $$tc_{it}=\beta_{0}+\beta_{1}td_{it}+u_{it}$$
 Si ignorando la estructura de panel estimamos:
 
 ```{r}
+#| echo: true
 db <- read_dta("http://fmwww.bc.edu/ec-p/data/wooldridge/crime2.dta")
 reg1 <- lm(crmrte~unem, data = db)
 summary(reg1)
@@ -529,6 +541,7 @@ summary(reg1)
 Usando un *corte transversal* en $t=87$:
 
 ```{r}
+#| echo: true
 reg2 <- lm(crmrte~unem, data = db, subset = year == 87)
 summary(reg2)
 ```
@@ -538,6 +551,7 @@ summary(reg2)
 Ahora usando el *estimador en primeras diferencias*:
 
 ```{r}
+#| echo: true
 library(plm)
 db.p <- pdata.frame(db, index = 46)
 db.p$dcrmrte <- diff(db.p$crmrte)
@@ -551,6 +565,7 @@ summary(reg_dif)
 Alternativamente es posible usar directamente el comando `plm` declarando previamente la estructura de panel con `pdata.frame(dabe_datos, index = c("ivar","tvar"))`:
 
 ```{r}
+#| echo: true
 reg_dif2 <- plm(crmrte~unem, data = db.p, model = "fd")
 summary(reg_dif2)
 ```
@@ -636,7 +651,7 @@ summary(reg_dif2)
 ## Ejemplo 4: Análisis de políticas de capacitación en las empresas
 
 ```{r}
-#| echo: false
+#| echo: true
 library(plm)
 db <- read_dta("http://fmwww.bc.edu/ec-p/data/wooldridge/jtrain.dta")
 db.p <- pdata.frame(db, index = c("fcode","year"))
@@ -882,7 +897,7 @@ Estamos interesados en el parámetro $\beta_{1}$ y usamos datos de Vella y Verbe
 MCO Agrupados:
 
 ```{r}
-#| echo: false
+#| echo: true
 library(plm)
 db <- read_dta("http://fmwww.bc.edu/ec-p/data/wooldridge/wagepan.dta")
 reg_mco <- lm(lwage~educ+exper+I(exper^2)+union+black+hisp+married, data = db)
@@ -894,7 +909,7 @@ summary(reg_mco)
 Usamos la estructura de panel:
 
 ```{r}
-#| echo: false
+#| echo: true
 db.p = pdata.frame(db, index = c("nr", "year"))
 head(subset(db.p, select = c("black","exper","hisp","married","educ",
                              "union","lwage")), n=15)
@@ -905,7 +920,7 @@ head(subset(db.p, select = c("black","exper","hisp","married","educ",
 Estimador en primeras diferencias:
 
 ```{r}
-#| echo: false
+#| echo: true
 reg_dif <- plm(lwage~educ+exper+I(exper^2)+union+black+hisp+married, 
                data = db.p, model = "fd")
 summary(reg_dif)
@@ -916,7 +931,7 @@ summary(reg_dif)
 Estimador Within (efectos fijos):
 
 ```{r}
-#| echo: false
+#| echo: true
 reg_ef <- plm(lwage~educ+exper+I(exper^2)+union+black+hisp+married, 
               data = db, model = "within")
 summary(reg_ef)
@@ -927,7 +942,7 @@ summary(reg_ef)
 Estimador Within con Variables Dummy Temporales:
 
 ```{r}
-#| echo: false
+#| echo: true
 reg_ef_cd <- plm(lwage~educ+exper+I(exper^2)+union+black+hisp+married
                  +educ:d81+educ:d82+educ:d83+educ:d84+educ:d85+educ:d86
                  +educ:d87, data = db.p, model = "within")
@@ -968,7 +983,7 @@ summary(reg_ef_cd)
 
 Estimador Within con Errores Estándar Agrupados:
 ```{r}
-#| echo: false
+#| echo: true
 coeftest(reg_ef_cd, vcov = vcovHC, type = "HC1")
 ```
 
@@ -1171,7 +1186,7 @@ $$\tilde{y}_{it} = y_{it}-\hat{\lambda}\overline{y}_{i} \ \ \ \ \ \
 Estimador Between:
 
 ```{r}
-#| echo: false
+#| echo: true
 reg_be <- plm(lwage~educ+exper+I(exper^2)+union+black+hisp+married, 
               data = db.p, model = "between")
 summary(reg_be)
@@ -1182,7 +1197,7 @@ summary(reg_be)
 Estimador de Efectos Aleatorios
 
 ```{r}
-#| echo: false
+#| echo: true
 reg_ea <- plm(lwage~educ+exper+I(exper^2)+union+black+hisp+married, 
               data = db.p, model = "random")
 summary(reg_ea)
@@ -1281,7 +1296,7 @@ u_{it} & =  \alpha_{i}+\epsilon_{it}
 Test Hausman:
 
 ```{r}
-#| echo: false
+#| echo: true
 reg_ef <- plm(lwage~educ+exper+I(exper^2)+union+black+hisp+married, 
               data = db, model = "within")
 reg_ea <- plm(lwage~educ+exper+I(exper^2)+union+black+hisp+married, 
