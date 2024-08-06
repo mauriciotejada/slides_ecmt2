@@ -1,0 +1,427 @@
+---
+title: "Econometría II"
+subtitle: "**Unidad 1: Muestras Grandes: Estimación y Propiedades**"
+author: "Mauricio M. Tejada"
+institute: "*Departamento de Economía, Universidad Diego Portales*"
+format: 
+  udp-revealjs:
+    footer: "Ingeniería Comercial -- Econometría II"
+incremental: false
+embed-resources: true
+---
+
+```{r setup, message=FALSE, warning=FALSE, include=FALSE}
+library(ggplot2)
+library(haven)
+library(magrittr)
+library(AER)
+
+theme_set(theme_minimal(base_size = 16))
+```
+
+# El modelo de regresión lineal: Repaso {.center .center-x}
+
+## Función de Regresión Poblacional
+
+Función de **Regresión Poblacional**:
+$$y_{i}=\beta_{0}+\beta_{1}x_{1i}+\beta_{2}x_{2i}+...+\beta_{K}x_{Ki}+u_{i}$$
+
+Efecto marginal (efecto [ceteris paribus]{.emph}) de la variable $k$:
+$$\Delta u_{i}=\Delta x_{j\neq k,i}=0\rightarrow\frac{\Delta y}{\Delta x_{ki}}=\beta_{k}\quad\forall k=1,...,K$$
+
+Variación total en la variables explicativas ($\Delta u_{i}=0$):
+$$\Delta y=\beta_{1}\Delta x_{1i}+\beta_{2}\Delta x_{2i}+...+\beta_{K}\Delta x_{Ki}$$
+
+## Función de Regresión Muestral y Mínimos Cuadrados Ordinarios
+
+Función de **Regresión Muestral**:
+$$\widehat{y}_{i}=\widehat{\beta}_{0}+\widehat{\beta}_{1}x_{1i}+\widehat{\beta}_{2}x_{2i}+...+\widehat{\beta}_{K}x_{Ki}$$
+
+Término residual:
+$$e_{i}=y_{i}-\widehat{y}_{i}$$
+Criterio de Mínimos Cuadrados Ordinarios:
+$$\min\sum_{i=1}^{n}e_{i}^{2}=\min\sum_{i=1}^{n}(y_{i}-\widehat{\beta}_{0}-\widehat{\beta}_{1}x_{1i}-\widehat{\beta}_{2}x_{2i}-...-\widehat{\beta}_{K}x_{Ki})^{2}$$
+
+CPO (sistema de ecuaciones normales, $K+1$ ecuaciones con $K+1$ incógnitas):
+\begin{eqnarray*}
+	\frac{\partial SRC}{\widehat{\beta}_{0}} & = & -2\sum_{i=1}^{n}(y_{i}-\widehat{\beta}_{0}-\widehat{\beta}_{1}x_{1i}-\widehat{\beta}_{2}x_{2i}-...-\widehat{\beta}_{K}x_{Ki})=0\\
+	\frac{\partial SRC}{\widehat{\beta}_{1}} & = & -2\sum_{i=1}^{n}(y_{i}-\widehat{\beta}_{0}-\widehat{\beta}_{1}x_{1i}-\widehat{\beta}_{2}x_{2i}-...-\widehat{\beta}_{K}x_{Ki})x_{1i}=0\\
+	 & \vdots\\
+	\frac{\partial SRC}{\widehat{\beta}_{K}} & = & -2\sum_{i=1}^{n}(y_{i}-\widehat{\beta}_{0}-\widehat{\beta}_{1}x_{1i}-\widehat{\beta}_{2}x_{2i}-...-\widehat{\beta}_{K}x_{Ki})x_{Ki}=0
+\end{eqnarray*}
+
+## Regresión simple con MCO
+
+Tomemos el caso de dos variables:
+$$
+\widehat{y}_{i}=\widehat{\beta}_{0}+\widehat{\beta}_{1}x_{i}
+$$
+
+Mínimos Cuadrados Ordinarios:
+$$
+min\sum_{i=1}^{n}e_{i}^{2}=min\sum_{i=1}^{n}(y_{i}-\widehat{\beta}_{0}-\widehat{\beta}_{1}x_{i})^{2}
+$$
+
+CPO (sistema de ecuaciones normales, $2$ ecuaciones con $2$ incógnitas):
+\begin{eqnarray*}
+\frac{\partial SRC}{\widehat{\beta}_{0}} & = & -2\sum_{i=1}^{n}(y_{i}-\widehat{\beta}_{0}-\widehat{\beta}_{1}x_{i})=0\\
+\frac{\partial SRC}{\widehat{\beta}_{1}} & = & -2\sum_{i=1}^{n}(y_{i}-\widehat{\beta}_{0}-\widehat{\beta}_{1}x_{i})x_{i}=0
+\end{eqnarray*}
+
+## Regresión simple con MCO
+
+Estimadores MCO:
+\begin{eqnarray*}
+\hat{\beta}_{0} & = & \bar{y}-\hat{\beta}_{1}\bar{x}\\
+\hat{\beta}_{1} & = & \frac{\sum_{i=1}^{n}(y_{i}-\bar{y})(x_{i}-\bar{x})}{\sum_{i=1}^{n}(x_{i}-\bar{x})^{2}}
+\end{eqnarray*}
+
+
+-  Si en la muestra $x$ y $y$ están correlacionadas positivamente (negativamente),
+$\hat{\beta}_{1}>0$ ($\hat{\beta}_{1}<0$).
+-  Requerimiento: $x$ tiene varianza positiva.
+
+
+## Descuento de efectos parciales (controles)
+
+La función de regresión muestral es:
+$$
+\widehat{y}_{i}=\widehat{\beta}_{0}+\widehat{\beta}_{1}x_{1i}+\widehat{\beta}_{2}x_{2i}+...+\widehat{\beta}_{K}x_{iK}
+$$
+
+Concentrémonos en $\hat{\beta}_{1}$. La CPO de MCO es:
+$$
+\sum_{i=1}^{n}(y_{i}-\widehat{\beta}_{0}-\widehat{\beta}_{1}x_{1i}-\widehat{\beta}_{2}x_{2i}-...-\widehat{\beta}_{K}x_{Ki})\left(\hat{x}_{1i}+e_{1i}\right)=0
+$$
+donde los $e_{1i}$ son los residuos MCO de la regresión $x_{1i}$
+sobre $x_{2i},...,x_{Ki}$. 
+
+## Descuento de efectos parciales (controles)
+
+El estimador MCO de $\beta_1$ es:
+$$
+\hat{\beta}_{1}=\frac{\sum_{i=1}^{n}y_{i}e_{1i}}{\sum_{i=1}^{n}e_{1i}^{2}}
+$$
+
+
+Note que:
+
+-  $e_{1i}$: Parte de $x_{1i}$ no correlacionada con $x_{2i},...,x_{Ki}$.
+-  $\hat{\beta}_{1}$: Relación muestral entre $y$ y $x_{1}$ después
+de descontar (controlar) los efectos de $x_{2i},...,x_{Ki}$.
+
+# Propiedades del estimador MCO {.center .center-x}
+
+## Propiedades en muestras pequeñas
+
+TABLA
+
+## Propiedades asintóticas
+
+- Bajo los supuestos 1 a 5 MCO es insesgados y eficiente. Estas son
+propiedades en muestras finitas.
+
+- Bajo los supuestos 1 a 6 los estimadores de MCO tienen una distribución
+normal.
+
+- Los estimadores MCO también tienen propiedades asintóticas ($n\rightarrow\infty$):
+consistencia. 
+
+- En algunos casos, algún estimador podría ser sesgado pero si la muestra
+se aproxima al infinito éste debiera ser consistente. [Consistencia]{.emph}
+es un requisito mínimo para un estimador. 
+	
+
+## Propiedades asintóticas
+
+Consistencia
+: *Sea $\hat{\beta}_{j}$ un estimador de \textbf{$\beta_{j}$ }para una muestra de tamaño $n$. $\hat{\beta}_{j}$ es un estimador consistente si para todo $\epsilon>0$, $\Pr[|\hat{\beta}_{j}-\beta_{j}|>\epsilon]\rightarrow0$ cuando $n\rightarrow\infty$. Alternativamente, se dice también que $\beta_{j}$ es el límite en probabilidad de $\hat{\beta}_{j}$, $plim(\hat{\beta}_{j})=\beta_{j}$.*
+
+\ 
+
+**Intuición**: 
+
+- Sea $\hat{\beta}_{j}$ el estimador MCO de $\beta_{j}$. Para cada $n$, $\hat{\beta}_{j}$ tiene una distribución de probabilidad.
+
+- Si $\hat{\beta}_{j}$ es consistente, a medida que $n\rightarrow\infty$ esta distribución se estrechará cada vez más alrededor de $\beta_{j}$. Entonces:  $\hat{\beta}_{j}$ estará arbitrariamente cerca de $\beta_{j}$.
+
+## Propiedades asintóticas
+
+**Consistencia**: Considere el estimador $\beta^*$ bajo distintos tamaños de muestra:
+
+![](figs/consistencia.png){fig-align="center"}
+
+
+## Propiedades asintóticas
+
+Vamos a requerir algunos conceptos de la estadística en muestras grandes.\bigskip
+
+Ley de los Grandes Números
+: *Sean $Y_{1},...,Y_{N}$ variable aleatorias i.i.d. con media $\mathbb{E}[Y]=\mu$.Entonces:
+$$plim\left(\frac{1}{N}\sum_{i=1}^{N}Y_{i}\right)=\mathbb{E}[Y]=\mu$$*
+
+Propiedades de los $plim$:
+	
+-  $plim\,g(\beta)=g(plim\,\beta)$
+-  $plim\left(\beta_{1}+\beta_{2}\right)=plim\,\beta_{1}+plim\,\beta_{2}$
+-  $plim\left(\beta_{1}\times\beta_{2}\right)=plim\,\beta_{1}\times plim\,\beta_{2}$
+-  $plim\left(\beta_{1}/\beta_{2}\right)=plim\,\beta_{1}/plim\,\beta_{2}$
+	
+## Propiedades asintóticas
+
+-  El estimador de MCO para el modelo de regresión simple es:
+$$\hat{\beta_{1}}=\frac{\sum_{i=1}^{N}y_{i}(x_{1i}-\bar{x}_{1})}{\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})^{2}}$$
+-  Bajo el mismo procedimiento usado para mostrar insesgamiento: 
+$$\hat{\beta_{1}}=\beta_{1}+\frac{\frac{1}{n}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})u_{i}}{\frac{1}{n}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})^{2}}$$
+
+## Propiedades asintóticas
+
+-  Bajo los supuestos 1 a 4, el estimador MCO es consistente:
+$$plim\,\hat{\beta}_{1}=\beta_{1}+\frac{\mathbb{Cov}(e_{1},u)}{\mathbb{V}(e_{1})}=\beta_{1}\,\,\,dado\ ,\mathbb{Cov}(x,u)=0$$
+
+**La clave para consistencia es** $\mathbb{Cov}(x,u)=0$. De hecho podemos sustituir el supuesto $\mathbb{E}[u|x]=0$ por $\mathbb{E}[u]=0$ y $\mathbb{Cov}(x,u)=0$ (que es más débil).
+
+# Estimador de Máximo Verosimilitud
+
+## Introducción
+
+- Motivación: Experimento "repetir el lanzamiento de una moneda 10 veces".
+
+- Definamos la variable aleatoria $X$ como el número de caras. Entonces $X \sim \operatorname{Binomial}\left(10, p_0\right)$ donde $p_0$ es la probabilidad de éxito (obtener cara).
+
+- Por ahora pensemos que $p_0$ es desconocido. La función de densidad de la variable aleatoria $X$ condicional en $p_0$ es entonces:
+$$
+f\left(X ; p_0\right)=\underset{p_0}{\operatorname{Pr}}(X=x)=\binom{N}{x} p_0^x\left(1-p_0\right)^{(N-x)}
+$$
+
+- En el experimento $N=10$. Ahora supongamos que realizamos el experimento y observamos $X=3$, dada esta realización hagamos dos pruebas:
+$$
+\begin{aligned}
+& \operatorname{Pr}_{0,5}^{\operatorname{Pr}}(X=3)=\binom{10}{3} 0,5^3 0,5^7=0,12 \\
+& \operatorname{Pr}_{0,2}(X=3)=\binom{10}{3} 0,2^3 0,8^7=0,20
+\end{aligned}
+$$
+
+## Introducción
+
+- Note que entre los dos resultados anteriores, $p=0,2$ es el valor hace la probabilidad de observar la realización $X=3$ más alta.
+
+- El principio de máxima verosimilitud se basa en justamente esta idea. Si se buscara estimar $p_0$ se elegiría aquel que maximice la probabilidad de observar una realización particular (la muestra). Entonces la idea sería:
+$$
+\operatorname{máx}_p f(3 ; p)=\binom{N}{3} p^3(1-p)^7
+$$
+
+- Alternativamente:
+$$
+\underset{p}{\operatorname{má}} \ln f(3 ; p)=3 \ln p+7 \ln (1-p)+\ln \binom{N}{3}
+$$
+
+- La condición de primer orden es:
+$$
+\frac{\partial \ln f(3 ; p)}{\partial p}=\frac{3}{p}+\frac{7}{1-p}=0 \longrightarrow p=\frac{3}{10}
+$$
+
+Este es el valor de $p$ que maximiza la probabilidad de observar $X=3$. Note que en general para $X=K$ en un experimento repetido $N$ veces el estimador máximo verosimilitud de $p$ es $=p=\frac{K}{N}$.
+	
+## El Principio de Máxima Verosimilitud
+
+- Sea $y=\left[y_1, y_2, \ldots, y_N\right]^{\prime}$ el vector de $N$ valores muestrales (observables) y $\theta=\left[\theta_1, \theta_2, \ldots, \theta_K\right]$ el vector de $K$ parámetros desconocidos.
+
+- La densidad conjunta de $y$ condicionada en $\theta$ es $f(y ; \theta)$.
+
+- Una interpretación alternativa a dicha función de densidad sería: para un $\theta$ determinado, cuál sería la probabilidad de observar un conjunto de resultados muestrales.
+
+- La función de verosimilitud:
+$$
+L(\theta ; y)=f(y ; \theta)
+$$
+
+- El estimador de máxima verosimilitud sigue el principio de máxima verosimilitud descrito antes y por tanto sería:
+$$
+\hat{\theta}^{M V}=\arg \text { máx } L(\theta ; y)
+$$
+
+Alternativamente:
+$$
+\hat{\theta}^{M V}=\arg \text { máx } \ln L(\theta ; y)
+$$
+
+## Propiedades del Estimador de Máxima Verosimilitud
+La propiedades del estimador de máxima verosimilitud son esencialmente asintóticas (esto es, en muestra grandes). Dichas propiedades son:
+
+1. Consistencia: $\operatorname{plim}\left(\hat{\theta}^{M L}\right)=\theta \longrightarrow \lim _{N \rightarrow \infty} \operatorname{Pr}\left(\hat{\theta}^{M L}-\theta>\epsilon\right)=0$
+
+2. Normalidad Asintótica: $\hat{\theta}^{M L} \sim N\left(\theta, I^{-1}(\theta)\right)$ donde $I(\theta)=E\left[\left(\frac{\partial l}{\partial \theta}\right)\left(\frac{\partial l}{\partial \theta}\right)^{\prime}\right]=-E\left[\frac{\partial^2 l}{\partial \theta^2}\right]$.
+
+3. Eficiencia Asintótica: $\hat{\theta}^{M L}$ tiene la mínima varianza entre la clase de estimadores consistentes y asintóticamente normales.
+
+4. Invarianza: Si $\hat{\theta}^{M L}$ es un estimador de máxima verosimilitud de $\theta$ y $g(\theta)$ es una función continua, entonces $g\left(\hat{\theta}^{M L}\right)$ es un estimador de máxima verosimilitud de $g(\theta)$.
+
+## Variables Aleatorias Independientes
+
+- La densidad conjunta de variables aleatorias independientes e idénticamente distribuidas es el producto de las funciones de densidad marginales.
+
+- Suponga que $y_i$ en $y$ son independientes y tienen la misma distribución de probabilidad, entonces:
+$$
+L(\theta ; y)=f\left(y_1 ; \theta\right) \times f\left(y_2 ; \theta\right) \times \ldots f\left(y_N ; \theta\right)
+$$
+
+- Alternativamente:
+$$
+l(\theta ; y)=\sum_{i=1}^N \ln f\left(y_i ; \theta\right)
+$$
+
+## El Modelo de Regresión Lineal
+
+- Illustramos el estimador usando el modelo de regresión lineal simple:
+$$
+y_i=\alpha+\beta x_i+u_i
+$$
+
+- Entre los supuestos del modelo teníamos que ui.i.d $\sim N\left(0, \sigma^2 I\right)$ por tanto la función de densidad de la observación $u_i$ es:
+$$
+f\left(u_i\right)=\frac{1}{\sqrt{2 \pi \sigma^2}} \exp \left\{-0,5 \frac{u_i^2}{\sigma^2}\right\}
+$$
+
+- Por tanto:
+$$
+f(u)=f\left(u_1\right) \times f\left(u_2\right) \times \ldots \times f\left(u_N\right)=\frac{1}{\left(2 \pi \sigma^2\right)^{N / 2}} \exp \left\{-0,5 \frac{\sum_{i=1}^N u_i^2}{\sigma^2}\right\}
+$$
+
+- Aplicando logaritmo tenemos:
+$$
+\ln f(u)=-\frac{N}{2} \ln 2 \pi-\frac{N}{2} \ln \sigma^2-0,5 \frac{\sum_{i=1}^N\left(y_i-\alpha-\beta x_i\right)^2}{\sigma^2}
+$$
+
+## El Modelo de Regresión Lineal
+Las condiciones de primer orden son:
+$$
+\begin{aligned}
+\frac{\partial l}{\partial \alpha} & =-\frac{1}{\sigma^2}\left[\sum_{i=1}^N\left(y_i-\alpha-\beta x_i\right)\right]=0 \\
+\frac{\partial l}{\partial \beta} & =-\frac{1}{\sigma^2}\left[\sum_{i=1}^N\left(y_i-\alpha-\beta x_i\right) x_i\right]=0 \\
+\frac{\partial l}{\partial \sigma^2} & =-\frac{N}{2 \sigma^2}+\frac{1}{2 \sigma^4}\left[\sum_{i=1}^N\left(y_i-\alpha-\beta x_i\right)^2\right]=0
+\end{aligned}
+$$
+
+## El Modelo de Regresión Lineal
+
+- Cómo $\sigma^2>0$, las dos primeras ecuaciones resuelven por $\alpha$ y $\beta$ :
+$$
+\begin{aligned}
+\sum_{i=1}^N y_i-N \widehat{\alpha}-\widehat{\beta} \sum_{i=1}^N x_i & =0 \\
+\sum_{i=1}^N y_i x_i-\widehat{\alpha} \sum_{i=1}^N x_i-\widehat{\beta} \sum_{i=1}^N x_i^2 & =0
+\end{aligned}
+$$
+Note que este es el sistema de ecuaciones normales de MCO.
+
+- De la última condición de primer orden tenemos:
+$$
+\widehat{\sigma}^2=\frac{1}{N} \sum_{i=1}^N\left(y_i-\widehat{\alpha}-\widehat{\beta} x_i\right)^2=\frac{1}{N} \sum_{i=1}^N \widehat{u}_i^2
+$$
+
+# Método Generalizado de Momentos
+
+## Introducción
+
+- Los Estimados del Método Generalizado de Momentos (MGM) tienen las siguientes ventajas:
+
+    - MGM incluye (como caso particular) los estimadores más comunes y proporciona un marco de trabajo útil para su comparación y evaluación.
+    - MGM es una alternativa "sensilla" respecto a otros estimadores (especialmente cuando resulta complicado formular un estimador de MV)
+
+Los costos:
+
+    - MGM es un estimador de muestra grandes (sus propiedades deseables son asintóticas). Ejemplo: es asintóticamente eficiente pero rara vez es eficiente en muestras pequeñas.
+    
+    - MGM suele requerir algún tipo de programación (aunque esto está cambiando en las versionas más recientes de los paquetes: Stata tiene una implementación relativamente sensilla).
+    
+## El Método de Momentos
+
+- Punto de partida - El Método de Momentos (MM): Definimos el momento poblacional $\gamma$ como la esperanza de una función continua $g(\cdot)$ de una variable aleatoria $x$ :
+$$
+\gamma=E[g(x)]
+$$
+
+Los momentos usualmente utilizados usan $g(x)=x^i$ con $i=1, \ldots, k$ :
+
+- Momento de primer orden (la media): $\gamma_1=E[x]$
+
+- Momento (no centrado) de segundo orden: $\gamma_2=E\left[x^2\right] \ldots$
+
+- Momento (no centrado) de orden $k: \gamma_k=E\left[x^k\right]$
+
+- Note que la varianza es una función de los dos primeros momentos:
+$$
+\operatorname{Var}(x)=E\left[x^2\right]-(E[x])^2
+$$
+
+## El Método de Momentos
+
+Definimos momento muestral como la versión del poblacional calculada con una muestra aleatoria de tamaño $n$ dada.
+$$
+\hat{\gamma}=\frac{1}{n} \sum_{i=1}^n g\left(x_i\right)
+$$
+
+Del mismo modo que antes podemos definir:
+
+- Momento de primer orden (la media): $\hat{\gamma_1}=\frac{1}{n} \sum_{i=1}^n x_i$
+
+- Momento (no centrado) de segundo orden: $\hat{\gamma_2}=\frac{1}{n} \sum_{i=1}^n x_i^2$...
+
+- Momento (no centrado) de orden $k: \hat{\gamma_k}=\frac{1}{n} \sum_{i=1}^n x_i^k$
+
+## El Método de Momentos
+- El método de momentos consiste simplemente en lo siguiente: Para estimar el momento poblacional utilizamos los correspondientes momentos muestrales.
+
+- Ejemplo: El estimados de la varianza:
+$$
+\begin{aligned}
+\operatorname{Var}(x) & =\frac{1}{n} \sum_{i=1}^n x_i^2-\left(\frac{1}{n} \sum_{i=1}^n x_i\right)^2 \\
+& =\frac{1}{n} \sum_{i=1}^n\left(x_i-\bar{x}\right)^2
+\end{aligned}
+$$
+
+Este es el estimador de momentos de la varianza.
+
+- Note que es sesgado en muestras pequeñas (el estimado convencionalmente usado es $\left.\operatorname{Var}(x)=\frac{1}{n-1} \sum_{i=1}^n\left(x_i-\bar{x}\right)^2\right)$. En muestras grandes el sesgo tiende a cero.
+
+## MCO como un Problema de Momentos
+- Suponga que tenemos el siguiente modelo de regresión simple:
+$$
+y_i=\beta_0+\beta_1 x_i+\epsilon_i
+$$
+donde $\epsilon_i \sim Q\left(0, \sigma^2\right)$ con $Q$ alguna distribución (no necesariamente normal).
+- Si el modelo está bien especificado entonces:
+$$
+E\left[\epsilon_i \times 1\right]=E\left[\epsilon_i \times x_i\right]=0
+$$
+para todo $i$ (condiciones de ortogonalidad).
+- Usando el modelo de regresión tenemos:
+$$
+\begin{aligned}
+E\left[\left(y_i-\beta_0-\beta_1 x_i\right) \times 1\right] & =0 \\
+E\left[\left(y_i-\beta_0-\beta_1 x_i\right) \times x_i\right] & =0
+\end{aligned}
+$$
+
+Note que $\beta_k(k=0,1)$ es desconocido.
+
+## MCO como un Problema de Momentos
+- El método de momentos sugiere reemplazar momentos poblacionales por momentos muestrales:
+$$
+\begin{aligned}
+& \frac{1}{n} \sum_{i=1}^n\left(y_i-\beta_0-\beta_1 x_i\right) \times 1 \\
+& \frac{1}{n} \sum_{i=1}^n\left(y_i-\beta_0-\beta_1 x_i\right) \times x_i
+\end{aligned}
+$$
+
+- El verdadero valor de los parámetros $\beta_k(k=0,1)$ hace que los momentos poblacionales sean cero. Es razonable suponer que los estimadores hacen que los momentos muestrales sean cero.
+$$
+\begin{aligned}
+& \frac{1}{n} \sum_{i=1}^n\left(y_i-\hat{\beta}_0-\hat{\beta}_1 x_i\right) \times 1=0 \\
+& \frac{1}{n} \sum_{i=1}^n\left(y_i-\hat{\beta}_0-\hat{\beta}_1 x_i\right) \times x_i=0
+\end{aligned}
+$$
+
+- Note que esta ecuaciones son el sistema de ecuaciones normales del estimador MCO.
+
+## 
