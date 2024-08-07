@@ -1,6 +1,6 @@
 ---
 title: "Econometría II"
-subtitle: "**Unidad 1: Muestras Grandes: Estimación y Propiedades**"
+subtitle: "**Unidad 1: Muestras Grandes, Estimación y Propiedades**"
 author: "Mauricio M. Tejada"
 institute: "*Departamento de Economía, Universidad Diego Portales*"
 format: 
@@ -42,6 +42,8 @@ $$e_{i}=y_{i}-\widehat{y}_{i}$$
 Criterio de Mínimos Cuadrados Ordinarios:
 $$\min\sum_{i=1}^{n}e_{i}^{2}=\min\sum_{i=1}^{n}(y_{i}-\widehat{\beta}_{0}-\widehat{\beta}_{1}x_{1i}-\widehat{\beta}_{2}x_{2i}-...-\widehat{\beta}_{K}x_{Ki})^{2}$$
 
+## MCO y el sistema de ecuaciones normales
+
 CPO (sistema de ecuaciones normales, $K+1$ ecuaciones con $K+1$ incógnitas):
 \begin{eqnarray*}
 	\frac{\partial SRC}{\widehat{\beta}_{0}} & = & -2\sum_{i=1}^{n}(y_{i}-\widehat{\beta}_{0}-\widehat{\beta}_{1}x_{1i}-\widehat{\beta}_{2}x_{2i}-...-\widehat{\beta}_{K}x_{Ki})=0\\
@@ -81,7 +83,6 @@ Estimadores MCO:
 $\hat{\beta}_{1}>0$ ($\hat{\beta}_{1}<0$).
 -  Requerimiento: $x$ tiene varianza positiva.
 
-
 ## Descuento de efectos parciales (controles)
 
 La función de regresión muestral es:
@@ -110,29 +111,40 @@ Note que:
 -  $\hat{\beta}_{1}$: Relación muestral entre $y$ y $x_{1}$ después
 de descontar (controlar) los efectos de $x_{2i},...,x_{Ki}$.
 
-# Propiedades del estimador MCO {.center .center-x}
+# Propiedades del estimador MCO en muestras pequeñas {.center .center-x}
 
-## Propiedades en muestras pequeñas
+## Supuestos
 
-TABLA
+S1. Muestreo aleatorio.
 
-## Propiedades asintóticas
+S2. Linealidad en los parámetros.
 
-- Bajo los supuestos 1 a 5 MCO es insesgados y eficiente. Estas son
-propiedades en muestras finitas.
+S3. No hay colinealidad perfecta.
 
-- Bajo los supuestos 1 a 6 los estimadores de MCO tienen una distribución
-normal.
+S4. Esperanza condicional cero para el término de error: 
+$$\mathbb{E}[u_{i}|x]=0,\,\,\,\,\,x=x_{1i},x_{2i},...,x_{Ki}$$
 
-- Los estimadores MCO también tienen propiedades asintóticas ($n\rightarrow\infty$):
-consistencia. 
+S5. Errores no autocorrelacionados y homocedásticos: 
+$$\mathbb{V}(u_{i}|x)=\sigma^{2}\quad\forall i\quad y\quad \mathbb{Cov}(u_{i},u_{j}|x)=0\quad\forall i\neq j$$
 
-- En algunos casos, algún estimador podría ser sesgado pero si la muestra
-se aproxima al infinito éste debiera ser consistente. [Consistencia]{.emph}
-es un requisito mínimo para un estimador. 
-	
+S6. Normalidad de los errores: $u_i | x \sim \mathcal{N}(0, \sigma^2)\quad \forall i$.
 
-## Propiedades asintóticas
+## Implicancias
+
+| Supuesto | Implicancia |
+| --- | --- |
+| S1 | Representatividad de la población (no selección) |
+| S2 | Sistema de Ecuaciones Normales lineal | 
+| S3 | Independecia Lineal del Sistema de Ecuaciones Normales |
+| [S2 y S3]{.color-red} | [Identificación: Solución única para estimadores MCO]{.color-red} | 
+| S4 | Idependencia entre $u$ y $x$ (exogeneidad) |
+| [S1 a S4]{.color-red} | [Insesgamiento: $\mathbb{E}\left[\widehat{\beta}_{k}|x_{1i},...,x_{Ki}\right]=\beta_{k}\Rightarrow \mathbb{E}\left[\widehat{\beta}_{k}\right]=\beta_{k}\,\,\,\,k=0,1,...,K$]{.color-red} |
+| [S1 a S5]{.color-red} | [Eficiencia: $\widehat{\beta}_{k}$ MCO es el más eficiente (mínima varianza) entre los estimadores linealmente insesgados (MELI). $\widehat{\mathbb{V}}(\hat{\beta}_{k}|x)=\frac{s^{2}}{\sum_{i=1}^{n}(x_{ki}-\bar{x}_{k})^{2}(1-R_{k}^{2})}$]{.color-red} |
+| [S1 a S6]{.color-red} | [$\widehat{\beta}_{k}\sim \mathcal{N}(\beta_{k},\mathbb{V}(\widehat{\beta}_{k}|x))$. Inferencia tests $t$, $F$, $\chi^2$ y estimación por intervalo.]{.color-red} |
+
+# Propiedades asintóticas del estimador MCO {.center .center-x}
+
+## Consistencia
 
 Consistencia
 : *Sea $\hat{\beta}_{j}$ un estimador de \textbf{$\beta_{j}$ }para una muestra de tamaño $n$. $\hat{\beta}_{j}$ es un estimador consistente si para todo $\epsilon>0$, $\Pr[|\hat{\beta}_{j}-\beta_{j}|>\epsilon]\rightarrow0$ cuando $n\rightarrow\infty$. Alternativamente, se dice también que $\beta_{j}$ es el límite en probabilidad de $\hat{\beta}_{j}$, $plim(\hat{\beta}_{j})=\beta_{j}$.*
@@ -145,14 +157,14 @@ Consistencia
 
 - Si $\hat{\beta}_{j}$ es consistente, a medida que $n\rightarrow\infty$ esta distribución se estrechará cada vez más alrededor de $\beta_{j}$. Entonces:  $\hat{\beta}_{j}$ estará arbitrariamente cerca de $\beta_{j}$.
 
-## Propiedades asintóticas
+## Consistencia
 
 **Consistencia**: Considere el estimador $\beta^*$ bajo distintos tamaños de muestra:
 
 ![](figs/consistencia.png){fig-align="center"}
 
 
-## Propiedades asintóticas
+## Consistencia
 
 Vamos a requerir algunos conceptos de la estadística en muestras grandes.\bigskip
 
@@ -167,19 +179,80 @@ Propiedades de los $plim$:
 -  $plim\left(\beta_{1}\times\beta_{2}\right)=plim\,\beta_{1}\times plim\,\beta_{2}$
 -  $plim\left(\beta_{1}/\beta_{2}\right)=plim\,\beta_{1}/plim\,\beta_{2}$
 	
-## Propiedades asintóticas
+## Consistencia
 
 -  El estimador de MCO para el modelo de regresión simple es:
 $$\hat{\beta_{1}}=\frac{\sum_{i=1}^{N}y_{i}(x_{1i}-\bar{x}_{1})}{\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})^{2}}$$
 -  Bajo el mismo procedimiento usado para mostrar insesgamiento: 
 $$\hat{\beta_{1}}=\beta_{1}+\frac{\frac{1}{n}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})u_{i}}{\frac{1}{n}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})^{2}}$$
 
-## Propiedades asintóticas
+## Consistencia
 
 -  Bajo los supuestos 1 a 4, el estimador MCO es consistente:
-$$plim\,\hat{\beta}_{1}=\beta_{1}+\frac{\mathbb{Cov}(e_{1},u)}{\mathbb{V}(e_{1})}=\beta_{1}\,\,\,dado\ ,\mathbb{Cov}(x,u)=0$$
+$$plim\,\hat{\beta}_{1}=\beta_{1}+\frac{\mathbb{Cov}(x_{1},u)}{\mathbb{V}(x_{1})}=\beta_{1}\,\,\,dado\ \mathbb{Cov}(x,u)=0$$
 
-**La clave para consistencia es** $\mathbb{Cov}(x,u)=0$. De hecho podemos sustituir el supuesto $\mathbb{E}[u|x]=0$ por $\mathbb{E}[u]=0$ y $\mathbb{Cov}(x,u)=0$ (que es más débil).
+**La clave para consistencia es** $\mathbb{Cov}(x,u)=0$. De hecho podemos sustituir el supuesto $\mathbb{E}[u|x]=0$ por uno más débil (no requiere independencia solo no existencia de correlación):
+
+\ 
+
+S4'. $\mathbb{E}[u]=0$ y $\mathbb{Cov}(x,u)=0$.
+
+## Sesgo asintótico (inconsistencia)
+
+Supongamos que el verdadero modelo es:
+$$
+y_i=\beta_0+\beta_1 x_{1 i}+\beta_2 x_{2 i}+u_i
+$$
+pero estimamos:
+$$
+y_i=\widetilde{\beta}_0+\widetilde{\beta}_1 x_{1 i}+u_i
+$$
+usando MCO:
+$$
+\widetilde{\beta}_1=\frac{\sum\left(x_{1 i}-\bar{x}_1\right)\left(y_i-\bar{y}\right)}{\sum\left(x_{1 i}-\bar{x}_1\right)^2}
+$$
+
+¿Qué sucede con las propiedades asintóticas de $\widetilde{\beta}_1$ ?
+$$
+plim \left[\widetilde{\beta}_1\right]=\beta_1+\beta_2 \frac{\mathbb{C}ov(x_1,x_2)}{\mathbb{V}(x_1)} \rightarrow plim[\widetilde{\beta_1}]-\beta_1 = \beta_2 \delta \neq 0 \text{ si } \mathbb{C}ov(x_1,x_2) \neq 0
+$$
+
+## Normalidad Asintótica e Inferencia
+
+- En muestras pequeñas, la normalidad exacta de los estimadores de MCO depende de la normalidad, en la población, de la distribución del error u.
+
+- Si los estimadores MCO no estarán distribuidos normalmente, los estadísticos $t$ no tendrán distribuciones $t$ y los estadísticos $F$ no tendrán distribuciones $F$.
+
+- La normalidad no juega ningún papel en las propiedades de insegamiento y eficiencia, pero [la inferencia exacta basada en los estadísticos $t$ y $F$ si requiere de normalidad.]{.color-red}
+
+Recordemos el TCL:
+
+Teorema Central del Límite
+: *Si $x_1, x_2, \ldots, x_n$ son muestras aleatorias extraídas de una población con media $\mu$ y varianza finita $\sigma^2$, y si $\bar{x}_n$ es la media muestral de las primeras $n$ muestras, entonces $z = \left(\frac{\bar{x}_n-\mu}{\sigma_{\bar{x}}}\right) \stackrel{a}{\sim} \mathcal{N}(0, 1)$, con $\sigma_{\bar{X}}=\sigma / \sqrt{n}$. Alternativamente, $\sqrt{n}(\bar{x}_n-\mu) \stackrel{a}{\sim} \mathcal{N}(0, \sigma^2)$*
+
+## Normalidad Asintótica e Inferencia
+
+Normalidad Asintótica
+: *Bajo los supuestos S1 a S5 (usando S4' en lugar de S4) tenemos*:
+
+    - *$\sqrt{n}\left(\hat{\beta}_k-\beta_k\right) \stackrel{a}{\sim} \mathcal{N}\left(0, \sigma^2 / a_k^2\right)$, donde $\sigma^2 / a_k^2>0$ es la varianza asintótica de $\sqrt{n}\left(\hat{\beta}_k-\beta_k\right)$; los coeficientes de pendiente, $a_k^2=plim\left(n^{-1} STC_k(1-R_k^2)\right)$, donde $STC_k$ y $R_k^2$ corresponden a regresar $x_k$ sobre las otras variables independientes. Se dice que $\hat{\beta}_k$ está distribuida en forma asintóticamente normal;*
+    - *$\hat{\sigma}^2$ es un estimador consistente de $\sigma^2=\mathbb{V}(u)$;*
+    - *Para cada $k$,$$ \left(\hat{\beta}_k-\beta_k\right) / \operatorname{ee}\left(\hat{\beta}_k\right) \stackrel{\text { a }}{\sim} \operatorname{Normal}(0,1),$$ donde ee $\left(\hat{\beta}_k\right)$ es el error estándar usual de MCO.*
+
+## Normalidad Asintótica e Inferencia
+
+- Tomemos el caso del modelo de regresión simple:
+$$\sqrt{n}(\hat{\beta_{1}}-\beta_{1})=\sqrt{n}\frac{\frac{1}{n}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})u_{i}}{\frac{1}{n}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})^{2}} = \frac{\sqrt{n}^{-1}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})u_{i}}{s_x^2}$$
+- Usando la ley de los grandes número tnemos que: $plim(s_x^2)=\sigma^2_x$ y $plim(\bar{x})=\mu$.
+
+    - Cuando $n \rightarrow \infty$ tenemos que $\sqrt{n}^{-1}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})u_{i} \stackrel{a}{\sim} \mathcal{N}(0, \sigma^2_x \sigma^2)$
+    
+    - También: $\frac{\sqrt{n}^{-1}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})u_{i}}{\sigma_x^2} \stackrel{a}{\sim} \mathcal{N}(0, (\sigma^2_x \sigma^2)/(\sigma_x^2)^2)$ 
+    
+    Note que $\sigma^2 / a_k^2 = \sigma^2/\sigma_x^2$ en el contexto del modelo de regresión simple.
+
+## Normalidad Asintótica e Inferencia
+
 
 # Estimador de Máximo Verosimilitud
 
@@ -191,14 +264,14 @@ $$plim\,\hat{\beta}_{1}=\beta_{1}+\frac{\mathbb{Cov}(e_{1},u)}{\mathbb{V}(e_{1})
 
 - Por ahora pensemos que $p_0$ es desconocido. La función de densidad de la variable aleatoria $X$ condicional en $p_0$ es entonces:
 $$
-f\left(X ; p_0\right)=\underset{p_0}{\operatorname{Pr}}(X=x)=\binom{N}{x} p_0^x\left(1-p_0\right)^{(N-x)}
+f\left(X ; p_0\right)=\operatorname{Pr}(X=x)=\binom{N}{x} p_0^x\left(1-p_0\right)^{(N-x)}
 $$
 
 - En el experimento $N=10$. Ahora supongamos que realizamos el experimento y observamos $X=3$, dada esta realización hagamos dos pruebas:
 $$
 \begin{aligned}
-& \operatorname{Pr}_{0,5}^{\operatorname{Pr}}(X=3)=\binom{10}{3} 0,5^3 0,5^7=0,12 \\
-& \operatorname{Pr}_{0,2}(X=3)=\binom{10}{3} 0,2^3 0,8^7=0,20
+& \operatorname{Pr}_{0,5}(X=3)=\binom{10}{3} 0.5^3 0.5^7=0.12 \\
+& \operatorname{Pr}_{0,2}(X=3)=\binom{10}{3} 0.2^3 0.8^7=0.20
 \end{aligned}
 $$
 
@@ -326,13 +399,16 @@ $$
 - Los Estimados del Método Generalizado de Momentos (MGM) tienen las siguientes ventajas:
 
     - MGM incluye (como caso particular) los estimadores más comunes y proporciona un marco de trabajo útil para su comparación y evaluación.
-    - MGM es una alternativa "sensilla" respecto a otros estimadores (especialmente cuando resulta complicado formular un estimador de MV)
 
-Los costos:
+    - MGM es una alternativa "sensilla" respecto a otros estimadores (especialmente cuando resulta complicado formular un estimador de MV)
+    
+    - MGM hace sensillo implementar modelos no lineales.
+
+- Los costos:
 
     - MGM es un estimador de muestra grandes (sus propiedades deseables son asintóticas). Ejemplo: es asintóticamente eficiente pero rara vez es eficiente en muestras pequeñas.
     
-    - MGM suele requerir algún tipo de programación (aunque esto está cambiando en las versionas más recientes de los paquetes: Stata tiene una implementación relativamente sensilla).
+    - MGM suele requerir algún tipo de programación (aunque esto está cambiando en las versionas más recientes de los paquetes: R tiene una implementación relativamente sensilla).
     
 ## El Método de Momentos
 
@@ -424,4 +500,4 @@ $$
 
 - Note que esta ecuaciones son el sistema de ecuaciones normales del estimador MCO.
 
-## 
+## Generalización: Método Generalizado de Momentos
