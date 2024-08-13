@@ -182,7 +182,7 @@ Propiedades de los $plim$:
 ## Consistencia
 
 -  El estimador de MCO para el modelo de regresión simple es:
-$$\hat{\beta_{1}}=\frac{\sum_{i=1}^{N}y_{i}(x_{1i}-\bar{x}_{1})}{\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})^{2}}$$
+$$\hat{\beta_{1}}=\frac{\sum_{i=1}^{N}(y_{i}-\bar{y})(x_{1i}-\bar{x}_{1})}{\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})^{2}}$$
 -  Bajo el mismo procedimiento usado para mostrar insesgamiento: 
 $$\hat{\beta_{1}}=\beta_{1}+\frac{\frac{1}{n}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})u_{i}}{\frac{1}{n}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})^{2}}$$
 
@@ -225,15 +225,17 @@ $$
 
 - La normalidad no juega ningún papel en las propiedades de insegamiento y eficiencia, pero [la inferencia exacta basada en los estadísticos $t$ y $F$ si requiere de normalidad.]{.color-red}
 
+- [En muestras grandes, cuando $n \rightarrow \infty$ los estimadores tienen una distribución normal de forma aproximada]{.color-red} sin importar la distribución en muestras pequeñas. Entonces, la inferencia también se basa en distribuciones $t$ y $F$ aproximadas. 
+
 Recordemos el TCL:
 
 Teorema Central del Límite
-: *Si $x_1, x_2, \ldots, x_n$ son muestras aleatorias extraídas de una población con media $\mu$ y varianza finita $\sigma^2$, y si $\bar{x}_n$ es la media muestral de las primeras $n$ muestras, entonces $z = \left(\frac{\bar{x}_n-\mu}{\sigma_{\bar{x}}}\right) \stackrel{a}{\sim} \mathcal{N}(0, 1)$, con $\sigma_{\bar{X}}=\sigma / \sqrt{n}$. Alternativamente, $\sqrt{n}(\bar{x}_n-\mu) \stackrel{a}{\sim} \mathcal{N}(0, \sigma^2)$*
+: *Si $x_1, x_2, \ldots, x_n$ son muestras aleatorias (i.i.d.) extraídas de una población con media $\mu$ y varianza finita $\sigma^2$, y si $\bar{x}_n$ es la media muestral de las primeras $n$ muestras, entonces $z = \left(\frac{\bar{x}_n-\mu}{\sigma_{\bar{x}}}\right) \stackrel{a}{\sim} \mathcal{N}(0, 1)$, con $\sigma_{\bar{X}}=\sigma / \sqrt{n}$. Alternativamente, $\sqrt{n}(\bar{x}_n-\mu) \stackrel{a}{\sim} \mathcal{N}(0, \sigma^2)$*
 
 ## Normalidad Asintótica e Inferencia
 
 Normalidad Asintótica
-: *Bajo los supuestos S1 a S5 (usando S4' en lugar de S4) tenemos*:
+: *Bajo los supuestos S1 a S5 tenemos*:
 
     - *$\sqrt{n}\left(\hat{\beta}_k-\beta_k\right) \stackrel{a}{\sim} \mathcal{N}\left(0, \sigma^2 / a_k^2\right)$, donde $\sigma^2 / a_k^2>0$ es la varianza asintótica de $\sqrt{n}\left(\hat{\beta}_k-\beta_k\right)$; los coeficientes de pendiente, $a_k^2=plim\left(n^{-1} STC_k(1-R_k^2)\right)$, donde $STC_k$ y $R_k^2$ corresponden a regresar $x_k$ sobre las otras variables independientes. Se dice que $\hat{\beta}_k$ está distribuida en forma asintóticamente normal;*
     - *$\hat{\sigma}^2$ es un estimador consistente de $\sigma^2=\mathbb{V}(u)$;*
@@ -241,17 +243,52 @@ Normalidad Asintótica
 
 ## Normalidad Asintótica e Inferencia
 
-- Tomemos el caso del modelo de regresión simple:
-$$\sqrt{n}(\hat{\beta_{1}}-\beta_{1})=\sqrt{n}\frac{\frac{1}{n}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})u_{i}}{\frac{1}{n}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})^{2}} = \frac{\sqrt{n}^{-1}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})u_{i}}{s_x^2}$$
-- Usando la ley de los grandes número tnemos que: $plim(s_x^2)=\sigma^2_x$ y $plim(\bar{x})=\mu$.
+- Notación:
+    
+    - Media y varianza poblacionales: $\mu_x = \mathbb{E}[x]$ y $\sigma_x^2 = \mathbb{E}[(x-\mu_x)^2] = \mathbb{V}(x)$.
+    
+    - Media y varianza muestrales: $\bar{x} = \frac{\sum x_i}{n}$ y $s_x^2 = \frac{\sum(x_i-\bar{x})^2}{n}$.
 
-    - Cuando $n \rightarrow \infty$ tenemos que $\sqrt{n}^{-1}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})u_{i} \stackrel{a}{\sim} \mathcal{N}(0, \sigma^2_x \sigma^2)$
+- Tomemos el caso del modelo de regresión simple:
+$$\hat{\beta} = \beta + \frac{\frac{1}{n}\sum_{i=1}^{N}(x_{i}-\bar{x})u_{i}}{\frac{1}{n}\sum_{i=1}^{N}(x_{i}-\bar{x})^{2}} = \beta + \frac{\bar{v}}{s^2_{x}}$$ con $\bar{v} = \frac{1}{n}\sum_{i=1}^{N}(x_{i}-\bar{x})u_{i}$.
+
+
+- Puntos a considerar:
+
+    - $plim \ \bar{x} = \mu_x$, $plim \ s^2_x = \sigma^2_x$ y $plim \ \bar{v} = \mathbb{E}[(x-\mu_x)u] = 0$.
     
-    - También: $\frac{\sqrt{n}^{-1}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})u_{i}}{\sigma_x^2} \stackrel{a}{\sim} \mathcal{N}(0, (\sigma^2_x \sigma^2)/(\sigma_x^2)^2)$ 
+    - $v_i$ es i.i.d. porque $x_i$ e $u_i$ son i.i.d.
     
-    Note que $\sigma^2 / a_k^2 = \sigma^2/\sigma_x^2$ en el contexto del modelo de regresión simple.
+    - $\sigma^2_{v} = \mathbb{V}[(x-\mu_x)u]$ es finita porque $\sigma^2_{x_1}$ y $\sigma^2$ son finitas.  
+
 
 ## Normalidad Asintótica e Inferencia
+
+- Entonces:
+$$\bar{v}/\sigma_{\bar{v}} \stackrel{a}{\sim} \mathcal{N}(0,1) \text{ o alternativamente } \bar{v} \stackrel{a}{\sim} \mathcal{N}(0,\sigma^2_v/n) $$
+- Sabemos además que converge a $\hat{\beta}-\beta = \frac{\bar{v}}{\sigma^2_{x}}$ entonces:
+$$\hat{\beta}-\beta \stackrel{a}{\sim} \mathcal{N}\left(0,\frac{\mathbb{V}(\bar{v})}{(\sigma^2_x)^2}\right)$$
+
+- Bajo los supuestos S1 a S5 tenemos:
+
+    - $\mathbb{E}[v] = 0$ y $\mathbb{V}(v) = \mathbb{E}[(v-\mathbb{E}(v))^2]= \mathbb{E}[(x-\mu_x)^2]\mathbb{E}[u^2] = \sigma^2_x \sigma^2$
+
+- Entonces:
+$$\mathbb{V}(\bar{v}) = \frac{\sum \mathbb{V}(v_i)}{n^2}= \frac{n \sigma^2_x \sigma^2}{n^2} $$ por lo que finalmente: $\hat{\beta} \stackrel{a}{\sim} \mathcal{N}\left(\beta,\frac{\sigma^2}{n \sigma^2_x}\right)$.
+
+## Eficiencia Asintótica 
+
+- Tomemos nuevamente el modelo de regresión simple y supongamos que se cumplen los supuesto S1 a S5.
+
+- Sea $g(x)$ una función de $x$ tal que $z=g(x)$. Bajo el supuesto S4 $Cov(z,x)\neq0$ y $Cov(z,u)=0$
+
+Implicaciones de Independencia
+: *Si $x$ e $y$ son variables aleatorias $\mathbb{E}[x|y]=\mathbb{E}[x]$ entonces $Cov(x,y)=0$. Más aún, si g(x) es una función de $x$ se cumple que $Cov(g(x),y)=0$.*
+
+- Sea $\tilde{\beta}$ un estimador de $\beta$:
+$$
+\tilde{\beta} = \frac{\sum\left(z_i-\bar{z}\right)\left(y_i-\bar{y}\right)}{\sum\left(z_{i}-\bar{z}\right)\left(x_{i}-\bar{x}\right)}
+$$
 
 
 # Estimador de Máximo Verosimilitud
@@ -262,7 +299,7 @@ $$\sqrt{n}(\hat{\beta_{1}}-\beta_{1})=\sqrt{n}\frac{\frac{1}{n}\sum_{i=1}^{N}(x_
 
 - Definamos la variable aleatoria $X$ como el número de caras. Entonces $X \sim \operatorname{Binomial}\left(10, p_0\right)$ donde $p_0$ es la probabilidad de éxito (obtener cara).
 
-- Por ahora pensemos que $p_0$ es desconocido. La función de densidad de la variable aleatoria $X$ condicional en $p_0$ es entonces:
+- Ahora pensemos en $p_0$ desconocido. La función de densidad de $X$ condicional en $p_0$ es:
 $$
 f\left(X ; p_0\right)=\operatorname{Pr}(X=x)=\binom{N}{x} p_0^x\left(1-p_0\right)^{(N-x)}
 $$
@@ -275,18 +312,19 @@ $$
 \end{aligned}
 $$
 
-## Introducción
-
 - Note que entre los dos resultados anteriores, $p=0,2$ es el valor hace la probabilidad de observar la realización $X=3$ más alta.
 
-- El principio de máxima verosimilitud se basa en justamente esta idea. Si se buscara estimar $p_0$ se elegiría aquel que maximice la probabilidad de observar una realización particular (la muestra). Entonces la idea sería:
+
+## Introducción
+
+- *Principio de máxima verosimilitud:* Si se buscara estimar $p_0$ se elegiría aquel que maximice la probabilidad de observar una realización particular (la muestra).
 $$
-\operatorname{máx}_p f(3 ; p)=\binom{N}{3} p^3(1-p)^7
+\max_p f(3 ; p)=\binom{N}{3} p^3(1-p)^7
 $$
 
 - Alternativamente:
 $$
-\underset{p}{\operatorname{má}} \ln f(3 ; p)=3 \ln p+7 \ln (1-p)+\ln \binom{N}{3}
+\max_p \ln f(3 ; p)=3 \ln p+7 \ln (1-p)+\ln \binom{N}{3}
 $$
 
 - La condición de primer orden es:
