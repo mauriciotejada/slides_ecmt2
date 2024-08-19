@@ -182,14 +182,14 @@ Propiedades de los $plim$:
 ## Consistencia
 
 -  El estimador de MCO para el modelo de regresión simple es:
-$$\hat{\beta_{1}}=\frac{\sum_{i=1}^{N}(y_{i}-\bar{y})(x_{1i}-\bar{x}_{1})}{\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})^{2}}$$
+$$\hat{\beta}_1=\frac{\sum_{i=1}^{N}(y_{i}-\bar{y})(x_{i}-\bar{x})}{\sum_{i=1}^{N}(x_{i}-\bar{x})^{2}}$$
 -  Bajo el mismo procedimiento usado para mostrar insesgamiento: 
-$$\hat{\beta_{1}}=\beta_{1}+\frac{\frac{1}{n}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})u_{i}}{\frac{1}{n}\sum_{i=1}^{N}(x_{1i}-\bar{x}_{1})^{2}}$$
+$$\hat{\beta}_1=\beta_1+\frac{\frac{1}{n}\sum_{i=1}^{N}(x_{i}-\bar{x})u_{i}}{\frac{1}{n}\sum_{i=1}^{N}(x_{i}-\bar{x})^{2}}$$
 
 ## Consistencia
 
 -  Bajo los supuestos 1 a 4, el estimador MCO es consistente:
-$$plim\,\hat{\beta}_{1}=\beta_{1}+\frac{\mathbb{Cov}(x_{1},u)}{\mathbb{V}(x_{1})}=\beta_{1}\,\,\,dado\ \mathbb{Cov}(x,u)=0$$
+$$plim\,\hat{\beta}_1=\beta_1+\frac{\mathbb{Cov}(x,u)}{\mathbb{V}(x)}=\beta_{1}\,\,\,dado\ \mathbb{Cov}(x,u)=0$$
 
 **La clave para consistencia es** $\mathbb{Cov}(x,u)=0$. De hecho podemos sustituir el supuesto $\mathbb{E}[u|x]=0$ por uno más débil (no requiere independencia solo no existencia de correlación):
 
@@ -221,13 +221,11 @@ $$
 
 - En muestras pequeñas, la normalidad exacta de los estimadores de MCO depende de la normalidad, en la población, de la distribución del error u.
 
-- Si los estimadores MCO no estarán distribuidos normalmente, los estadísticos $t$ no tendrán distribuciones $t$ y los estadísticos $F$ no tendrán distribuciones $F$.
+  - Si los estimadores MCO no estarán distribuidos normalmente, los estadísticos $t$ no tendrán distribuciones $t$ y los estadísticos $F$ no tendrán distribuciones $F$.
 
 - La normalidad no juega ningún papel en las propiedades de insegamiento y eficiencia, pero [la inferencia exacta basada en los estadísticos $t$ y $F$ si requiere de normalidad.]{.color-red}
 
-- [En muestras grandes, cuando $n \rightarrow \infty$ los estimadores tienen una distribución normal de forma aproximada]{.color-red} sin importar la distribución en muestras pequeñas. Entonces, la inferencia también se basa en distribuciones $t$ y $F$ aproximadas. 
-
-Recordemos el TCL:
+  - [En muestras grandes, cuando $n \rightarrow \infty$ los estimadores tienen una distribución normal de forma aproximada]{.color-red} sin importar la distribución en muestras pequeñas. Entonces, la inferencia también se basa en distribuciones $t$ y $F$ aproximadas. 
 
 Teorema Central del Límite
 : *Si $x_1, x_2, \ldots, x_n$ son muestras aleatorias (i.i.d.) extraídas de una población con media $\mu$ y varianza finita $\sigma^2$, y si $\bar{x}_n$ es la media muestral de las primeras $n$ muestras, entonces $z = \left(\frac{\bar{x}_n-\mu}{\sigma_{\bar{x}}}\right) \stackrel{a}{\sim} \mathcal{N}(0, 1)$, con $\sigma_{\bar{X}}=\sigma / \sqrt{n}$. Alternativamente, $\sqrt{n}(\bar{x}_n-\mu) \stackrel{a}{\sim} \mathcal{N}(0, \sigma^2)$*
@@ -250,8 +248,7 @@ Normalidad Asintótica
     - Media y varianza muestrales: $\bar{x} = \frac{\sum x_i}{n}$ y $s_x^2 = \frac{\sum(x_i-\bar{x})^2}{n}$.
 
 - Tomemos el caso del modelo de regresión simple:
-$$\hat{\beta} = \beta + \frac{\frac{1}{n}\sum_{i=1}^{N}(x_{i}-\bar{x})u_{i}}{\frac{1}{n}\sum_{i=1}^{N}(x_{i}-\bar{x})^{2}} = \beta + \frac{\bar{v}}{s^2_{x}}$$ con $\bar{v} = \frac{1}{n}\sum_{i=1}^{N}(x_{i}-\bar{x})u_{i}$.
-
+$$\hat{\beta}_1 = \beta_1 + \frac{\frac{1}{n}\sum_{i=1}^{N}(x_{i}-\bar{x})u_{i}}{\frac{1}{n}\sum_{i=1}^{N}(x_{i}-\bar{x})^{2}} = \beta_1 + \frac{\bar{v}}{s^2_{x}}$$ con $\bar{v} = \frac{1}{n}\sum_{i=1}^{N}(x_{i}-\bar{x})u_{i}$.
 
 - Puntos a considerar:
 
@@ -266,30 +263,75 @@ $$\hat{\beta} = \beta + \frac{\frac{1}{n}\sum_{i=1}^{N}(x_{i}-\bar{x})u_{i}}{\fr
 
 - Entonces:
 $$\bar{v}/\sigma_{\bar{v}} \stackrel{a}{\sim} \mathcal{N}(0,1) \text{ o alternativamente } \bar{v} \stackrel{a}{\sim} \mathcal{N}(0,\sigma^2_v/n) $$
-- Sabemos además que converge a $\hat{\beta}-\beta = \frac{\bar{v}}{\sigma^2_{x}}$ entonces:
-$$\hat{\beta}-\beta \stackrel{a}{\sim} \mathcal{N}\left(0,\frac{\mathbb{V}(\bar{v})}{(\sigma^2_x)^2}\right)$$
+- Sabemos además que converge a $\hat{\beta}_1-\beta_1 = \frac{\bar{v}}{\sigma^2_{x}}$ entonces:
+$$\hat{\beta}_1-\beta_1 \stackrel{a}{\sim} \mathcal{N}\left(0,\frac{\mathbb{V}(\bar{v})}{(\sigma^2_x)^2}\right)$$
 
 - Bajo los supuestos S1 a S5 tenemos:
 
     - $\mathbb{E}[v] = 0$ y $\mathbb{V}(v) = \mathbb{E}[(v-\mathbb{E}(v))^2]= \mathbb{E}[(x-\mu_x)^2]\mathbb{E}[u^2] = \sigma^2_x \sigma^2$
 
 - Entonces:
-$$\mathbb{V}(\bar{v}) = \frac{\sum \mathbb{V}(v_i)}{n^2}= \frac{n \sigma^2_x \sigma^2}{n^2} $$ por lo que finalmente: $\hat{\beta} \stackrel{a}{\sim} \mathcal{N}\left(\beta,\frac{\sigma^2}{n \sigma^2_x}\right)$.
+$$\mathbb{V}(\bar{v}) = \frac{\sum \mathbb{V}(v_i)}{n^2}= \frac{n \sigma^2_x \sigma^2}{n^2} $$ por lo que finalmente: $\hat{\beta}_1 \stackrel{a}{\sim} \mathcal{N}\left(\beta_1,\frac{\sigma^2}{n \sigma^2_x}\right)$.
 
 ## Eficiencia Asintótica 
 
 - Tomemos nuevamente el modelo de regresión simple y supongamos que se cumplen los supuesto S1 a S5.
 
-- Sea $g(x)$ una función de $x$ tal que $z=g(x)$. Bajo el supuesto S4 $Cov(z,x)\neq0$ y $Cov(z,u)=0$
+- Sea $g(x)$ una función de $x$ tal que $z=g(x)$. Bajo el supuesto S4 $\mathbb{Cov}(z,x)\neq0$ y $\mathbb{Cov}(z,u)=0$
 
 Implicaciones de Independencia
-: *Si $x$ e $y$ son variables aleatorias $\mathbb{E}[x|y]=\mathbb{E}[x]$ entonces $Cov(x,y)=0$. Más aún, si g(x) es una función de $x$ se cumple que $Cov(g(x),y)=0$.*
+: *Si $x$ e $y$ son variables aleatorias $\mathbb{E}[x|y]=\mathbb{E}[x]$ entonces $\mathbb{Cov}(x,y)=0$. Más aún, si g(x) es una función de $x$ se cumple que $\mathbb{Cov}(g(x),y)=0$.*
 
 - Sea $\tilde{\beta}$ un estimador de $\beta$:
 $$
-\tilde{\beta} = \frac{\sum\left(z_i-\bar{z}\right)\left(y_i-\bar{y}\right)}{\sum\left(z_{i}-\bar{z}\right)\left(x_{i}-\bar{x}\right)}
+\tilde{\beta}_1 = \frac{\sum\left(z_i-\bar{z}\right)\left(y_i-\bar{y}\right)}{\sum\left(z_{i}-\bar{z}\right)\left(x_{i}-\bar{x}\right)}
 $$
 
+- El estimador $\tilde{\beta}_1$ es consistente ya que $plim \ \tilde{\beta}_1 = \beta_1$ dado $\mathbb{Cov}(z,x)=0$.
+
+## Eficiencia Asintótica 
+
+- Usando los mismo argumentos se puede mostrar que:
+$$\tilde{\beta} = \frac{\sum\left(z_i-\bar{z}\right)\left(\beta (x_i - \bar{x} + u_i)\right)}{\sum\left(z_{i}-\bar{z}\right)\left(x_{i}-\bar{x}\right)} = \beta + \frac{\frac{1}{n} \sum (z_i - \bar{z})u_i}{\frac{1}{n}\sum\left(z_{i}-\bar{z}\right)\left(x_{i}-\bar{x}\right)}$$ y por tanto:
+$$\tilde{\beta} \stackrel{a}{\sim} \mathcal{N}\left(\beta,\frac{\sigma^2_z \sigma^2}{n \mathbb{Cov}(x,z)^2}\right)$$
+
+- ¿Cuál de los estimadores tiene la menor varianza? Usemos la [Desgualdad de Cauchy-Swartz: $\mathbb{Cov}(z,x)^2 \leq \sigma^2_x \times \sigma^2_z$]{.color-red}.
+$$\frac{\sigma^2}{n \sigma^2_x} \leq \frac{\sigma^2_z \sigma^2}{n \mathbb{Cov}(x,z)^2} \Rightarrow \mathbb{Cov}(z,x)^2 \leq \sigma^2_x \times \sigma^2_z$$
+
+## Extensión al modelo de regresión múltiple
+
+- Recordemos que el estimador de MCO para el modelo de regresión múltiple es:
+$$\hat{\beta_{k}}=\frac{\sum_{i=1}^{N}(y_{i}-\bar{y})e_{ki}}{\sum_{i=1}^{N}e_{ki}^{2}}$$ con $e_{k}$ el error de regresión de $x_k$ contra todas las demás variables explicativas del modelo.
+
+- Tenemos los siguiente resultados:
+
+    1. $plim\,\hat{\beta}_{k}=\beta_{k}+\frac{\mathbb{Cov}(e_{k},u)}{\mathbb{V}(e_{k})}=\beta_{k}\,\,\,dado\ \mathbb{Cov}(e_k,u)=0$
+    2. $\hat{\beta}_k \stackrel{a}{\sim} \mathcal{N}\left(\beta_k,\frac{\sigma^2}{n \sigma^2_{e_{k}}}\right)$ o $\hat{\beta}_k \stackrel{a}{\sim} \mathcal{N}\left(\beta_k,\frac{\sigma^2}{n \sigma^2_{x_k} (1-R^2_k)}\right)$
+    3. $\mathbb{AVar}(\hat{\beta}_k) \leq \mathbb{AVar}(\tilde{\beta}_k)$ con $\tilde{\beta}$ un estimador consistente y asintóticamente normal.
+
+## Prueba de hipótesis de los Multiplicadores de Lagrange
+
+- Suponga que planteamos el siguiente modelo poblacional:
+$$y_i = \beta_0 + \beta_1 x_{1i} + ... +  \beta_k x_{ki} + u_i$$
+
+- Suponga además que estamos interesados en testear la siguiente hipótesis nula:
+$$H_0 : \beta_{k-q+1} = ... = \beta_k = 0$$
+
+- El modelo restrigido sería:
+$$y_i = \beta_0 + \beta_1 x_{1i} + ... +  \beta_q x_{qi} + \tilde{u}_i$$
+
+- Intuición: *Si la hipótesis nula es cierta, omitir los último $q$ parámetros no debiera generar correlación entre $\tilde{u}$ y $x_j$ para $j=1,...,k$.*
+
+## Prueba de hipótesis de los Multiplicadores de Lagrange
+
+- [Entonces, el $R^2$ de una regresión entre $\tilde{u}$ contra las variables $x_1,...,x_k$ debiera ser cercano a 0.]{.color-red}
+
+- Procedimiento del test:
+
+    1. Realizar la regresión del modelo restringido: $y$ contra $x_1,...,x_q$ y recuperar los errores $\tilde{u}$.
+    2. Realizar una regresión entre los errores $\tilde{u}$ contra todas las variable explicativa $x_1,...,x_k$ y calcular el estadístico de prueba $ML=n R_{\tilde{u}}^2 \sim \chi^2_q$.
+
+        *Si $ML>\chi^2_q$ hay suficiente evidencia para rechazar $H_0$.* 
 
 # Estimador de Máximo Verosimilitud
 
@@ -297,7 +339,7 @@ $$
 
 - Motivación: Experimento "repetir el lanzamiento de una moneda 10 veces".
 
-- Definamos la variable aleatoria $X$ como el número de caras. Entonces $X \sim \operatorname{Binomial}\left(10, p_0\right)$ donde $p_0$ es la probabilidad de éxito (obtener cara).
+- $X$ número de caras (v.a.). $X \sim \operatorname{Binomial}\left(10, p_0\right)$ donde $p_0$ es la probabilidad de éxito.
 
 - Ahora pensemos en $p_0$ desconocido. La función de densidad de $X$ condicional en $p_0$ es:
 $$
@@ -430,27 +472,27 @@ $$
 \widehat{\sigma}^2=\frac{1}{N} \sum_{i=1}^N\left(y_i-\widehat{\alpha}-\widehat{\beta} x_i\right)^2=\frac{1}{N} \sum_{i=1}^N \widehat{u}_i^2
 $$
 
-# Método Generalizado de Momentos
+# Método de Momentos
 
 ## Introducción
 
-- Los Estimados del Método Generalizado de Momentos (MGM) tienen las siguientes ventajas:
+- Los Estimadores del Método de Momentos (MM) tienen las siguientes ventajas:
 
-    - MGM incluye (como caso particular) los estimadores más comunes y proporciona un marco de trabajo útil para su comparación y evaluación.
+    - MM incluye (como caso particular) los estimadores más comunes y proporciona un marco de trabajo útil para su comparación y evaluación.
 
-    - MGM es una alternativa "sensilla" respecto a otros estimadores (especialmente cuando resulta complicado formular un estimador de MV)
+    - MM es una alternativa "sensilla" respecto a otros estimadores (especialmente cuando resulta complicado formular un estimador de MV)
     
-    - MGM hace sensillo implementar modelos no lineales.
+    - MM hace sensillo implementar modelos no lineales.
 
 - Los costos:
 
-    - MGM es un estimador de muestra grandes (sus propiedades deseables son asintóticas). Ejemplo: es asintóticamente eficiente pero rara vez es eficiente en muestras pequeñas.
+    - MM es un estimador de muestra grandes (sus propiedades deseables son asintóticas). Ejemplo: es asintóticamente eficiente pero rara vez es eficiente en muestras pequeñas.
     
-    - MGM suele requerir algún tipo de programación (aunque esto está cambiando en las versionas más recientes de los paquetes: R tiene una implementación relativamente sensilla).
+    - MM suele requerir algún tipo de programación (aunque esto está cambiando en las versionas más recientes de los paquetes: R tiene una implementación relativamente sensilla).
     
 ## El Método de Momentos
 
-- Punto de partida - El Método de Momentos (MM): Definimos el momento poblacional $\gamma$ como la esperanza de una función continua $g(\cdot)$ de una variable aleatoria $x$ :
+- Definimos el momento poblacional $\gamma$ como la esperanza de una función continua $g(\cdot)$ de una variable aleatoria $x$ :
 $$
 \gamma=E[g(x)]
 $$
@@ -538,4 +580,3 @@ $$
 
 - Note que esta ecuaciones son el sistema de ecuaciones normales del estimador MCO.
 
-## Generalización: Método Generalizado de Momentos
