@@ -21,11 +21,11 @@ embed-resources: true
 
 2. *Horarios:*
 
-    - Clases: Martes y Jueves 11:30 a 12:50. Sala B401.
+    - Clases: Martes y Jueves 14:30 a 15:50. Sala B-401.
 
-    - Horas de Oficina: Martes 14:00 a 15:30. Oficia 510 Edificio Cubo.
+    - Horas de Oficina: Martes 10:00 a 11:30. Oficia 510 Edificio Cubo.
 
-    - Horario de Ayudantía: Viernes 11:30 a 12:50. Sala B704.
+    - Horario de Ayudantía: Viernes 10:00 a 11:20. Sala B-604.
 
 3. *Comunicación:*
 
@@ -105,22 +105,22 @@ Formas de evaluación (en base esquema 8445):
 
 * [**Nota de Presentación (70%):**]{.color-red} actividades a llevarse a cabo durante el semestre.
     
-    * [**Solemne 1 (30%):**]{.color-red}  semana del 9 al 13 de septiembre.
+    * [**Solemne 1 (30%):**]{.color-red} Semana del 21 al 25 de abril.
 
-    * [**Solemne 2 (30%):**]{.color-red} semana del 11 a 15 de noviembre.
+    * [**Solemne 2 (30%):**]{.color-red} Semana del 9 a 13 de junio.
 
-    * [**Controles (20%):**]{.color-red} dos controles (teóricos/conceptuales) a tomarse en clase entre solemnes.
+    * [**Controles (20%):**]{.color-red} Dos tareas analíticas a ser entregadas el viernes anterior al inicio de la semana de solemnes.
 
     * [**Trabajo (20%):**]{.color-red} 4 a 5 ejercicio empíricos a realizarse durante el semestre (esta
 actividad tributa a su e-portafolio).
 
-* [**Examen (30%):**]{.color-red} del 11 al 19 de diciembre.
+* [**Examen (30%):**]{.color-red} Semana del 7 al 15 de julio.
 
 ## Evaluación 
 
-- No hay eximición de la evaluación final o examen. La nota mínima de presentación al examen es 3,5. 
+- No hay eximición. La nota mínima de presentación al examen es 3,5. 
 
-- Si un/a estudiante falta a una evaluación, deberá rendir de forma obligatoria el examen para reemplazar la nota pendiente (ya no deberá presentar justificación en secretaría de estudios). 
+- Si un/a estudiante falta a una evaluación, deberá rendir de forma obligatoria el examen para reemplazar la nota pendiente. 
 
 - Solo una evaluación (evaluación 1 o 2) puede ser reemplazada con el examen o evaluación final.
 
@@ -134,26 +134,37 @@ actividad tributa a su e-portafolio).
 
 - Para garantizar un aprendizaje óptimo y ético usen de forma responsable las herramientas de inteligencia artificial. 
 
-- Usen la herramienta solo si no afecta su rendimiento académico o el de sus compañeros. 
+- El uso de herramientas de inteligencia artificial está permitido en este curso para las siguientes actividades:
 
-- Usen la herramienta cuando logren internalizar y entender los argumentos, puedan citar fuentes, y puedan verificar que los datos sean verídicos. 
+  - Discutir y perfeccionar ideas (brainstorming);
+  - Refinar preguntas de investigación previamente definidas por el estudiante;
+  - Realizar consultas sobre un tema en particular;
+  - Elaborar esquemas para organizar ideas; y
+  - Revisar gramática y estilo.
+  
+- Para los usos permitidos citar de acuerdo al siguiente ejemplo: **Chat-GPT-4. (Mes MM y año AAAA de la consulta). “Texto de tu consulta.” Generado con OpenAI. https://chat.openai.com/**.
 
-- Tomen en cuenta cuenta que esta herramientas están en constante evolución y tiene capacidades y limitaciones. 
+## Sobre el uso de herramientas de inteligencia artificial
 
-- Ustedes son los únicos responsables de todo el contenido que presentan en evaluaciones.
+- El uso de herramientas de inteligencia artificial no está permitido en este curso para las siguientes actividades:
 
-- El uso de herramientas de inteligencia artificial debe ser declarado en la actividad correspondiente en la que haya sido utilizada.
+  - Suplantar la identidad del estudiante en foros de discusión Canvas o en un chat de Zoom.
+  - Completar las partes de un trabajo en grupo que haya sido asignada al estudiante.
+  - Escribir oraciones, párrafos o documentos completos para cumplir con las tareas del cursor.
+  - Generar códigos de programación (si fuera el caso en este cursor) para cumplir con tareas del curso.  
 
-## Programación tentativa {visibility="hidden"}
+- El estudiante es responsable de la información que envíe basada en una consulta estas herramientas.
+
+## Programación tentativa 
 
 |Marzo|Abril|Mayo|Junio|Julio|
 |:---:|:---:|:---:|:---:|:---:|
-|6 Clases     |7 Clases      |8 Clases      |6 Clases      |2 Clases.      |
-|Unidad 1 (3) | Unidad 3 (7) | Unidad 3 (1) | Unidad 4 (3) | Unidad 5 (2)  |
-|Unidad 2 (3) |              | Unidad 4 (7) | Unidad 5 (3) |               |
+|7 Clases     |7 Clases      |5 Clases      |7 Clases      |1 Clases.      |
+|Unidad 1 (3) | Unidad 3 (7) | Unidad 4 (1) | Unidad 4 (1) | Unidad 5 (1)  |
+|Unidad 2 (4) |              | Unidad 4 (4) | Unidad 5 (6) |               |
 |             |*Solemne 1*   |              | *Solemne 2*  |               | 
 
-## Programación tentativa
+## Programación tentativa {visibility="hidden"}
 
 |Agosto|Septiembre|Octubre|Noviembre|Diciembre|
 |:---:|:---:|:---:|:---:|:---:|
