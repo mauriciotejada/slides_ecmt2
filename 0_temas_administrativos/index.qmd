@@ -15,15 +15,15 @@ embed-resources: true
 
 1. *Quien es quien:*
 
-    - Profesor: Mauricio Tejada (email: [mauricio.tejada@mail.udp.cl](mailto:mauricio.tejada@mail.udp.cl])).
+    - Profesor: Mauricio Tejada (email: [mauricio.tejada@mail.udp.cl](mailto:mauricio.tejada@mail.udp.cl)).
 
-    - Ayudante: A ser anunciado.
+    - Ayudante: Amanda Catalan (email: [amanda.catalan_p@mail.udp.cl](mailto:amanda.catalan_p@mail.udp.cl)) 
 
 2. *Horarios:*
 
-    - Clases: Martes y Jueves 14:30 a 15:50. Sala B-401.
+    - Clases: Lunes y Miércoles 14:30 a 15:50. Sala B-401.
 
-    - Horas de Oficina: Martes 10:00 a 11:30. Oficia 510 Edificio Cubo.
+    - Horas de Oficina: Miércoles 10:00 a 11:30. Oficia 510 Edificio Cubo.
 
     - Horario de Ayudantía: Viernes 10:00 a 11:20. Sala B-604.
 
