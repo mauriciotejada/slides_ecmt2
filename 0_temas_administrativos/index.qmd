@@ -17,15 +17,15 @@ embed-resources: true
 
     - Profesor: Mauricio Tejada (email: [mauricio.tejada@mail.udp.cl](mailto:mauricio.tejada@mail.udp.cl)).
 
-    - Ayudante: Amanda Catalan (email: [amanda.catalan_p@mail.udp.cl](mailto:amanda.catalan_p@mail.udp.cl)) 
+    - Ayudante: Por anunciar
 
 2. *Horarios:*
 
-    - Clases: Lunes y Miércoles 14:30 a 15:50. Sala B-401.
+    - Clases: Martes y Jueves 14:30 a 15:50. Sala B-703.
 
-    - Horas de Oficina: Miércoles 10:00 a 11:30. Oficia 510 Edificio Cubo.
+    - Horas de Oficina: Martes 10:00 a 12:00. Oficia 502 Edificio Cubo.
 
-    - Horario de Ayudantía: Viernes 10:00 a 11:20. Sala B-604.
+    - Ayudantía: A ser anunciada.
 
 3. *Comunicación:*
 
@@ -43,7 +43,6 @@ embed-resources: true
 - Un énfasis especial se pondrá en el uso de estos modelos y estimadores para resolver problemas específicos. 
 
 
-
 **Objetivo:**
 
 *Se espera que el alumno conozca los rudimentos de los métodos de estimación bajo distintos tipos de datos y sepa identificar las situaciones en las que éstos deben ser aplicados.*
@@ -53,25 +52,20 @@ embed-resources: true
 
 - [**Unidad 1:**]{.color-red} Muestras grandes, estimación y propiedades
   
-  - Breve repaso MCO, propiedades, métodos de máximo verosimilitud, método de momentos. 
+  - Breve repaso MCO, repaso VI, propiedades, métodos de máximo verosimilitud, método de momentos. 
   
-- [**Unidad 2:**]{.color-red} Variables instrumentales
-
-  - Endogeneidad, estimación, inferencia, pruebas de validez y sobreidentificación.
-
-- [**Unidad 3:**]{.color-red} Modelos para Datos de Panel
+- [**Unidad 2:**]{.color-red} Modelos para Datos de Panel
 
   - Modelo de componentes de error, efectos fijos, efectos aleatorios, inferencia.
 
-## Contenidos
+- [**Unidad 3:**]{.color-red} Modelos de Series Temporales
+
+  - Efectos cuasales dinámicos, procesos estacionarios, VAR, raíces unitarias, cointegración.
 
 - [**Unidad 4:**]{.color-red} Modelos de Variable Dependiente Limitada
 
-  - Variable dependiente dicotómica, selección muestral.
+  - Variable dependiente dicotómica, selección muestral (si el tiempo lo permite).
 
-- [**Unidad 5:**]{.color-red} Modelos de Series Temporales
-
-  - Efectos cuasales dinámicos, procesos estacionarios, VAR, raíces unitarias, cointegración.
 
 ## Bibliografía:
 
@@ -105,16 +99,16 @@ Formas de evaluación (en base esquema 8445):
 
 * [**Nota de Presentación (70%):**]{.color-red} actividades a llevarse a cabo durante el semestre.
     
-    * [**Solemne 1 (30%):**]{.color-red} Semana del 21 al 25 de abril.
+    * [**Solemne 1 (30%):**]{.color-red} Semana del 9 al 12 de septiembre.
 
-    * [**Solemne 2 (30%):**]{.color-red} Semana del 9 a 13 de junio.
+    * [**Solemne 2 (30%):**]{.color-red} Semana del 3 a 7 de noviembre.
 
-    * [**Controles (20%):**]{.color-red} Dos tareas analíticas a ser entregadas el viernes anterior al inicio de la semana de solemnes.
+    * [**Controles (Tareas, 20%):**]{.color-red} Dos tareas analíticas a ser entregadas el viernes anterior al inicio de la semana de solemnes.
 
-    * [**Trabajo (20%):**]{.color-red} 4 a 5 ejercicio empíricos a realizarse durante el semestre (esta
+    * [**Trabajo (Ejercicio Empíricos, 20%):**]{.color-red} 4 a 5 ejercicio empíricos a realizarse durante el semestre (esta
 actividad tributa a su e-portafolio).
 
-* [**Examen (30%):**]{.color-red} Semana del 7 al 15 de julio.
+* [**Examen (30%):**]{.color-red} Semana del 12 al 19 de diciembre.
 
 ## Evaluación 
 
@@ -156,6 +150,23 @@ actividad tributa a su e-portafolio).
 - El estudiante es responsable de la información que envíe basada en una consulta estas herramientas.
 
 ## Programación tentativa 
+
+- Agosto (8 clases): 
+  - Unidad 1 (6), Unidad 2 (2)
+
+- Septiembre (7 clases): 
+  - Unidad 2 (7), [**Solemne 1**]{.color-red}
+
+- Octubre (8 clases): 
+  - Unidad 3 (8) 
+
+- Noviembre (6 clases): 
+  - Unidad 3 (6), [**Solemne 2**]{.color-red}
+
+- Diciembre (4 clases): 
+  - Unidad 4 (4)
+
+## Programación tentativa {visibility="hidden"}
 
 |Marzo|Abril|Mayo|Junio|Julio|
 |:---:|:---:|:---:|:---:|:---:|
