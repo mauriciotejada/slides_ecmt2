@@ -1,6 +1,6 @@
 ---
 title: "Econometría II"
-subtitle: "**Unidad 5: Modelos de Variable Dependiente Dicotómica**"
+subtitle: "**Unidad 4: Modelos de Variable Dependiente Dicotómica**"
 author: "Mauricio M. Tejada"
 institute: "*Departamento de Economía, Universidad Diego Portales*"
 format: 

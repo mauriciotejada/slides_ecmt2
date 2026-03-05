@@ -1,6 +1,6 @@
 ---
 title: "Econometría II"
-subtitle: "**Unidad 4: Modelos de Series de Tiempo**"
+subtitle: "**Unidad 3: Modelos de Series de Tiempo**"
 author: "Mauricio M. Tejada"
 institute: "*Departamento de Economía, Universidad Diego Portales*"
 format: 
