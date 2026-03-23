@@ -333,6 +333,76 @@ $$y_i = \beta_0 + \beta_1 x_{1i} + ... +  \beta_q x_{qi} + \tilde{u}_i$$
 
         *Si $ML>\chi^2_q$ hay suficiente evidencia para rechazar $H_0$.*
 
+## Ejemplo 1: Aplicación — Multiplicadores de Lagrange
+
+**Pregunta económica**: ¿Disuaden la severidad de condenas pasadas y el tiempo cumplido en prisión la comisión de nuevos delitos?
+
+- Dataset: `crime1` (Wooldridge) — $n = 2{,}725$ hombres en EEUU, 1986
+- **Modelo completo** ($k = 5$ regresores):
+$$narr86_i = \beta_0 + \beta_1 pcnv_i + \beta_2 avgsen_i + \beta_3 tottime_i + \beta_4 ptime86_i + \beta_5 qemp86_i + u_i$$
+- **Hipótesis nula** ($q = 2$ restricciones):
+$$H_0: \beta_{avgsen} = 0 \;\text{ y }\; \beta_{tottime} = 0$$
+- **Intuición**: si las condenas pasadas no disuaden, incluirlas no cambia los residuos del modelo restringido. El $R^2$ de la regresión auxiliar $\tilde{u}$ sobre todos los regresores debería ser cercano a 0 — y el estadístico $LM = n \cdot R^2_{\tilde{u}}$ pequeño.
+
+## Ejemplo 1: Aplicación — Multiplicadores de Lagrange
+
+::: {.panel-tabset}
+
+### Resultados
+
+```{r lm_crime_resultados}
+#| echo: false
+#| warning: false
+
+library(wooldridge)
+data("crime1")
+
+mod_r   <- lm(narr86 ~ pcnv + ptime86 + qemp86, data = crime1)
+u_tilde <- residuals(mod_r)
+aux     <- lm(u_tilde ~ pcnv + ptime86 + qemp86 + avgsen + tottime, data = crime1)
+
+n    <- nobs(mod_r)
+LM   <- n * summary(aux)$r.squared
+pval <- 1 - pchisq(LM, df = 2)
+vc10 <- qchisq(0.90, df = 2)
+
+data.frame(
+  ` ` = c("$LM = n \\cdot R^2_{\\tilde{u}}$",
+           "$\\chi^2_{0.10,\\,2}$ (valor crítico)", "p-valor"),
+  Valor = c(round(LM, 3), round(vc10, 3), round(pval, 3)),
+  check.names = FALSE
+) |> knitr::kable(escape = FALSE, align = "lr")
+```
+
+**Conclusión**: $LM \approx 4.09 < \chi^2_{0.10,\,2} \approx 4.61$ — [no se rechaza $H_0$ al 10%]{.color-red}. El p-valor $\approx 0.13$ indica que la severidad (`avgsen`) y el tiempo acumulado en prisión (`tottime`) **no son conjuntamente significativos** para predecir nuevos arrestos.
+
+### Código R
+
+```{r lm_crime_codigo}
+#| echo: true
+#| eval: false
+
+library(wooldridge)
+data("crime1")
+
+# Paso 1: Regresión del modelo restringido (sin avgsen y tottime)
+mod_r   <- lm(narr86 ~ pcnv + ptime86 + qemp86, data = crime1)
+u_tilde <- residuals(mod_r)
+
+# Paso 2: Regresión auxiliar — residuos sobre todos los regresores
+aux <- lm(u_tilde ~ pcnv + ptime86 + qemp86 + avgsen + tottime, data = crime1)
+
+# Paso 3: Estadístico LM = n * R²
+n    <- nobs(mod_r)
+LM   <- n * summary(aux)$r.squared
+pval <- 1 - pchisq(LM, df = 2)
+
+cat("LM =", round(LM, 3), "\n")
+cat("p-valor =", round(pval, 3), "\n")
+```
+
+:::
+
 # Variables Instrumentales {.center .center-x}
 
 ## Motivación y definición del instrumento
@@ -365,7 +435,7 @@ $$\hat{\beta}_1^{MCDE} = \frac{s_{y,z}}{s_{x,z}} = \frac{\frac{1}{n}\sum_{i=1}^{
 
 es consistente porque $\mathbb{Cov}(z, u) = 0$ y $\mathbb{Cov}(z, x) \neq 0$.
 
-## Ejemplo 1: Retornos a la educación para mujeres casadas
+## Ejemplo 2: Retornos a la educación para mujeres casadas
 
 - Modelo postulado:
 $$log(wage_{i})=\beta_{0}+\beta_{1} educ_{i}+ \beta_{2} habil_i+u_{i}$$
@@ -382,11 +452,16 @@ $$log(wage_{i})=\beta_{0}+\beta_{1} educ_{i}+ \beta_{2} habil_i+u_{i}$$
 
     - $\mathbb{Cov}\left(habil_{i}, fatheduc_{i}\right) = \mathbb{Cov}\left(\tilde{u}_i, fatheduc_{i}\right) = 0$ [¿Discutible?]
 
-## Ejemplo 1: Retornos a la educación para mujeres casadas
+## Ejemplo 2: Retornos a la educación para mujeres casadas
+
+::: {.panel-tabset}
+
+### Resultados
 
 ::: {.small}
 
-```{r ejemplo_1}
+```{r ejemplo_2_resultados}
+#| echo: false
 #| warning: false
 
 library(haven)
@@ -398,10 +473,32 @@ db <- read_dta("http://fmwww.bc.edu/ec-p/data/wooldridge/mroz.dta")
 db_submuetra <- db %>% filter(is.na(wage) != 1)
 
 reg.educ.fatheduc <- lm(educ ~ fatheduc, data = db_submuetra)
+reg.mco           <- lm(log(wage) ~ educ, data = db_submuetra)
+reg.iv            <- ivreg(log(wage) ~ educ | fatheduc, data = db_submuetra)
 
-reg.mco <- lm(log(wage) ~ educ, data = db_submuetra)
+modelsummary(list("educ MCO"=reg.educ.fatheduc, "log(wage) MCO"=reg.mco,
+                  "log(wage) VI"=reg.iv), output = "markdown",
+             gof_omit = "AIC|BIC|Log.Lik|RMSE|R2 Adj.", stars = T,
+             title = "*Variable dependiente:*", vcov = "stata")
+```
 
-reg.iv <- ivreg(log(wage) ~ educ | fatheduc, data = db_submuetra)
+:::
+
+### Código R
+
+```{r ejemplo_2_codigo}
+#| echo: true
+#| eval: false
+#| warning: false
+
+library(haven); library(dplyr); library(modelsummary); library(AER)
+
+db <- read_dta("http://fmwww.bc.edu/ec-p/data/wooldridge/mroz.dta")
+db_submuetra <- db %>% filter(is.na(wage) != 1)
+
+reg.educ.fatheduc <- lm(educ ~ fatheduc, data = db_submuetra)
+reg.mco           <- lm(log(wage) ~ educ, data = db_submuetra)
+reg.iv            <- ivreg(log(wage) ~ educ | fatheduc, data = db_submuetra)
 
 modelsummary(list("educ MCO"=reg.educ.fatheduc, "log(wage) MCO"=reg.mco,
                   "log(wage) VI"=reg.iv), output = "markdown",
